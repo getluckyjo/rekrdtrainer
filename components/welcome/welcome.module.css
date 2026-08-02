@@ -1,0 +1,253 @@
+.hero {
+  background: var(--powder-100);
+  border-bottom: 1px solid var(--hairline);
+  padding: 64px 0 56px;
+}
+@media (max-width: 700px) {
+  .hero {
+    padding: 40px 0 36px;
+  }
+}
+
+.codePanel {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--cream);
+  padding: clamp(22px, 4vw, 36px);
+  margin-top: 32px;
+}
+@media (max-width: 720px) {
+  .codePanel {
+    grid-template-columns: 1fr;
+  }
+}
+
+.codeLabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  display: block;
+  margin-bottom: 8px;
+}
+.code {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(44px, 9vw, 86px);
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  word-break: break-all;
+}
+.link {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 14px;
+  word-break: break-all;
+}
+.copyRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.qrBox {
+  text-align: center;
+}
+.qr {
+  width: 190px;
+  height: 190px;
+  display: block;
+  background: var(--cream);
+}
+.qrCaption {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 10px;
+  word-break: break-all;
+}
+.qrActions {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+/* ---------------------------------------------------------- do this now -- */
+
+.actions {
+  display: grid;
+  gap: 12px;
+  margin-top: 8px;
+}
+.action {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--cream);
+  padding: 20px 22px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: center;
+}
+@media (max-width: 620px) {
+  .action {
+    grid-template-columns: 1fr;
+  }
+}
+.actionTitle {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+.actionBody {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+.snippet {
+  background: var(--paper);
+  border: 1px dashed var(--hairline-strong);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  font-size: 13.5px;
+  margin-top: 10px;
+  white-space: pre-wrap;
+}
+.openerTabs {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.openerTab {
+  border: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--ink-soft);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.openerTab[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+/* -------------------------------------------------------------- payout -- */
+
+.payout {
+  border: 1px dashed var(--hairline-strong);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-top: 12px;
+}
+.payoutK {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* ---------------------------------------------------------- print card -- */
+
+.printCard {
+  display: none;
+}
+
+@media print {
+  /* Classic print-one-element trick: hide everything, reveal just the card,
+     so "Print card" produces a single A6 and not the whole page. */
+  :global(body) {
+    visibility: hidden;
+    background: #fff;
+  }
+  .printCard,
+  .printCard * {
+    visibility: visible;
+  }
+
+  .printCard {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 105mm;
+    height: 148mm;
+    padding: 14mm 12mm;
+    box-sizing: border-box;
+    page-break-after: always;
+    text-align: center;
+    background: #fff;
+    color: #0b1220;
+  }
+  .printCard .pcBrand {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+    font-size: 16pt;
+    letter-spacing: 0.02em;
+  }
+  .printCard .pcLead {
+    font-size: 11pt;
+    margin-top: 10mm;
+    line-height: 1.5;
+  }
+  .printCard .pcCode {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 30pt;
+    letter-spacing: -0.01em;
+    margin: 6mm 0;
+    word-break: break-all;
+  }
+  .printCard .pcQr {
+    width: 45mm;
+    height: 45mm;
+    margin: 4mm auto;
+    display: block;
+  }
+  .printCard .pcUrl {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    word-break: break-all;
+  }
+  .printCard .pcBar {
+    height: 2mm;
+    margin-top: 8mm;
+    background: linear-gradient(
+      90deg,
+      #a8cc7c 0 20%,
+      #efd88c 20% 40%,
+      #ecb87e 40% 60%,
+      #e8a38c 60% 80%,
+      #e8949c 80% 100%
+    );
+  }
+  .printCard .pcFine {
+    font-size: 7pt;
+    margin-top: 4mm;
+    color: #3a4354;
+  }
+}

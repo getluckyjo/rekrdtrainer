@@ -1,0 +1,517 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) minmax(320px, 1.15fr);
+  gap: 0;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.controls {
+  padding: 26px;
+  border-right: 1px solid var(--hairline);
+}
+.output {
+  padding: 26px;
+  background: var(--cream);
+}
+@media (max-width: 860px) {
+  .controls {
+    border-right: none;
+    border-bottom: 1px solid var(--hairline);
+  }
+}
+
+/* ------------------------------------------------------------- presets -- */
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.preset {
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  border-radius: var(--radius);
+  padding: 8px 13px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 120ms ease-out, color 120ms ease-out;
+}
+.preset:hover {
+  background: var(--powder-200);
+}
+.preset[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--cream);
+}
+.preset.pessimistic {
+  border-style: dashed;
+  border-color: var(--hairline-strong);
+  color: var(--ink-soft);
+}
+.preset.pessimistic[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+/* -------------------------------------------------------------- slider -- */
+
+.field {
+  margin-bottom: 26px;
+}
+.field:last-child {
+  margin-bottom: 0;
+}
+.fieldTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.fieldLabel {
+  font-size: 14px;
+  font-weight: 700;
+}
+.fieldValue {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.fieldHint {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-top: 8px;
+  max-width: 42ch;
+}
+
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: transparent;
+  height: 22px;
+  cursor: pointer;
+  display: block;
+}
+.range:focus {
+  outline: none;
+}
+.range:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+.range:focus-visible::-moz-range-thumb {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.range::-webkit-slider-runnable-track {
+  height: 1px;
+  /* --track is a per-instance ink/hairline gradient set by Slider.tsx.
+     Firefox gets the same effect free via ::-moz-range-progress. */
+  background: var(--track, var(--hairline-strong));
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: var(--ink);
+  border: none;
+  border-radius: var(--radius);
+  margin-top: -6.5px;
+}
+.range::-moz-range-track {
+  height: 1px;
+  background: var(--hairline-strong);
+}
+.range::-moz-range-progress {
+  height: 1px;
+  background: var(--ink);
+}
+.range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: var(--ink);
+  border: none;
+  border-radius: var(--radius);
+}
+
+/* -------------------------------------------------------------- output -- */
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  display: block;
+  margin-bottom: 6px;
+}
+.headline {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(40px, 6.4vw, 76px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.annual {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: clamp(18px, 2.4vw, 24px);
+  color: var(--ink-soft);
+  margin-top: 8px;
+  font-variant-numeric: tabular-nums;
+}
+.disclaimer {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin-top: 14px;
+  max-width: 46ch;
+}
+.translate {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  margin-top: 14px;
+}
+
+/* -------------------------------------------------------------- ledger -- */
+
+.ledger {
+  margin-top: 26px;
+  border-top: 1px solid var(--hairline);
+  padding-top: 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.ledgerRow {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 7px 6px;
+  color: var(--ink-soft);
+  transition: background 400ms ease-out;
+}
+.ledgerRow.flash {
+  background: var(--powder-100);
+  transition: background 0ms;
+}
+.ledgerLabel {
+  flex: 1;
+  min-width: 0;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 10.5px;
+}
+.ledgerAmount {
+  white-space: nowrap;
+  font-weight: 500;
+  color: var(--ink);
+}
+.ledgerRule {
+  height: 1px;
+  background: var(--hairline);
+  margin: 8px 6px;
+}
+.ledgerTotal .ledgerLabel {
+  color: var(--ink);
+  font-weight: 500;
+}
+.ledgerTotal .ledgerAmount {
+  font-size: 14px;
+}
+.ledgerSaved .ledgerAmount,
+.ledgerSaved .ledgerLabel {
+  color: var(--ink-soft);
+}
+
+.basis {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--hairline);
+}
+
+/* -------------------------------------------------------- derived stats -- */
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+.stat {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+.statK {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  display: block;
+  margin-bottom: 4px;
+}
+.statV {
+  font-weight: 700;
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* -------------------------------------------------- sub vs one-off ------ */
+
+.compare {
+  margin-top: 40px;
+}
+.compareGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 20px;
+}
+@media (max-width: 700px) {
+  .compareGrid {
+    grid-template-columns: 1fr;
+  }
+}
+.col {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  padding: 22px;
+  background: var(--paper);
+}
+.col.win {
+  border-color: var(--ink);
+}
+.colHead {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+}
+.colBig {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  font-variant-numeric: tabular-nums;
+}
+.colSub {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-top: 8px;
+}
+.bar {
+  height: 8px;
+  background: var(--powder-200);
+  margin-top: 16px;
+  border-radius: 1px;
+}
+.bar > span {
+  display: block;
+  height: 100%;
+  background: var(--powder-400);
+  transition: width 220ms ease-out;
+}
+.col.win .bar > span {
+  background: var(--ink);
+}
+.colRows {
+  margin-top: 16px;
+  border-top: 1px solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.colRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--hairline);
+  color: var(--ink-soft);
+}
+.colRow:last-child {
+  border-bottom: none;
+}
+.colRow b {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.compareNote {
+  margin-top: 18px;
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  max-width: 66ch;
+}
+.compareNote strong {
+  color: var(--ink);
+}
+
+.intervalPicker {
+  display: flex;
+  gap: 6px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.intervalBtn {
+  border: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--ink-soft);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.intervalBtn[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+/* --------------------------------------------------------- sticky total -- */
+
+.sticky {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  background: var(--ink);
+  color: var(--cream);
+  border-top: 1px solid var(--ink);
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 20px;
+  min-height: 52px;
+}
+.sticky b {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 20px;
+  font-variant-numeric: tabular-nums;
+}
+.sticky span {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--powder-400);
+}
+.sticky a {
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--powder-400);
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+@media (max-width: 860px) {
+  .sticky.visible {
+    display: flex;
+  }
+}
+
+/* ------------------------------------------------------------- teaser --- */
+
+.teaser {
+  margin-top: 34px;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--cream);
+  padding: 20px 22px;
+  max-width: 460px;
+}
+.teaserTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.teaserLabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.teaserCount {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.teaserOut {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.teaserBig {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(30px, 5vw, 42px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.teaserUnit {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.teaserLink {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
