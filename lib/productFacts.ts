@@ -1,3 +1,5 @@
+import type { IconName } from "@/components/Icon";
+
 /**
  * Single source of truth for every product fact on this site.
  *
@@ -129,3 +131,17 @@ export const PROGRAMME = {
   minimumPayoutC: 20_000,
   holdDays: 30,
 } as const;
+
+/**
+ * The six facts a coach needs at a glance. Everything else lives in the full
+ * spec table, which is collapsed by default — a coach between clients should
+ * not have to read fourteen rows to learn the product.
+ */
+export const KEY_FACTS: { icon: IconName; k: string; v: string }[] = [
+  { icon: "drop", k: "Sodium", v: "600mg a sachet" },
+  { icon: "no-sugar", k: "Sugar", v: "None added" },
+  { icon: "no-caffeine", k: "Caffeine", v: "None" },
+  { icon: "flavours", k: "Flavours", v: "Five" },
+  { icon: "rand", k: "Price", v: "R20 a serve" },
+  { icon: "flask", k: "Testing", v: "Every batch, MJ Labs" },
+];

@@ -1,5 +1,6 @@
 "use client";
 
+import Icon from "@/components/Icon";
 import { LESSONS } from "@/lib/lessons";
 import { markLessonRead, useLessonsRead } from "./lessonProgress";
 import s from "./training.module.css";
@@ -42,6 +43,7 @@ export default function LessonAccordion() {
         >
           <summary>
             <span className="pnum">{lesson.n}</span>
+            <Icon name={lesson.icon} size={18} />
             <span className="ptitle">{lesson.title}</span>
             <span className={s.time}>{lesson.seconds} sec</span>
             <span

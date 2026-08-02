@@ -9,33 +9,28 @@
 export const CLAIMS_CHECK_VERSION = "2026-08-v1";
 
 export const CLAIMS_LEDE =
-  "REKRD is a foodstuff, not a medicine. It is not registered with SAHPRA and it makes no health claims — which means neither can you, in a session, in a caption, or in a WhatsApp. This isn't legal theatre. A health claim from you is a health claim from the brand, and it lands on both of us.";
+  "REKRD is a foodstuff, not a medicine. It isn't registered with SAHPRA and it makes no health claims — so neither can you, in a session, a caption or a WhatsApp. A health claim from you is a health claim from the brand, and it lands on both of us.";
 
 export const SAY_THIS: string[] = [
   "“600mg of sodium per sachet.”",
-  "“No added sugar, no caffeine, no artificial sweeteners, colours or flavours.”",
-  "“Potassium, magnesium, coconut water powder, Himalayan rock salt, 500mg of L-glutamine, vitamin C and zinc.”",
-  "“Made in South Africa, and every batch is independently tested by MJ Labs.”",
+  "“No added sugar, no caffeine, no artificial sweeteners.”",
+  "“Potassium, magnesium, coconut water powder, L-glutamine, vitamin C, zinc.”",
+  "“Made in South Africa, every batch independently tested by MJ Labs.”",
   "“One sachet in 500ml of cold water, once a day.”",
-  "“Thirty sachets to a tube. R600, so R20 a serve.”",
-  "“I drink it every day. Most of my clients go for the Sour Cherry.”",
-  "“It's a foodstuff, not a medicine — the whole ingredient list is printed on the tube.”",
-  "“If you're on medication or pregnant, show the label to your doctor or pharmacist.”",
-  "“With my code you get 5% off at shop.rekrd.io.”",
+  "“R600 a tube, so R20 a serve.”",
+  "“I drink it every day.”",
+  "“If you're on medication or pregnant, show the label to your doctor.”",
 ];
 
 export const NEVER_SAY: string[] = [
   "“It cures cramp.” / “It stops you cramping.”",
-  "“It prevents dehydration.” / “It'll stop you getting heat stroke.”",
-  "“It boosts your immunity.” / “The zinc will stop you getting sick.”",
-  "“You'll recover faster.” / “It speeds up recovery.”",
-  "“It's basically a drip in a sachet.” / “Same as a banana bag.”",
-  "“It fixes a hangover.”",
+  "“It prevents dehydration.” / “It'll stop heat stroke.”",
+  "“It boosts your immunity.” / “The zinc stops you getting sick.”",
+  "“You'll recover faster.”",
+  "“It's basically a drip in a sachet.” / “It fixes a hangover.”",
   "“It's safe for drug testing.” / “It's Informed Sport approved.”",
-  "“SAHPRA approved.” / “Medically approved.” / “Doctors recommend it.”",
-  "“It'll help you lean out.” / “It burns fat.”",
-  "“It's fine for your blood pressure.” / “It won't affect your kidneys.”",
-  "“Everybody should be on this.” — a blanket clinical recommendation is still a claim.",
+  "“SAHPRA approved.” / “Doctors recommend it.”",
+  "“It's fine for your blood pressure.” / “It'll help you lean out.”",
 ];
 
 /** The ones that feel safe and aren't. This is the useful part. */
@@ -77,7 +72,7 @@ export const GREY_AREA: GreyArea[] = [
 export const POSTING_RULES: { title: string; body: string }[] = [
   {
     title: "Disclose, every time",
-    body: "“I'm a REKRD coach — my code gets you 5% off.” In the caption, not buried in hashtags. That's the ASA and the CPA, and it's also just decent.",
+    body: "“I'm a REKRD coach — my code gets you 5% off.” In the caption, not buried in hashtags.",
   },
   {
     title: "Never DM a claim you wouldn't put on a poster",
@@ -85,11 +80,11 @@ export const POSTING_RULES: { title: string; body: string }[] = [
   },
   {
     title: "Don't buy stock and resell it",
-    body: "Your client buys direct from REKRD. You never touch product and you never touch anyone's money.",
+    body: "Clients buy direct. You never touch product and never touch anyone's money.",
   },
   {
-    title: "Don't bid on “REKRD” in Google, don't post your code on coupon sites",
-    body: "That's not recommending, that's intercepting — and it's the fastest way to lose your code.",
+    title: "Don't bid on “REKRD” in Google or post your code on coupon sites",
+    body: "That's intercepting, not recommending — and the fastest way to lose your code.",
   },
 ];
 

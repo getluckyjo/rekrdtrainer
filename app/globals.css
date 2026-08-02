@@ -708,3 +708,192 @@ table.pl td:first-child {
     display: none !important;
   }
 }
+
+/* ---------------------------------------------------------- HERO SPLIT -- */
+/* Product shot beside the pitch. Below 900px the image drops under the copy
+   rather than shrinking into a stamp. */
+
+.hero-split {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: clamp(24px, 4vw, 52px);
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .hero-split {
+    grid-template-columns: 1fr;
+  }
+}
+.hero-split h1 {
+  font-size: clamp(38px, 5.6vw, 68px);
+}
+
+/* The shot ships on its own light-grey studio background, so rather than
+   fight it with blend modes, frame it: a cream panel with a hairline and the
+   five-flavour bar reads as deliberate and matches every other box here. */
+.hero-shot {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--cream);
+  overflow: hidden;
+  justify-self: center;
+  width: 100%;
+  max-width: 340px;
+}
+/* No max-height: capping the height makes the box wider than the image and
+   leaves a visible seam down the side. Width alone drives the size, and
+   aspect-ratio derives the height exactly. */
+.hero-shot .shot-inner {
+  position: relative;
+  aspect-ratio: 1084 / 1451;
+}
+.hero-shot img {
+  object-fit: contain;
+}
+@media (max-width: 900px) {
+  .hero-shot {
+    max-width: 260px;
+  }
+}
+
+/* --------------------------------------------------------- ICON PIECES -- */
+
+.fact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.fact {
+  background: var(--cream);
+  padding: 18px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.section.alt .fact {
+  background: var(--paper);
+}
+.fact svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--ink);
+}
+.fact .k {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  display: block;
+  margin-bottom: 3px;
+}
+.fact .v {
+  font-weight: 700;
+  font-size: 14.5px;
+  line-height: 1.25;
+}
+
+/* An icon sitting in a card or step header */
+.ico-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.ico-head h3 {
+  margin-bottom: 0;
+}
+.ico-head svg {
+  flex-shrink: 0;
+  color: var(--ink);
+}
+
+/* Tight two-column get / don't-get list with check and cross marks */
+.deal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 700px) {
+  .deal {
+    grid-template-columns: 1fr;
+  }
+}
+.deal ul {
+  list-style: none;
+}
+.deal li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  color: var(--ink-soft);
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--hairline);
+}
+.deal li:last-child {
+  border-bottom: none;
+}
+.deal li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.deal .yes li svg {
+  color: #6f9b3f;
+}
+.deal .no li svg {
+  color: #c8636f;
+}
+
+/* Collapsed detail block — "all the details" without the wall of table */
+.tuck {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--cream);
+  margin-top: 18px;
+}
+.section.alt .tuck {
+  background: var(--paper);
+}
+.tuck > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tuck > summary::-webkit-details-marker {
+  display: none;
+}
+.tuck > summary::after {
+  content: "+";
+  margin-left: auto;
+  font-size: 15px;
+}
+.tuck[open] > summary::after {
+  content: "–";
+}
+.tuck[open] > summary {
+  border-bottom: 1px solid var(--hairline);
+}
+.tuck .tuck-body {
+  padding: 0;
+}
+.tuck table.pl {
+  border: none;
+}
+
+/* Lesson icon in the accordion summary */
+.post summary > svg {
+  flex-shrink: 0;
+  color: var(--ink);
+}

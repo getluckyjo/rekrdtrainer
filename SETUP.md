@@ -116,8 +116,18 @@ the first order only.
   pulled from live contracts when a coach leaves.
 - **Update the "~10% kickback" line** in `rekrd-sales-distribution_1.html` — it
   contradicts the 15% this site promises.
-- **Fix the flavour list** in the store policies doc. It says rooibos; the store
-  and this site say Peach.
+- **The flavour names disagree three ways.** The live store says Sour Cherry,
+  Pineapple, Orange, Peach, Watermelon. The policies doc says rooibos instead of
+  peach. The product shot in the hero shows *Pineapple Raspberry, Blueberry
+  Lemonade, Orange, Sour Cherry Apple* and *Salty Watermelon* — which matches
+  the financial model, not either of the others. This site follows the live
+  store, since that is what a client sees at checkout, but the packaging is
+  what they physically hold. Settle it before coaches start naming flavours.
+- **The tube says "supports muscle function, nerve function and recovery."**
+  That is a function claim printed on the pack, and this site tells coaches
+  never to say "you'll recover faster". Worth checking with whoever signed off
+  the label that the two positions are reconcilable — a coach reading the pack
+  aloud shouldn't be breaking a rule we gave them.
 - **Confirm 15% + 5% is intentional.** Check the coach channel against the
   landed cost in the financial model before opening applications — the combined
   giveaway lands materially below the direct-sale margin that model assumes,
