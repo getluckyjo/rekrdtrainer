@@ -35,19 +35,39 @@ The **Table Editor** is your admin panel. `trainers.status` is the switch —
 set it to `closed` to stop a coach earning. `payouts.status` is where you mark
 a run paid. There is deliberately no admin UI to maintain.
 
-## 3. Shopify custom app
+## 3. Shopify app
 
-**Settings → Apps and sales channels → Develop apps → Create an app.**
+Shopify has retired admin-created custom apps — the store's App development
+page now only offers the Dev Dashboard. So there is no static `shpat_` token
+any more. Instead the app authenticates with the **client credentials grant**:
+a client id and secret are exchanged for a 24-hour access token, which
+`lib/shopify/client.ts` fetches, caches in memory and refreshes on its own.
 
-Scopes under Admin API integration:
+This only works because the app and the store are in the same Shopify
+organisation. It is the supported path for server-to-server integrations you
+own, and needs no OAuth callback.
 
+1. **dev.shopify.com** → your app (or create one)
+2. **Configuration** → Admin API scopes → tick these → Save:
+   ```
+   write_discounts  read_discounts  read_orders  read_customers  read_products
+   ```
+3. **Install** it on `rekrd.myshopify.com` — the grant fails without an install
+4. **Settings** → copy the **Client ID** and **Client secret** (`shpss_…`)
+
+Both go in the environment as `SHOPIFY_CLIENT_ID` and
+`SHOPIFY_CLIENT_SECRET`. Leave `SHOPIFY_ADMIN_TOKEN` empty — it exists only
+for legacy apps and overrides the grant when set.
+
+Verify before going further:
+
+```bash
+npm run shopify:check
+npm run shopify:check -- --write-test
 ```
-write_discounts   read_discounts   read_orders   read_customers   read_products
-```
 
-Install it, then reveal the Admin API access token — **it is shown once**. That
-is `SHOPIFY_ADMIN_TOKEN`. `SHOPIFY_STORE_DOMAIN` is the `.myshopify.com` one,
-not `shop.rekrd.io`.
+The second one mints a throwaway discount code and deletes it, which is the
+only way to prove `write_discounts` works before a real coach signs up.
 
 ## 4. Environment variables
 
@@ -55,9 +75,10 @@ Add all of these in **Vercel → Settings → Environment Variables** (Productio
 and Preview), using `.env.example` as the checklist:
 
 ```
-SHOPIFY_STORE_DOMAIN     SHOPIFY_ADMIN_TOKEN      SHOPIFY_API_VERSION=2026-07
-SHOPIFY_PRODUCT_HANDLE   DATABASE_URL             RESEND_API_KEY
-DASHBOARD_JWT_SECRET     CRON_SECRET              NEXT_PUBLIC_SITE_ORIGIN
+SHOPIFY_STORE_DOMAIN     SHOPIFY_CLIENT_ID        SHOPIFY_CLIENT_SECRET
+SHOPIFY_API_VERSION      SHOPIFY_PRODUCT_HANDLE   DATABASE_URL
+RESEND_API_KEY           DASHBOARD_JWT_SECRET     CRON_SECRET
+NEXT_PUBLIC_SITE_ORIGIN
 ```
 
 Generate the two secrets:

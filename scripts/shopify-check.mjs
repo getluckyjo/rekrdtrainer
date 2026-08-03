@@ -12,55 +12,85 @@
  */
 
 const DOMAIN = process.env.SHOPIFY_STORE_DOMAIN;
-const TOKEN = process.env.SHOPIFY_ADMIN_TOKEN;
+const STATIC_TOKEN = process.env.SHOPIFY_ADMIN_TOKEN;
+const CLIENT_ID = process.env.SHOPIFY_CLIENT_ID;
+const CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET;
 const VERSION = process.env.SHOPIFY_API_VERSION || "2026-07";
 const WRITE_TEST = process.argv.includes("--write-test");
 
 const ok = (s) => `\x1b[32m✓\x1b[0m ${s}`;
 const bad = (s) => `\x1b[31m✗\x1b[0m ${s}`;
 const warn = (s) => `\x1b[33m!\x1b[0m ${s}`;
+const mask = (v) => `${v.slice(0, 6)}…${v.slice(-4)} [${v.length} chars]`;
 
-if (!DOMAIN || !TOKEN) {
-  console.error(bad("SHOPIFY_STORE_DOMAIN and SHOPIFY_ADMIN_TOKEN must be set."));
-  console.error("  Run with:  node --env-file=.env.local scripts/shopify-check.mjs");
+if (!DOMAIN) {
+  console.error(bad("SHOPIFY_STORE_DOMAIN must be set."));
+  console.error("  Run with:  npm run shopify:check");
   process.exit(1);
 }
 
 if (!/^[a-z0-9-]+\.myshopify\.com$/i.test(DOMAIN)) {
-  console.error(
-    bad(`SHOPIFY_STORE_DOMAIN looks wrong: "${DOMAIN}"`),
-  );
-  console.error(
-    "  It must be the myshopify domain (e.g. rekrd.myshopify.com), not shop.rekrd.io.",
-  );
+  console.error(bad(`SHOPIFY_STORE_DOMAIN looks wrong: "${DOMAIN}"`));
+  console.error("  It must be the myshopify domain (e.g. rekrd.myshopify.com), not shop.rekrd.io.");
   process.exit(1);
 }
 
-/* The two credentials sit on the same page of a custom app, so mixing them up
-   is the single most common setup mistake. Name it precisely. */
-if (TOKEN.startsWith("shpss_")) {
-  console.error(bad("That's the API secret key, not the Admin API access token."));
+if (!STATIC_TOKEN && !(CLIENT_ID && CLIENT_SECRET)) {
+  console.error(bad("No credentials found."));
   console.error("");
-  console.error("  Shopify admin → Settings → Apps and sales channels → Develop apps");
-  console.error("    → your app → API credentials");
-  console.error("");
-  console.error("  Use the token under the heading \"Admin API access token\" at the");
-  console.error("  TOP of that page — it starts shpat_ and is shown only once.");
-  console.error("  \"API key and secret key\" lower down is a different thing; keep the");
-  console.error("  shpss_ value for SHOPIFY_API_SECRET if we add webhooks later.");
-  console.error("");
-  console.error("  If that section says \"Install app to reveal\", the app isn't");
-  console.error("  installed yet — click Install app and the token will appear.");
+  console.error("  Dev Dashboard app (current):  set SHOPIFY_CLIENT_ID and SHOPIFY_CLIENT_SECRET");
+  console.error("  Legacy admin custom app:      set SHOPIFY_ADMIN_TOKEN");
   process.exit(1);
 }
 
-if (TOKEN.startsWith("shppa_")) {
-  console.error(bad("That's a legacy private app password. Create a custom app instead."));
+if (STATIC_TOKEN?.startsWith("shpss_")) {
+  console.error(bad("SHOPIFY_ADMIN_TOKEN holds a client secret (shpss_)."));
+  console.error("  That value belongs in SHOPIFY_CLIENT_SECRET instead, alongside");
+  console.error("  SHOPIFY_CLIENT_ID. Leave SHOPIFY_ADMIN_TOKEN empty.");
   process.exit(1);
 }
 
-if (!TOKEN.startsWith("shpat_")) {
-  console.log(warn(`Token starts "${TOKEN.slice(0, 6)}" — expected shpat_. Continuing anyway.`));
+console.log(`\nStore    ${DOMAIN}`);
+console.log(`API      ${VERSION}`);
+
+let TOKEN = STATIC_TOKEN;
+
+if (TOKEN) {
+  console.log(`Auth     static token  ${mask(TOKEN)}\n`);
+} else {
+  console.log(`Auth     client credentials`);
+  console.log(`   id     ${mask(CLIENT_ID)}`);
+  console.log(`   secret ${mask(CLIENT_SECRET)}\n`);
+
+  const res = await fetch(`https://${DOMAIN}/admin/oauth/access_token`, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+      grant_type: "client_credentials",
+    }),
+  });
+
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    console.error(bad(`Token exchange failed — HTTP ${res.status}`));
+    console.error(`  ${body.slice(0, 300)}`);
+    console.error("");
+    console.error("  Check, in order:");
+    console.error("   1. The app is INSTALLED on this store (Dev Dashboard → Installs)");
+    console.error("   2. The client id and secret are from the same app");
+    console.error("   3. The app and the store are in the same Shopify organisation —");
+    console.error("      client credentials only works for apps you own on stores you own");
+    process.exit(1);
+  }
+
+  const data = await res.json();
+  TOKEN = data.access_token;
+  const hours = Math.round((data.expires_in ?? 0) / 3600);
+  console.log(ok(`Exchanged credentials for a token — valid ${hours}h, auto-refreshed in production`));
+  if (data.scope) console.log(`   granted: ${data.scope}`);
+  console.log("");
 }
 
 const endpoint = `https://${DOMAIN}/admin/api/${VERSION}/graphql.json`;

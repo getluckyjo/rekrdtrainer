@@ -101,6 +101,11 @@ programme terms, the page copy and what a coach actually gets paid.
 - **`SHOPIFY_API_VERSION` is pinned.** Before bumping, re-verify
   `DiscountCodeBasicInput` — `customerSelection` is already deprecated in favour
   of `context`, and `percentage` is a 0–1 fraction, not 0–100.
+- **Auth is the client credentials grant, not a static token.** Shopify retired
+  admin-created custom apps; Dev Dashboard apps exchange a client id and secret
+  for a 24-hour token. `lib/shopify/client.ts` caches and refreshes it, and
+  retries once on a 401 in case it expired early. `SHOPIFY_ADMIN_TOKEN` still
+  works for legacy apps and takes precedence when set.
 - **Codes stack with the subscription price** (a selling-plan price, not a
   discount, so `combinesWith` doesn't govern it). `recurringCycleLimit: 1`
   keeps the 5% to the first subscription order only.
