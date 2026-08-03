@@ -11,7 +11,8 @@
     "test:watch": "vitest",
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "shopify:check": "node --env-file=.env.local scripts/shopify-check.mjs"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.2",
