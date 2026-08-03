@@ -9,10 +9,10 @@
  *   A coach is never penalised for the discount they hand their client.
  *
  * Which gives, per order:
- *   One-off tube ................. client pays R570.00, coach earns R90.00
- *   Subscription, first order .... client pays R513.00, coach earns R81.00
+ *   One-off tube ................. client pays R540.00, coach earns R90.00
+ *   Subscription, first order .... client pays R486.00, coach earns R81.00
  *   Subscription, every renewal .. client pays R540.00, coach earns R81.00
- *   5-sachet starter pack ........ client pays  R95.00, coach earns R15.00
+ *   5-sachet starter pack ........ client pays  R90.00, coach earns R15.00
  *
  * VAT-inclusive, delivery excluded, not paid on refunded orders.
  */
@@ -26,7 +26,7 @@ export const LIST_TUBE_C = 60_000;
 export const LIST_STARTER_C = 10_000;
 
 /** The client's discount for using a coach's code. */
-export const CLIENT_DISCOUNT = 0.05;
+export const CLIENT_DISCOUNT = 0.1;
 
 /** Subscribe & Save, set on the Shopify selling plan. */
 export const SUB_DISCOUNT = 0.1;
@@ -44,17 +44,17 @@ export const FREE_DELIVERY_THRESHOLD_C = 50_000;
  *
  * A coach code and the subscription selling-plan price stack: the sub price is
  * a selling-plan price rather than a discount, so Shopify's `combinesWith`
- * rules don't apply to it. This is deliberate — "your client gets 5% off
+ * rules don't apply to it. This is deliberate — "your client gets 10% off
  * whatever they buy" is one sentence a coach can remember.
  */
-export const PRICE_ONE_OFF_C = Math.round(LIST_TUBE_C * (1 - CLIENT_DISCOUNT)); // 57_000
+export const PRICE_ONE_OFF_C = Math.round(LIST_TUBE_C * (1 - CLIENT_DISCOUNT)); // 54_000
 export const PRICE_SUB_FIRST_C = Math.round(
   LIST_TUBE_C * (1 - SUB_DISCOUNT) * (1 - CLIENT_DISCOUNT),
-); // 51_300
+); // 48_600
 export const PRICE_SUB_RENEWAL_C = Math.round(LIST_TUBE_C * (1 - SUB_DISCOUNT)); // 54_000
 export const PRICE_STARTER_C = Math.round(
   LIST_STARTER_C * (1 - CLIENT_DISCOUNT),
-); // 9_500
+); // 9_000
 
 /**
  * What the coach earns, in cents. 15% of the price before their 5%.

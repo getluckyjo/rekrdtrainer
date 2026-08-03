@@ -11,12 +11,12 @@ tracks what they're owed.
 | | |
 |---|---|
 | Coach earns | **15%** of the order value *before* the client's discount |
-| Client saves | **5%** with the coach's code |
+| Client saves | **10%** with the coach's code |
 | Carry-over | **12 months** from a client's first coded order |
 | Payment | Statement on the 1st, EFT on the 7th, R200 minimum, 30-day hold |
 
-Per order: **R90** on a one-off tube (client pays R570), **R81** on a
-subscription order (client pays R513 first, then R540), **R15** on a starter
+Per order: **R90** on a one-off tube (client pays R540), **R81** on a
+subscription order (client pays R486 first, then R540), **R15** on a starter
 pack. A coach is never penalised for the discount they give.
 
 ## How attribution works
@@ -25,7 +25,7 @@ pack. A coach is never penalised for the discount they give.
 theme edits. The primary use case is a coach saying "use my code" on a gym
 floor, where nobody clicks anything.
 
-1. Coach signs up → `discountCodeBasicCreate` mints a 5% code in Shopify.
+1. Coach signs up → `discountCodeBasicCreate` mints a 10% code in Shopify.
 2. Client checks out with the code → it's recorded permanently on the order.
 3. Nightly cron reads orders updated in the last 3 days and rebuilds the ledger.
 4. First coded order links that Shopify customer to the coach for 12 months, so

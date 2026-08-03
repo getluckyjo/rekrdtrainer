@@ -46,7 +46,7 @@ export async function sendWelcomeEmail(opts: {
       ``,
       `Your code is ${code}. It's live on ${BRAND.shopUrl} right now.`,
       ``,
-      `Your clients get 5% off with it. You earn 15% of what they spend —`,
+      `Your clients get 10% off with it. You earn 15% of what they spend —`,
       `R90 on a one-off tube, R81 on every subscription delivery — including`,
       `their repeat orders for 12 months, whether they type the code or not.`,
       ``,

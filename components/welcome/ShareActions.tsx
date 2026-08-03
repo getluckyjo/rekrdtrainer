@@ -19,25 +19,25 @@ export default function ShareActions({
 }) {
   const [opener, setOpener] = useState(0);
 
-  const bioLine = `5% off REKRD with code ${code} 👇 ${vanity}`;
+  const bioLine = `10% off REKRD with code ${code} 👇 ${vanity}`;
 
   const openers = [
     {
       tab: "WhatsApp a client",
-      text: `Hey — I've started using REKRD, it's a South African electrolyte sachet you put in 500ml of water once a day. 600mg of sodium, no sugar, no caffeine. If you want to try it, my code ${code} gets you 5% off at shop.rekrd.io. There's a 5-sachet pack for R100 if you want to taste the flavours first.`,
+      text: `Hey — I've started using REKRD, it's a South African electrolyte sachet you put in 500ml of water once a day. 600mg of sodium, no sugar, no caffeine. If you want to try it, my code ${code} gets you 10% off at shop.rekrd.io. There's a 5-sachet pack for R100 if you want to taste the flavours first.`,
     },
     {
       tab: "Story caption",
-      text: `One sachet, 500ml of cold water, once a day.\n600mg of sodium. No sugar, no caffeine.\nI'm a REKRD coach — code ${code} gets you 5% off.\n${vanity}`,
+      text: `One sachet, 500ml of cold water, once a day.\n600mg of sodium. No sugar, no caffeine.\nI'm a REKRD coach — code ${code} gets you 10% off.\n${vanity}`,
     },
     {
       tab: "End of a session",
-      text: `"I use REKRD — it's an electrolyte sachet, one in 500ml of water a day. R20 a serve. If you want to try it, my code's ${code} and it gets you 5% off. No pressure either way."`,
+      text: `"I use REKRD — it's an electrolyte sachet, one in 500ml of water a day. R20 a serve. If you want to try it, my code's ${code} and it gets you 10% off. No pressure either way."`,
     },
   ];
 
   const whatsappHref = `https://wa.me/?text=${encodeURIComponent(
-    `My REKRD coach link: ${vanity} — code ${code} for 5% off.`,
+    `My REKRD coach link: ${vanity} — code ${code} for 10% off.`,
   )}`;
 
   return (

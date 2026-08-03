@@ -77,7 +77,7 @@ export const LESSONS: Lesson[] = [
     blocks: [
       {
         kind: "p",
-        text: "A tube is R600 — thirty sachets, R20 a serve. Subscribe & Save is R540 with pause, skip or cancel any time, no fee. Your code takes a further 5% off: R570 one-off, R513 on a first subscription order.",
+        text: "A tube is R600 — thirty sachets, R20 a serve. Subscribe & Save is R540 with pause, skip or cancel any time, no fee. Your code takes a further 10% off: R540 one-off, R486 on a first subscription order.",
       },
       {
         kind: "callout",
@@ -141,7 +141,7 @@ export const LESSONS: Lesson[] = [
           "“How much sodium?” — “600mg a sachet.”",
           "“Can I have two?” — “One a day is the routine. On a very hot day or a big-sweat session, a second is fine.”",
           "“Is it safe for me?” — “It's a foodstuff, not a medicine. If you're pregnant, on medication, or managing your sodium, show the label to your doctor.”",
-          "“Where do I get it?” — “shop.rekrd.io. Use my code, you get 5% off.”",
+          "“Where do I get it?” — “shop.rekrd.io. Use my code, you get 10% off.”",
         ],
       },
       {

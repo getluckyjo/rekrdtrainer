@@ -47,7 +47,7 @@ export default function CoachesPage() {
             </h1>
             <p className="sub">
               One electrolyte sachet a day. 600mg of sodium, no sugar, no
-              caffeine. Recommend it with your code — your clients get 5% off,
+              caffeine. Recommend it with your code — your clients get 10% off,
               you earn 15% of everything they spend. Every order, not just the
               first.
             </p>
@@ -59,7 +59,7 @@ export default function CoachesPage() {
               </div>
               <div>
                 <div className="k mono">They save</div>
-                <div className="v">5%</div>
+                <div className="v">10%</div>
               </div>
               <div>
                 <div className="k mono">Setup</div>
@@ -264,12 +264,12 @@ export default function CoachesPage() {
               <tbody>
                 <tr>
                   <td>One-off tube</td>
-                  <td>R570.00</td>
+                  <td>R540.00</td>
                   <td>R90.00</td>
                 </tr>
                 <tr>
                   <td>Subscription — first order</td>
-                  <td>R513.00</td>
+                  <td>R486.00</td>
                   <td>R81.00</td>
                 </tr>
                 <tr>
@@ -279,7 +279,7 @@ export default function CoachesPage() {
                 </tr>
                 <tr>
                   <td>5-sachet starter pack</td>
-                  <td>R95.00</td>
+                  <td>R90.00</td>
                   <td>R15.00</td>
                 </tr>
               </tbody>
@@ -295,7 +295,7 @@ export default function CoachesPage() {
               <ul>
                 <li>
                   <Icon name="check" size={15} />
-                  <span>15% of the order before your client&rsquo;s 5% comes off</span>
+                  <span>15% of the order before your client&rsquo;s 10% comes off</span>
                 </li>
                 <li>
                   <Icon name="repeat" size={15} />

@@ -54,7 +54,7 @@ export const trainers = pgTable(
       precision: 5,
       scale: 4,
     })
-      .default("0.0500")
+      .default("0.1000")
       .notNull(),
 
     emailVerified: boolean("email_verified").default(false).notNull(),

@@ -247,8 +247,8 @@ export default function Calculator() {
         <p className={s.compareNote}>
           Notice the subscription pays you <strong>less</strong> per tube —{" "}
           {formatZar(COMM_SUB_C)} against {formatZar(COMM_ONE_OFF_C)}{" "}
-          — because your client gets the 10% Subscribe &amp; Save price on top
-          of your 5%.
+          — because commission follows the R540 subscription price rather than
+          the R600 list.
           It&rsquo;s still worth {comparison.multiple.toFixed(1)}× more over a
           year, because it arrives {formatCount(comparison.subPerYear)} times
           instead of {formatCount(comparison.oneOffPerYear)}.{" "}
@@ -315,7 +315,7 @@ function Ledger({
 
       <p className={s.basis}>
         15% of R600 a tube ({formatZar(COMM_ONE_OFF_C)}), or R540 on
-        subscription ({formatZar(COMM_SUB_C)}). Your client&rsquo;s 5%
+        subscription ({formatZar(COMM_SUB_C)}). Your client&rsquo;s 10%
         doesn&rsquo;t come out of your cut. Delivery excluded. Not paid on
         refunded orders.
       </p>

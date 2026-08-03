@@ -81,7 +81,7 @@ export default function QrCard({
         <div className={s.pcLead}>
           Clean hydration for the everyday athlete.
           <br />
-          5% off with my code:
+          10% off with my code:
         </div>
         <div className={s.pcCode}>{code}</div>
         {svg && (

@@ -1,0 +1,1 @@
+ALTER TABLE "trainers" ALTER COLUMN "customer_discount_rate" SET DEFAULT '0.1000';

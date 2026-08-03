@@ -72,7 +72,7 @@ export const GREY_AREA: GreyArea[] = [
 export const POSTING_RULES: { title: string; body: string }[] = [
   {
     title: "Disclose, every time",
-    body: "“I'm a REKRD coach — my code gets you 5% off.” In the caption, not buried in hashtags.",
+    body: "“I'm a REKRD coach — my code gets you 10% off.” In the caption, not buried in hashtags.",
   },
   {
     title: "Never DM a claim you wouldn't put on a poster",

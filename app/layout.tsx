@@ -34,11 +34,11 @@ export const metadata: Metadata = {
     template: "%s · REKRD Coach Programme",
   },
   description:
-    "Recommend REKRD with your own code. Your clients get 5% off, you earn 15% of everything they spend — including every subscription renewal. Free to join, no stock, no minimum.",
+    "Recommend REKRD with your own code. Your clients get 10% off, you earn 15% of everything they spend — including every subscription renewal. Free to join, no stock, no minimum.",
   openGraph: {
     title: "REKRD Coach Programme",
     description:
-      "Your clients get 5% off. You earn 15% of everything they spend. Free to join, nothing to buy.",
+      "Your clients get 10% off. You earn 15% of everything they spend. Free to join, nothing to buy.",
     type: "website",
     locale: "en_ZA",
   },

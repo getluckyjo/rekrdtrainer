@@ -73,15 +73,15 @@ own (02:00 SAST nightly, plus a Sunday deep sweep).
 
 # Verifying it end to end
 
-Do this on the real store with one real order. It costs R570 and proves the
+Do this on the real store with one real order. It costs R540 and proves the
 whole chain.
 
 1. **Sign up** as a test coach at `/coaches` with a code like `ZZTEST`.
    → the welcome screen should show the code, the QR and the print card.
-2. **Check Shopify.** Discounts should list `Coach · <name> · ZZTEST`, 5%,
+2. **Check Shopify.** Discounts should list `Coach · <name> · ZZTEST`, 10%,
    tagged `coach-affiliate`, no end date.
 3. **Open** `https://shop.rekrd.io/discount/ZZTEST` → add a tube → the cart
-   should read **R570**, not R600.
+   should read **R540**, not R600.
 4. **Place the order.**
 5. **Run the sync by hand:**
    ```bash
@@ -112,8 +112,14 @@ the first order only.
   address are still placeholders, and coaches are a category of data subject the
   existing customer privacy policy doesn't cover.
 - **Confirm which subscription app** runs Subscribe & Save. It decides whether
-  the 10% is a selling-plan price or a discount, and whether a code can be
-  pulled from live contracts when a coach leaves.
+  the Subscribe & Save 10% is a selling-plan price or a discount, and whether a
+  code can be pulled from live contracts when a coach leaves.
+- **At 10%, a coach code now matches the Subscribe & Save price exactly.** A
+  one-off tube with a code is R540; a subscription renewal is also R540. So a
+  coach-referred client has no *price* reason to subscribe any more — only
+  convenience. The coach's own incentive is untouched (a subscriber is still
+  worth ~2.3x more to them over a year), but if subscription take-up matters to
+  you, the Subscribe & Save discount may need to move.
 - **Update the "~10% kickback" line** in `rekrd-sales-distribution_1.html` — it
   contradicts the 15% this site promises.
 - **The flavour names disagree three ways.** The live store says Sour Cherry,
@@ -128,7 +134,7 @@ the first order only.
   never to say "you'll recover faster". Worth checking with whoever signed off
   the label that the two positions are reconcilable — a coach reading the pack
   aloud shouldn't be breaking a rule we gave them.
-- **Confirm 15% + 5% is intentional.** Check the coach channel against the
+- **Confirm 15% + 10% is intentional.** Check the coach channel against the
   landed cost in the financial model before opening applications — the combined
   giveaway lands materially below the direct-sale margin that model assumes,
   and it's worth being deliberate about that rather than discovering it at

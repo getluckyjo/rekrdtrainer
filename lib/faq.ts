@@ -17,7 +17,7 @@ export const FAQS: Faq[] = [
   },
   {
     q: "Can I use my own code?",
-    a: "Yes, for the 5% — please do, you'll recommend it better once you've tasted the flavours. We don't pay commission on your own orders. It's your discount, not a way to buy at 20% off.",
+    a: "Yes, for the 10% — please do, you'll recommend it better once you've tasted the flavours. We don't pay commission on your own orders. It's your discount, not a way to buy at 25% off.",
   },
   {
     q: "Can I buy stock and sell it to my clients myself?",

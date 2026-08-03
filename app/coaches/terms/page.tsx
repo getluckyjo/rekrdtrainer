@@ -19,7 +19,7 @@ const CLAUSES: { n: string; title: string; body: string[] }[] = [
     n: "02",
     title: "What you earn",
     body: [
-      `Commission is ${PROGRAMME.commissionRateLabel} of the value of a qualifying order before your client's ${PROGRAMME.clientDiscountLabel} discount is applied. A one-off 30-sachet tube lists at R600, your client pays R570, and you earn R90. On a Subscribe & Save order the tube is R540 and you earn R81, on the first order and on every renewal.`,
+      `Commission is ${PROGRAMME.commissionRateLabel} of the value of a qualifying order before your client's ${PROGRAMME.clientDiscountLabel} discount is applied. A one-off 30-sachet tube lists at R600, your client pays R540, and you earn R90. On a Subscribe & Save order the tube is R540 and you earn R81, on the first order and on every renewal.`,
       "Commission is calculated on product value only. Delivery is excluded. Commission is inclusive of VAT where you are VAT registered — tell us if you are, and invoice us accordingly.",
       "We may change the commission rate. If we do, we will tell you at least 30 days beforehand, and every order placed before the change is paid at the old rate.",
     ],
@@ -30,7 +30,7 @@ const CLAUSES: { n: string; title: string; body: string[] }[] = [
     body: [
       `An order qualifies if your code was applied at checkout, or if it was placed by a customer whose first REKRD order carried your code within the last ${PROGRAMME.carryOverMonths} months. That second rule is what pays you on subscription renewals and on repeat orders where your client forgot to type the code.`,
       "Orders that are cancelled, or refunded in full, earn nothing. Partially refunded orders earn commission on what the customer actually kept.",
-      "Orders you place yourself do not earn commission. You are welcome to use your own code for the discount — please do — but it is your discount, not a way to buy at 20% off.",
+      "Orders you place yourself do not earn commission. You are welcome to use your own code for the discount — please do — but it is your discount, not a way to buy at 25% off.",
     ],
   },
   {

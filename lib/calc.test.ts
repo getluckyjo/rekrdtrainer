@@ -23,20 +23,21 @@ import {
 
 describe("per-order economics", () => {
   it("prices what the client pays", () => {
-    expect(PRICE_ONE_OFF_C).toBe(57_000); // R570.00
-    expect(PRICE_SUB_FIRST_C).toBe(51_300); // R513.00
+    expect(PRICE_ONE_OFF_C).toBe(54_000); // R540.00
+    expect(PRICE_SUB_FIRST_C).toBe(48_600); // R486.00
     expect(PRICE_SUB_RENEWAL_C).toBe(54_000); // R540.00
-    expect(PRICE_STARTER_C).toBe(9_500); // R95.00
+    expect(PRICE_STARTER_C).toBe(9_000); // R90.00
   });
 
-  it("pays the coach 15% of the price before the client's 5%", () => {
+  it("pays the coach 15% of the price before the client's 10%", () => {
     expect(COMM_ONE_OFF_C).toBe(9_000); // R90.00
     expect(COMM_SUB_C).toBe(8_100); // R81.00
     expect(COMM_STARTER_C).toBe(1_500); // R15.00
   });
 
   it("never lets the coach's own discount come out of their cut", () => {
-    // 15% of R570 would be R85.50. We pay R90.00.
+    // 15% of R540 would be R81.00. We pay R90.00, because commission is
+    // owed on the R600 list price, not on what the client actually paid.
     expect(COMM_ONE_OFF_C).toBeGreaterThan(
       Math.round(PRICE_ONE_OFF_C * 0.15),
     );
@@ -105,7 +106,7 @@ describe("calculate — the five plan fixtures", () => {
     expect(r.buyers).toBeCloseTo(12);
     expect(r.tubesOneOff).toBeCloseTo(7.2);
     expect(r.tubesSub).toBeCloseTo(4.8);
-    expect(r.clientSpendC).toBe(669_600); // R6,696.00
+    expect(r.clientSpendC).toBe(648_000); // R6,480.00
     expect(r.perClientC).toBe(2_592); // R25.92
     expect(r.perBuyerC).toBe(8_640); // R86.40
   });
@@ -141,8 +142,8 @@ describe("compareSubscription", () => {
 
 describe("commissionForOrder — real Shopify orders", () => {
   it("reconstructs the pre-discount value when the code was used", () => {
-    // Client paid R570 with the code. Commission is 15% of R600.
-    expect(commissionForOrder({ subtotalC: 57_000, codeApplied: true })).toBe(
+    // Client paid R540 with the code. Commission is 15% of R600.
+    expect(commissionForOrder({ subtotalC: 54_000, codeApplied: true })).toBe(
       9_000,
     );
   });
@@ -160,8 +161,8 @@ describe("commissionForOrder — real Shopify orders", () => {
   });
 
   it("scales down with a partial refund", () => {
-    // Two tubes ordered (R1,140), one returned.
-    expect(commissionForOrder({ subtotalC: 57_000, codeApplied: true })).toBe(
+    // Two tubes ordered (R1,080), one returned.
+    expect(commissionForOrder({ subtotalC: 54_000, codeApplied: true })).toBe(
       9_000,
     );
   });
@@ -169,7 +170,7 @@ describe("commissionForOrder — real Shopify orders", () => {
   it("honours a per-trainer commission rate override", () => {
     expect(
       commissionForOrder({
-        subtotalC: 57_000,
+        subtotalC: 54_000,
         codeApplied: true,
         commissionRate: 0.1,
       }),

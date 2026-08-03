@@ -117,7 +117,7 @@ export default async function WelcomePage(
                 <p>
                   It appears on your statement the day after the order is
                   placed. Commission is 15% of the order before your
-                  client&rsquo;s 5% came off — R90 on a one-off tube, R81 on a
+                  client&rsquo;s 10% came off — R90 on a one-off tube, R81 on a
                   subscription delivery.
                 </p>
               </div>
@@ -157,10 +157,10 @@ export default async function WelcomePage(
 
           <div className="banner">
             <strong>One last thing.</strong> Order a 5-sachet pack for yourself
-            at R95 with your own code. You&rsquo;ll recommend it far better once
+            at R90 with your own code. You&rsquo;ll recommend it far better once
             you&rsquo;ve tasted all five flavours. We don&rsquo;t pay commission
             on your own orders — it&rsquo;s your discount, not a way to buy at
-            20% off.
+            25% off.
           </div>
         </div>
       </section>

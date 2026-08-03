@@ -124,7 +124,7 @@ export const SPEC_ROWS: { label: string; value: string }[] = [
 /** Programme terms, in one place, so page copy and emails can't drift. */
 export const PROGRAMME = {
   commissionRateLabel: "15%",
-  clientDiscountLabel: "5%",
+  clientDiscountLabel: "10%",
   carryOverMonths: 12,
   statementDay: "1st",
   payoutDay: "7th",
