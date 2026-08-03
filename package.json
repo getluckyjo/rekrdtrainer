@@ -13,7 +13,8 @@
     "db:push": "node --env-file=.env.local node_modules/drizzle-kit/bin.cjs push",
     "db:studio": "drizzle-kit studio",
     "shopify:check": "node --env-file=.env.local scripts/shopify-check.mjs",
-    "db:check": "node --env-file=.env.local scripts/db-check.mjs"
+    "db:check": "node --env-file=.env.local scripts/db-check.mjs",
+    "db:connect": "node --env-file=.env.local scripts/db-connect.mjs"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.2",
