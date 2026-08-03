@@ -1,28 +1,43 @@
 # Switching it on
 
-The site is deployed and the marketing, training, claims and calculator
-sections work with nothing configured. Signup, the ledger and the dashboard
-need the four steps below. Roughly an hour, most of it waiting.
+**Shopify and Supabase are live and verified.** A coach can sign up right now
+and get a real discount code. What remains is the domain, email, and the
+commercial and legal sign-offs at the bottom of this file.
 
-Until step 2 is done, the signup form returns a clear message telling coaches
-to email `partners@rekrd.io` — it never fails silently.
+| | |
+|---|---|
+| Shopify | ✅ Dev Dashboard app, client credentials, all five scopes |
+| Database | ✅ Supabase `rekrd-coaches`, eu-west-1, seven tables |
+| Vercel env | ✅ 10 variables across production, preview and development |
+| Crons | ✅ Nightly 02:00 SAST + Sunday deep sweep, both tested |
+| Domain | ⬜ Still on `rekrd-coaches.vercel.app` |
+| Email | ⬜ No `RESEND_API_KEY` — no welcome mail, no dashboard magic links |
+
+Verified end to end against production on 3 August 2026: signup created a
+trainer row, minted a live Shopify code, and the welcome page, vanity redirect
+and both cron endpoints all responded correctly. The test coach was removed
+from both systems afterwards.
 
 ---
 
-## 1. Make the site reachable
 
-The first deploy landed behind Vercel's team SSO, so only people logged into
-`get-lucky-golf-club` can see it. Turn that off:
+## 1. Point a domain at it
 
-**Vercel → rekrd-coaches → Settings → Deployment Protection → Vercel
-Authentication → Disabled → Save.**
-
-Then point a domain at it: **Settings → Domains → Add → `coaches.rekrd.io`**,
+The site is public at `rekrd-coaches.vercel.app`. To move it: **Settings → Domains → Add → `coaches.rekrd.io`**,
 and add the CNAME Vercel gives you at your DNS provider. The code already
 assumes that hostname; if you use a different one, set
 `NEXT_PUBLIC_SITE_ORIGIN` to match.
 
-## 2. Supabase
+## 2. Supabase — done
+
+Project `rekrd-coaches`, ref `nexbfbvemvdmldyqxsbn`, **West EU (Ireland)**,
+behind the shared transaction pooler on `aws-0-eu-west-1`. All seven tables
+created, defaults verified at 15% coach / 10% client.
+
+`npm run db:check` re-verifies any time. `npm run db:connect` rebuilds
+`DATABASE_URL` from a password if it is ever rotated.
+
+<details><summary>Original instructions, if it ever needs recreating</summary>
 
 1. New project, region **eu-west-1** (closest to SA, and the cleanest story for
    the POPIA cross-border clause).
@@ -31,11 +46,13 @@ assumes that hostname; if you use a different one, set
 3. Run the schema: paste `drizzle/0000_init.sql` into the SQL Editor, or
    `npm run db:push` locally with `DATABASE_URL` set.
 
+</details>
+
 The **Table Editor** is your admin panel. `trainers.status` is the switch —
 set it to `closed` to stop a coach earning. `payouts.status` is where you mark
 a run paid. There is deliberately no admin UI to maintain.
 
-## 3. Shopify app
+## 3. Shopify app — done
 
 Shopify has retired admin-created custom apps — the store's App development
 page now only offers the Dev Dashboard. So there is no static `shpat_` token
@@ -69,7 +86,7 @@ npm run shopify:check -- --write-test
 The second one mints a throwaway discount code and deletes it, which is the
 only way to prove `write_discounts` works before a real coach signs up.
 
-## 4. Environment variables
+## 4. Environment variables — done
 
 Add all of these in **Vercel → Settings → Environment Variables** (Production
 and Preview), using `.env.example` as the checklist:
@@ -132,6 +149,11 @@ the first order only.
   is a solid draft, but the company name, CIPC number, VAT number and registered
   address are still placeholders, and coaches are a category of data subject the
   existing customer privacy policy doesn't cover.
+- **The store already has Friends25, Wholesale25 and Welcome10.** Coach codes
+  are configured never to combine with other order or product discounts, so
+  they cannot stack — but a client who knows `Wholesale25` gets more off than a
+  coach code gives, and the coach earns nothing on that order. Worth deciding
+  whether those public codes should stay live once coaches are recruiting.
 - **Confirm which subscription app** runs Subscribe & Save. It decides whether
   the Subscribe & Save 10% is a selling-plan price or a discount, and whether a
   code can be pulled from live contracts when a coach leaves.
