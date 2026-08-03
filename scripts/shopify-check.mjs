@@ -119,10 +119,6 @@ async function gql(query, variables) {
   return json.data;
 }
 
-console.log(`\nStore    ${DOMAIN}`);
-console.log(`API      ${VERSION}`);
-console.log(`Token    ${TOKEN.slice(0, 6)}…${TOKEN.slice(-4)}  (${TOKEN.length} chars)\n`);
-
 let failed = false;
 
 /* ---------------------------------------------------------------- shop -- */
