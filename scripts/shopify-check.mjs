@@ -36,8 +36,31 @@ if (!/^[a-z0-9-]+\.myshopify\.com$/i.test(DOMAIN)) {
   process.exit(1);
 }
 
+/* The two credentials sit on the same page of a custom app, so mixing them up
+   is the single most common setup mistake. Name it precisely. */
+if (TOKEN.startsWith("shpss_")) {
+  console.error(bad("That's the API secret key, not the Admin API access token."));
+  console.error("");
+  console.error("  Shopify admin → Settings → Apps and sales channels → Develop apps");
+  console.error("    → your app → API credentials");
+  console.error("");
+  console.error("  Use the token under the heading \"Admin API access token\" at the");
+  console.error("  TOP of that page — it starts shpat_ and is shown only once.");
+  console.error("  \"API key and secret key\" lower down is a different thing; keep the");
+  console.error("  shpss_ value for SHOPIFY_API_SECRET if we add webhooks later.");
+  console.error("");
+  console.error("  If that section says \"Install app to reveal\", the app isn't");
+  console.error("  installed yet — click Install app and the token will appear.");
+  process.exit(1);
+}
+
+if (TOKEN.startsWith("shppa_")) {
+  console.error(bad("That's a legacy private app password. Create a custom app instead."));
+  process.exit(1);
+}
+
 if (!TOKEN.startsWith("shpat_")) {
-  console.log(warn("Token doesn't start with shpat_ — is it an Admin API access token?"));
+  console.log(warn(`Token starts "${TOKEN.slice(0, 6)}" — expected shpat_. Continuing anyway.`));
 }
 
 const endpoint = `https://${DOMAIN}/admin/api/${VERSION}/graphql.json`;
