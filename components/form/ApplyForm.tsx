@@ -12,6 +12,7 @@ const DISCIPLINES = [
   "Personal training",
   "Biokinetics",
   "Padel",
+  "Tennis",
   "Golf",
   "Running",
   "Cycling",
