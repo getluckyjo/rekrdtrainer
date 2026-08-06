@@ -11,8 +11,8 @@ type Verdict = { correct: boolean; explain: string } | null;
  * Five statements, two taps each, about 25 seconds. It cannot be permanently
  * failed — a wrong answer explains why and moves on.
  *
- * This is consent with comprehension, not a knowledge test. The point is the
- * audit artefact: every coach was shown the claims rules and answered them.
+ * Optional — it no longer gates the signup. When a coach does complete it we
+ * keep the audit artefact: they were shown the claims rules and answered them.
  */
 export default function ClaimsCheck() {
   const [index, setIndex] = useState(0);
@@ -41,9 +41,8 @@ export default function ClaimsCheck() {
           <div>
             <div className={s.passedTitle}>Claims check done.</div>
             <p className={s.passedSub}>
-              That&rsquo;s the only thing standing between you and a code. The
-              rule, one more time: describe the sachet, never describe the
-              outcome.
+              Nice — that&rsquo;s on your record now. The rule, one more time:
+              describe the sachet, never describe the outcome.
             </p>
           </div>
           <a className="btn" href="#apply">
@@ -59,13 +58,14 @@ export default function ClaimsCheck() {
       <div className={s.checkHead}>
         <span className={s.checkTitle}>Claims check</span>
         <span className={s.checkMeta}>
-          {CLAIMS_CARDS.length} statements · about 25 seconds
+          Optional · {CLAIMS_CARDS.length} statements · about 25 seconds
         </span>
       </div>
       <p className={s.checkLede}>
-        Not a test — you can&rsquo;t fail it and you can&rsquo;t get locked
-        out. It&rsquo;s here so that we both know you&rsquo;ve seen the rules
-        before your code goes live.
+        Not a test — you can&rsquo;t fail it and it won&rsquo;t hold up your
+        code. Worth the 25 seconds though: these are the five lines coaches get
+        wrong most often, and the rules bind you either way once you accept the
+        terms.
       </p>
 
       <div className={s.dots} aria-hidden="true">

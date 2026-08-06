@@ -22,12 +22,15 @@ const Payload = z.object({
   instagram: z.string().max(60).nullable().optional(),
   clientBand: z.string().max(20).nullable().optional(),
   marketingOptIn: z.boolean().default(false),
-  claimsCheckVersion: z.string().max(40),
+  /* Optional. The check is encouraged, not enforced — the signed terms and the
+     "I'll stick to it" consent are the binding part. When a coach does complete
+     it we still keep the audit artefact. */
+  claimsCheckVersion: z.string().max(40).nullable().optional(),
   trap: z.string().max(200).optional(),
   elapsedMs: z.number().int().nonnegative().optional(),
 });
 
-/** Nobody reads eight fields and completes a claims check in three seconds. */
+/** Nobody fills eight fields and picks a code in three seconds. */
 const MIN_FILL_MS = 3_000;
 
 export async function POST(req: NextRequest) {
@@ -105,8 +108,8 @@ export async function POST(req: NextRequest) {
         status: "provisioning",
         marketingOptIn: input.marketingOptIn,
         acceptedTermsAt: now,
-        claimsCheckPassedAt: now,
-        claimsCheckVersion: input.claimsCheckVersion,
+        claimsCheckPassedAt: input.claimsCheckVersion ? now : null,
+        claimsCheckVersion: input.claimsCheckVersion ?? null,
       })
       .returning({ id: trainers.id });
     trainerId = row.id;

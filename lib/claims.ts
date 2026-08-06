@@ -1,6 +1,7 @@
 /**
  * The claims discipline. The section that keeps REKRD and the coach out of
- * trouble, and the only part of the training that gates the signup.
+ * trouble. The interactive check is encouraged but optional — the binding part
+ * is the terms acceptance on the form.
  *
  * The whole rule in one sentence:
  *   Describe the sachet. Never describe the outcome.
@@ -92,9 +93,10 @@ export const POSTING_RULES: { title: string; body: string }[] = [
 
 /**
  * Five cards, two taps each, ~25 seconds. Not a knowledge test — this is
- * consent with comprehension, and it produces the audit artefact
- * (claims_check_passed_at + version) if a complaint ever lands.
+ * consent with comprehension, and when a coach completes it we get the audit
+ * artefact (claims_check_passed_at + version) if a complaint ever lands.
  *
+ * Optional: skipping it leaves both columns null and still yields a code.
  * It cannot be permanently failed. A wrong answer explains why and moves on.
  */
 export type ClaimsCard = {

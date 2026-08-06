@@ -84,13 +84,9 @@ export default function ApplyForm() {
       prev.includes(d) ? prev.filter((x) => x !== d) : [...prev, d],
     );
 
-  const canSubmit = passed && !submitting;
+  const canSubmit = !submitting;
 
-  const submitLabel = submitting
-    ? "Creating your code…"
-    : !passed
-      ? "Complete the claims check to continue"
-      : "Get my code";
+  const submitLabel = submitting ? "Creating your code…" : "Get my code";
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -130,7 +126,8 @@ export default function ApplyForm() {
           instagram: instagram.trim().replace(/^@/, "") || null,
           clientBand: clientBand || null,
           marketingOptIn: marketing,
-          claimsCheckVersion: CLAIMS_CHECK_VERSION,
+          // Optional: only stamped when the coach actually completed the check.
+          claimsCheckVersion: passed ? CLAIMS_CHECK_VERSION : null,
           // Bot signals: a filled honeypot, or a form completed impossibly fast.
           trap,
           elapsedMs: Date.now() - startedAt,
