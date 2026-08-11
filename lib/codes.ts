@@ -186,6 +186,6 @@ export function shopifyDiscountLink(code: string, redirectPath?: string): string
 }
 
 /** The vanity link we print and put in bios. Redirects to the above. */
-export function vanityLink(code: string, origin = "https://coaches.rekrd.io") {
+export function vanityLink(code: string, origin = "https://coach.rekrd.io") {
   return `${origin.replace(/\/$/, "")}/t/${code}`;
 }

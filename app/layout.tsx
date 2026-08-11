@@ -28,7 +28,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://coaches.rekrd.io"),
+  metadataBase: new URL("https://coach.rekrd.io"),
   title: {
     default: "REKRD Coach Programme — earn 15% on clean hydration",
     template: "%s · REKRD Coach Programme",

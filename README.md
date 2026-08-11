@@ -4,7 +4,7 @@ The coach-facing side of REKRD's referral channel: a training site, an earnings
 calculator, and the plumbing that mints a coach's Shopify discount code and
 tracks what they're owed.
 
-**Live:** `coaches.rekrd.io` · **Store:** `shop.rekrd.io` (Shopify)
+**Live:** `coach.rekrd.io` · **Store:** `shop.rekrd.io` (Shopify)
 
 ## The deal
 
@@ -31,7 +31,7 @@ floor, where nobody clicks anything.
 4. First coded order links that Shopify customer to the coach for 12 months, so
    subscription renewals and forgotten-the-code repeat orders still pay out.
 
-`coaches.rekrd.io/t/CODE` is a vanity redirect to Shopify's own
+`coach.rekrd.io/t/CODE` is a vanity redirect to Shopify's own
 `/discount/CODE` share link. It logs clicks for the dashboard and is **never**
 the attribution source of truth.
 

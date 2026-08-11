@@ -15,12 +15,24 @@ function client(): Resend | null {
   return key ? new Resend(key) : null;
 }
 
+/**
+ * The origin every coach-facing link is built from — the print card, the QR,
+ * the welcome email and the dashboard. Set NEXT_PUBLIC_SITE_ORIGIN to the
+ * branded domain; it is baked in at build time, so changing it needs a redeploy.
+ *
+ * `||` rather than `??` so that an empty-string value falls through as well.
+ * `??` only catches null/undefined, and a blank var would otherwise yield
+ * host-less links like "/t/CODE" — on a printed QR card that is unrecoverable.
+ *
+ * VERCEL_PROJECT_PRODUCTION_URL is the deployment's own *.vercel.app host
+ * rather than the branded domain, so it is a fallback and not the answer.
+ */
 export function siteOrigin(): string {
   return (
-    process.env.NEXT_PUBLIC_SITE_ORIGIN ??
+    process.env.NEXT_PUBLIC_SITE_ORIGIN ||
     (process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-      : "https://coaches.rekrd.io")
+      : "https://coach.rekrd.io")
   );
 }
 

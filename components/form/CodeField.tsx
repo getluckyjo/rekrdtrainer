@@ -117,7 +117,7 @@ export default function CodeField({
           Code: <b>{value || "—"}</b>
         </span>
         <span>
-          Link: <b>coaches.rekrd.io/t/{value || "—"}</b>
+          Link: <b>coach.rekrd.io/t/{value || "—"}</b>
         </span>
       </div>
 

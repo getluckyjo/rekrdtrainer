@@ -23,7 +23,7 @@ from both systems afterwards.
 
 ## 1. Point a domain at it
 
-The site is public at `rekrd-coaches.vercel.app`. To move it: **Settings → Domains → Add → `coaches.rekrd.io`**,
+The site is public at `rekrd-coaches.vercel.app`. To move it: **Settings → Domains → Add → `coach.rekrd.io`**,
 and add the CNAME Vercel gives you at your DNS provider. The code already
 assumes that hostname; if you use a different one, set
 `NEXT_PUBLIC_SITE_ORIGIN` to match.
@@ -123,7 +123,7 @@ whole chain.
 4. **Place the order.**
 5. **Run the sync by hand:**
    ```bash
-   curl "https://coaches.rekrd.io/api/cron/sync-orders?secret=YOUR_CRON_SECRET"
+   curl "https://coach.rekrd.io/api/cron/sync-orders?secret=YOUR_CRON_SECRET"
    ```
    → expect `attributed: 1` and `commissionC: 9000` (R90.00).
 6. **Sign in** at `/dashboard` with the test coach's email → the order should
