@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { CLAIMS_CHECK_VERSION } from "@/lib/claims";
 import { validateCode } from "@/lib/codes";
-import { useClaimsGate } from "@/components/sections/ClaimsGate";
 import CodeField, { type CodeState } from "./CodeField";
 import s from "./form.module.css";
 
@@ -58,7 +57,6 @@ const CLIENT_BANDS = ["1–10", "11–25", "26–50", "51–100", "100+"];
 
 export default function ApplyForm() {
   const router = useRouter();
-  const { passed } = useClaimsGate();
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -84,13 +82,9 @@ export default function ApplyForm() {
       prev.includes(d) ? prev.filter((x) => x !== d) : [...prev, d],
     );
 
-  const canSubmit = passed && !submitting;
+  const canSubmit = !submitting;
 
-  const submitLabel = submitting
-    ? "Creating your code…"
-    : !passed
-      ? "Complete the claims check to continue"
-      : "Get my code";
+  const submitLabel = submitting ? "Creating your code…" : "Get my code";
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -351,8 +345,9 @@ export default function ApplyForm() {
           onChange={(e) => setAgreed(e.target.checked)}
         />
         <label htmlFor="agreed">
-          I&rsquo;ve read <a href="#claims">how to talk about REKRD</a>{" "}
-          and I&rsquo;ll stick to it. I accept the{" "}
+          I understand REKRD is a food, not a medicine. I&rsquo;ll tell people{" "}
+          <a href="#say">what&rsquo;s in the sachet</a>, and I won&rsquo;t tell
+          them what it does to a body. I accept the{" "}
           <a href="/coaches/terms">programme terms</a>.
         </label>
       </div>

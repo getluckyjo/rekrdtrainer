@@ -6,18 +6,16 @@ import Icon from "@/components/Icon";
 import HeroTeaser from "@/components/calculator/HeroTeaser";
 import Calculator from "@/components/calculator/Calculator";
 import LessonAccordion from "@/components/sections/LessonAccordion";
-import ClaimsCheck from "@/components/sections/ClaimsCheck";
-import { ClaimsGateProvider } from "@/components/sections/ClaimsGate";
 import ApplyForm from "@/components/form/ApplyForm";
+import { CLAIMS_LEDE, NEVER_SAY, POSTING_RULES, SAY_THIS } from "@/lib/claims";
+import { FAQS, PRODUCT_FAQS } from "@/lib/faq";
 import {
-  CLAIMS_LEDE,
-  GREY_AREA,
-  NEVER_SAY,
-  POSTING_RULES,
-  SAY_THIS,
-} from "@/lib/claims";
-import { FAQS } from "@/lib/faq";
-import { BRAND, KEY_FACTS, NOT_CLAIMS, SPEC_ROWS } from "@/lib/productFacts";
+  BRAND,
+  FORMULA_NOTES,
+  KEY_FACTS,
+  REGULATORY_NOTE,
+  SPEC_ROWS,
+} from "@/lib/productFacts";
 import claims from "@/components/sections/claims.module.css";
 
 export const metadata: Metadata = {
@@ -27,8 +25,8 @@ export const metadata: Metadata = {
 
 export default function CoachesPage() {
   return (
-    <ClaimsGateProvider>
-      <a className="skip-link" href="#product">
+    <>
+      <a className="skip-link" href="#earnings">
         Skip to content
       </a>
       <Nav />
@@ -46,10 +44,10 @@ export default function CoachesPage() {
               <span className="accent">to drink more water.</span>
             </h1>
             <p className="sub">
-              One electrolyte sachet a day. 600mg of sodium, no sugar, no
-              caffeine. Recommend it with your code — your clients get 10% off,
-              you earn 15% of everything they spend. Every order, not just the
-              first.
+              One sachet in 500ml of water, once a day. 600mg of sodium, 500mg
+              of L-glutamine, zinc and vitamin C. No sugar, no caffeine, no
+              fillers. Your clients get 10% off with your code — you earn 15% of
+              everything they spend, every order, not just the first.
             </p>
 
             <div className="hero-meta">
@@ -89,161 +87,11 @@ export default function CoachesPage() {
         </div>
       </header>
 
-      {/* ------------------------------------------------------- product -- */}
-      <section className="section" id="product">
-        <div className="wrap">
-          <h2>
-            <span className="num">01</span>The product,{" "}
-            <span className="accent">in sixty seconds.</span>
-          </h2>
-          <p className="lede">
-            These six answer almost everything a client will ask you.
-          </p>
-
-          <div className="fact-grid">
-            {KEY_FACTS.map((f) => (
-              <div className="fact" key={f.k}>
-                <Icon name={f.icon} size={20} />
-                <div>
-                  <span className="k">{f.k}</span>
-                  <span className="v">{f.v}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="callout" style={{ marginTop: 18, maxWidth: 720 }}>
-            <strong>The whole thing, out loud:</strong> a single-serve sachet of
-            electrolytes you tear into 500ml of cold water, once a day. Thirty
-            to a tube. Made in South Africa, every batch tested by MJ Labs.
-          </div>
-
-          <details className="tuck">
-            <summary>All the details</summary>
-            <div className="tuck-body table-scroll">
-              <table className="pl">
-                <tbody>
-                  {SPEC_ROWS.map((row) => (
-                    <tr key={row.label}>
-                      <td style={{ width: "26%" }}>{row.label}</td>
-                      <td>{row.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </details>
-
-          <div className="manifesto" style={{ marginTop: 30 }}>
-            <span className="m-kicker">The part nobody else prints</span>
-            <h2>And here&rsquo;s what it isn&rsquo;t.</h2>
-            <ul>
-              {NOT_CLAIMS.map((n) => (
-                <li key={n.title}>
-                  <strong>{n.title}</strong>
-                  {n.body}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------ training -- */}
-      <section className="section alt" id="training">
-        <div className="wrap">
-          <h2>
-            <span className="num">02</span>Learn it properly.{" "}
-            <span className="accent">Four minutes.</span>
-          </h2>
-          <p className="lede">
-            Six lessons, none longer than a minute. Read them once and
-            you&rsquo;ll never be caught out on a gym floor. Lesson 05 is the
-            one that matters most.
-          </p>
-          <LessonAccordion />
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------- claims -- */}
-      <section className="section" id="claims">
-        <div className="wrap">
-          <h2>
-            <span className="num">03</span>Say what&rsquo;s in it.{" "}
-            <span className="accent">Never say what it does.</span>
-          </h2>
-          <p className="lede">{CLAIMS_LEDE}</p>
-
-          <div className="deal">
-            <div className={`card ${claims.sayAccent} yes`}>
-              <div className="ico-head">
-                <Icon name="check" size={18} />
-                <h3>Say this</h3>
-              </div>
-              <ul>
-                {SAY_THIS.map((line) => (
-                  <li key={line}>
-                    <Icon name="check" size={15} />
-                    <span>{line}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className={`card ${claims.neverAccent} no`}>
-              <div className="ico-head">
-                <Icon name="cross" size={18} />
-                <h3>Never say this</h3>
-              </div>
-              <ul>
-                {NEVER_SAY.map((line) => (
-                  <li key={line}>
-                    <Icon name="cross" size={15} />
-                    <span>{line}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className={claims.grey}>
-            <div className={claims.greyHead}>
-              The grey area — the ones that feel safe and aren&rsquo;t
-            </div>
-            {GREY_AREA.map((g) => (
-              <div className={claims.greyRow} key={g.said}>
-                <div className={claims.greySaid}>{g.said}</div>
-                <div className={claims.greyWhy}>{g.why}</div>
-                <div className={claims.greyInstead}>{g.instead}</div>
-              </div>
-            ))}
-          </div>
-
-          <div className="steps" style={{ marginTop: 26 }}>
-            {POSTING_RULES.map((r) => (
-              <div className="step" key={r.title}>
-                <div>
-                  <h3>{r.title}</h3>
-                  <p>{r.body}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="callout" style={{ marginTop: 22, maxWidth: 680 }}>
-            Unsure about a line? Send it to{" "}
-            <a href={`mailto:${BRAND.partnerEmail}`}>{BRAND.partnerEmail}</a>.
-            Nobody has ever been told off for asking.
-          </div>
-
-          <ClaimsCheck />
-        </div>
-      </section>
-
       {/* ------------------------------------------------------ earnings -- */}
-      <section className="section alt" id="earnings">
+      <section className="section" id="earnings">
         <div className="wrap">
           <h2>
-            <span className="num">04</span>15% of everything,{" "}
+            <span className="num">01</span>15% of everything,{" "}
             <span className="accent">for as long as they keep buying.</span>
           </h2>
           <p className="lede">
@@ -311,27 +159,27 @@ export default function CoachesPage() {
                 </li>
               </ul>
             </div>
-            <div className="card no">
+            <div className="card yes">
               <div className="ico-head">
-                <Icon name="cross" size={18} />
-                <h3>What you don&rsquo;t</h3>
+                <Icon name="check" size={18} />
+                <h3>What it costs you</h3>
               </div>
               <ul>
                 <li>
-                  <Icon name="cross" size={15} />
-                  <span>No stock to buy. You never hold product</span>
+                  <Icon name="check" size={15} />
+                  <span>Nothing to buy — you never hold stock</span>
                 </li>
                 <li>
-                  <Icon name="cross" size={15} />
+                  <Icon name="check" size={15} />
                   <span>No fee, no minimum, no target</span>
                 </li>
                 <li>
-                  <Icon name="cross" size={15} />
-                  <span>No recruiting other coaches — this isn&rsquo;t that</span>
+                  <Icon name="check" size={15} />
+                  <span>No admin — your clients buy direct, you never invoice</span>
                 </li>
                 <li>
-                  <Icon name="cross" size={15} />
-                  <span>No commission on delivery or refunded orders</span>
+                  <Icon name="check" size={15} />
+                  <span>Commission on product, not delivery. R0, forever</span>
                 </li>
               </ul>
             </div>
@@ -348,11 +196,94 @@ export default function CoachesPage() {
         </div>
       </section>
 
+      {/* ------------------------------------------------------- product -- */}
+      <section className="section alt" id="product">
+        <div className="wrap">
+          <h2>
+            <span className="num">02</span>The product,{" "}
+            <span className="accent">in sixty seconds.</span>
+          </h2>
+          <p className="lede">
+            These six answer almost everything a client will ask you.
+          </p>
+
+          <div className="fact-grid">
+            {KEY_FACTS.map((f) => (
+              <div className="fact" key={f.k}>
+                <Icon name={f.icon} size={20} />
+                <div>
+                  <span className="k">{f.k}</span>
+                  <span className="v">{f.v}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="callout" style={{ marginTop: 18, maxWidth: 720 }}>
+            <strong>The whole thing, out loud:</strong> a single-serve sachet of
+            electrolytes you tear into 500ml of cold water, once a day. Thirty
+            to a tube. Made in South Africa, every batch third-party lab tested.
+          </div>
+
+          <div className="manifesto" style={{ marginTop: 30 }}>
+            <span className="m-kicker">Every day, every sport</span>
+            <h2>Why it looks like this.</h2>
+            <ul>
+              {FORMULA_NOTES.map((n) => (
+                <li key={n.title}>
+                  <strong>{n.title}</strong>
+                  {n.body}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <h3 style={{ fontSize: 16, marginTop: 34, marginBottom: 6 }}>
+            The two questions you&rsquo;ll get most
+          </h3>
+          <p className="lede" style={{ marginBottom: 16 }}>
+            Both of these are answers you can read straight out loud.
+          </p>
+          {PRODUCT_FAQS.map((f, i) => (
+            <details className="post" key={f.q}>
+              <summary>
+                <span className="pnum">{String(i + 1).padStart(2, "0")}</span>
+                <span className="ptitle">{f.q}</span>
+              </summary>
+              <div className="body">
+                <p>{f.a}</p>
+              </div>
+            </details>
+          ))}
+
+          <details className="tuck">
+            <summary>All the numbers</summary>
+            <div className="tuck-body table-scroll">
+              <table className="pl">
+                <tbody>
+                  {SPEC_ROWS.map((row) => (
+                    <tr key={row.label}>
+                      <td style={{ width: "26%" }}>{row.label}</td>
+                      <td>{row.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </details>
+
+          <div className="callout" style={{ marginTop: 22, maxWidth: 720 }}>
+            {REGULATORY_NOTE.lead} {REGULATORY_NOTE.deferral}{" "}
+            <strong>{REGULATORY_NOTE.deferralEmphasis}</strong>
+          </div>
+        </div>
+      </section>
+
       {/* --------------------------------------------------- how it works -- */}
       <section className="section">
         <div className="wrap">
           <h2>
-            <span className="num">05</span>How it works.
+            <span className="num">03</span>How it works.
           </h2>
           <div className="cards c4" style={{ marginTop: 26 }}>
             <div className="card">
@@ -378,7 +309,7 @@ export default function CoachesPage() {
                 <h3>Tell people</h3>
               </div>
               <p>
-                Captions and messages written for you — all compliance-clean.
+                Captions and messages written for you — ready to paste.
               </p>
             </div>
             <div className="card">
@@ -394,11 +325,77 @@ export default function CoachesPage() {
         </div>
       </section>
 
-      {/* --------------------------------------------------------- apply -- */}
-      <section className="section alt" id="apply">
+      {/* ----------------------------------------------------------- say -- */}
+      <section className="section alt" id="say">
         <div className="wrap">
           <h2>
-            <span className="num">06</span>Get your code.
+            <span className="num">04</span>Almost everything true{" "}
+            <span className="accent">is safe to say.</span>
+          </h2>
+          <p className="lede">{CLAIMS_LEDE}</p>
+
+          <div className="deal">
+            <div className={`card ${claims.sayAccent} yes`}>
+              <div className="ico-head">
+                <Icon name="check" size={18} />
+                <h3>Your lines</h3>
+              </div>
+              <ul>
+                {SAY_THIS.map((line) => (
+                  <li key={line}>
+                    <Icon name="check" size={15} />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className={`card ${claims.neverAccent} no`}>
+              <div className="ico-head">
+                <Icon name="cross" size={18} />
+                <h3>The three to avoid</h3>
+              </div>
+              <ul>
+                {NEVER_SAY.map((line) => (
+                  <li key={line}>
+                    <Icon name="cross" size={15} />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="steps" style={{ marginTop: 26 }}>
+            {POSTING_RULES.map((r) => (
+              <div className="step" key={r.title}>
+                <div>
+                  <h3>{r.title}</h3>
+                  <p>{r.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="callout" style={{ marginTop: 22, maxWidth: 680 }}>
+            Unsure about a line? Send it to{" "}
+            <a href={`mailto:${BRAND.partnerEmail}`}>{BRAND.partnerEmail}</a>.
+            Nobody has ever been told off for asking.
+          </div>
+
+          <details className="tuck">
+            <summary>The whole brief — two minutes, if you want it</summary>
+            <div className="tuck-body">
+              <LessonAccordion />
+            </div>
+          </details>
+        </div>
+      </section>
+
+      {/* --------------------------------------------------------- apply -- */}
+      <section className="section" id="apply">
+        <div className="wrap">
+          <h2>
+            <span className="num">05</span>Get your code.
           </h2>
           <p className="lede">
             Ninety seconds, and it&rsquo;s live before you close the tab.
@@ -408,10 +405,10 @@ export default function CoachesPage() {
       </section>
 
       {/* ----------------------------------------------------------- faq -- */}
-      <section className="section" id="faq">
+      <section className="section alt" id="faq">
         <div className="wrap">
           <h2>
-            <span className="num">07</span>Questions coaches ask.
+            <span className="num">06</span>Questions coaches ask.
           </h2>
           <div style={{ marginTop: 24 }}>
             {FAQS.map((f, i) => (
@@ -440,6 +437,6 @@ export default function CoachesPage() {
       </section>
 
       <Footer />
-    </ClaimsGateProvider>
+    </>
   );
 }

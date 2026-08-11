@@ -6,6 +6,22 @@
 
 export type Faq = { q: string; a: string };
 
+/**
+ * The two questions clients actually ask, answered where the objection lands —
+ * in the product section, not eight screens later in the coach FAQ. Both are
+ * written to be read aloud verbatim.
+ */
+export const PRODUCT_FAQS: Faq[] = [
+  {
+    q: "Why is there so little powder in the sachet?",
+    a: "Because there are no fillers in it. A lot of powder in a sachet isn't the same as a lot of active in a sachet — we only put in what's on the list, so the sachet is the size the actives make it. The full list is printed on the tube, with the quantities.",
+  },
+  {
+    q: "Another brand has 1000mg of sodium. Why is yours only 600mg?",
+    a: "Because ours is built to be drunk every day, not just on race day. 600mg is a daily amount — one sachet, once a day, whether they trained or not. If someone's had a brutal, soaking session, they take two. Different products are built around different jobs; this one is built around Tuesday.",
+  },
+];
+
 export const FAQS: Faq[] = [
   {
     q: "Do I earn on repeat orders, or only the first one?",

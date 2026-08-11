@@ -78,11 +78,11 @@ export default function LessonAccordion() {
           <div>
             <div className={s.doneText}>You&rsquo;ve read the lot.</div>
             <div className={s.doneSub}>
-              One more section — the claims rules — and then your code.
+              That&rsquo;s the whole brief. Go and get your code.
             </div>
           </div>
-          <a className="btn" href="#claims">
-            Keep going
+          <a className="btn" href="#apply">
+            Get my code
           </a>
         </div>
       )}

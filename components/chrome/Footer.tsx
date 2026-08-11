@@ -9,8 +9,7 @@ export default function Footer() {
           REKRD Coach Programme · South Africa
         </p>
         <p>
-          Questions about the programme, or unsure whether you can say
-          something?{" "}
+          Questions about the programme?{" "}
           <a href={`mailto:${BRAND.partnerEmail}`}>{BRAND.partnerEmail}</a>. A
           person answers, usually within a business day.
         </p>

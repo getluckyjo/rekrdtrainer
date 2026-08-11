@@ -27,7 +27,7 @@ const Payload = z.object({
   elapsedMs: z.number().int().nonnegative().optional(),
 });
 
-/** Nobody reads eight fields and completes a claims check in three seconds. */
+/** Nobody reads eight fields and picks a code in three seconds. */
 const MIN_FILL_MS = 3_000;
 
 export async function POST(req: NextRequest) {

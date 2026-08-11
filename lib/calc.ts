@@ -5,7 +5,7 @@
  * cents until the display boundary — floats are never allowed near money.
  *
  * THE RULE, stated once:
- *   Commission is 15% of the price BEFORE the coach's own 5% discount.
+ *   Commission is 15% of the price BEFORE the client's 10% discount.
  *   A coach is never penalised for the discount they hand their client.
  *
  * Which gives, per order:
@@ -57,7 +57,7 @@ export const PRICE_STARTER_C = Math.round(
 ); // 9_000
 
 /**
- * What the coach earns, in cents. 15% of the price before their 5%.
+ * What the coach earns, in cents. 15% of the price before the client's 10%.
  * Note the subscription figure is the same on the first order and on every
  * renewal — the coach's cut doesn't move when the client's discount lapses.
  */

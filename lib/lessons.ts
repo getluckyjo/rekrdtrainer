@@ -1,9 +1,15 @@
 /**
- * The training module. Six lessons, none longer than a minute.
+ * The training module. Four lessons, none longer than a minute.
  *
  * Written for a coach reading on a phone between clients, so every lesson
  * leads with the thing they'd actually say out loud. Deep-linkable
- * (#lesson-05) so a specific one can be sent to someone who got a claim wrong.
+ * (#lesson-04) so a specific one can be sent to someone who asked.
+ *
+ * This used to be six lessons and its own numbered section. What's in it and
+ * how it's tested are now told properly in the product section, so those two
+ * lessons merged; the old lesson 05 ("what it is NOT — read this one twice")
+ * is gone, and its one genuinely load-bearing line lives in a single callout
+ * on the page and in the programme terms.
  */
 
 import type { IconName } from "@/components/Icon";
@@ -32,7 +38,7 @@ export const LESSONS: Lesson[] = [
     blocks: [
       {
         kind: "p",
-        text: "An electrolyte sachet you tear into 500ml of cold water, once a day. Thirty to a tube. Built for the everyday athlete — the person keeping a record, not chasing one.",
+        text: "An electrolyte sachet you tear into 500ml of cold water, once a day. Thirty to a tube. Built for every day and every sport — the person keeping a record, not just the one chasing one.",
       },
       {
         kind: "callout",
@@ -44,7 +50,7 @@ export const LESSONS: Lesson[] = [
   {
     id: "lesson-02",
     n: "02",
-    title: "What's in it",
+    title: "What's in it, and why it's built that way",
     icon: "drop",
     seconds: 45,
     blocks: [
@@ -52,19 +58,20 @@ export const LESSONS: Lesson[] = [
         kind: "list",
         items: [
           "600mg sodium — the number you'll be asked about most",
-          "Potassium, magnesium, zinc, vitamin C",
-          "Coconut water powder and Himalayan rock salt for trace minerals",
           "500mg L-glutamine",
+          "7mg zinc (64% NRV) and 30mg vitamin C",
+          "Potassium and magnesium",
+          "Coconut water powder and Himalayan rock salt for trace minerals",
         ],
       },
       {
         kind: "p",
-        text: "Nothing hidden behind a proprietary blend — the full list is printed on the tube.",
+        text: "No fillers, and nothing hidden behind a proprietary blend — the full list is printed on the tube, with the quantities. Made in South Africa and tested by an independent third-party lab, every batch, not a sample batch. A certificate of analysis is available on request.",
       },
       {
         kind: "callout",
-        label: "The discipline",
-        text: "State the quantity. Never state what it does to a body. That's lesson 05, and it's the one that matters.",
+        label: "The one discipline",
+        text: "State the quantity. Don't state what it does to a body. Naming the zinc is fine; saying the zinc stops you getting sick is not.",
       },
     ],
   },
@@ -89,58 +96,18 @@ export const LESSONS: Lesson[] = [
   {
     id: "lesson-04",
     n: "04",
-    title: "Where it's made, how it's tested",
-    icon: "flask",
-    seconds: 25,
-    blocks: [
-      {
-        kind: "p",
-        text: "Made in South Africa. Independently tested by MJ Labs — every batch, not a sample batch. A certificate of analysis is available on request for any batch.",
-      },
-      {
-        kind: "p",
-        text: "For a client who reads labels, this is the fact that closes them. It's a fact, not a claim, which is why you can say it freely.",
-      },
-    ],
-  },
-  {
-    id: "lesson-05",
-    n: "05",
-    title: "What it is NOT — read this one twice",
-    icon: "alert",
-    seconds: 45,
-    blocks: [
-      {
-        kind: "list",
-        items: [
-          "Not registered with SAHPRA. A foodstuff, not a medicine.",
-          "Not Informed Sport certified. Batch testing is not the same thing — if a client competes under a code requiring certified supplements, send them to their team doctor.",
-          "Not a treatment for cramp, hangovers, illness or fatigue.",
-          "Not a meal replacement and not a pre-workout. No caffeine.",
-          "Not your call if a client is pregnant, breastfeeding or on chronic medication. Your whole answer: show the label to your doctor or pharmacist.",
-        ],
-      },
-      {
-        kind: "callout",
-        label: "Why it's your problem too",
-        text: "A health claim from you is a health claim from the brand. It lands on both of us.",
-      },
-    ],
-  },
-  {
-    id: "lesson-06",
-    n: "06",
-    title: "The five questions you'll actually get",
+    title: "The questions you'll actually get",
     icon: "people",
     seconds: 60,
     blocks: [
       {
         kind: "list",
         items: [
+          "“Why is there so little powder in it?” — “No fillers. You're paying for the actives, not for something to bulk out the sachet.”",
+          "“Isn't 1000mg of sodium better?” — “Different job. 600mg is a daily amount — one a day, whether you trained or not. Brutal sweaty session, take two.”",
           "“Is there sugar in it?” — “No added sugar, and no artificial sweeteners. The supplement facts are on the tube.”",
-          "“How much sodium?” — “600mg a sachet.”",
           "“Can I have two?” — “One a day is the routine. On a very hot day or a big-sweat session, a second is fine.”",
-          "“Is it safe for me?” — “It's a foodstuff, not a medicine. If you're pregnant, on medication, or managing your sodium, show the label to your doctor.”",
+          "“Is it safe for me?” — “It's a food, not a medicine. If you're pregnant, on medication, or managing your sodium, show the label to your doctor.”",
           "“Where do I get it?” — “shop.rekrd.io. Use my code, you get 10% off.”",
         ],
       },

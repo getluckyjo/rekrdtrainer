@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Footer from "@/components/chrome/Footer";
 import { BRAND, PROGRAMME } from "@/lib/productFacts";
+import { GREY_AREA } from "@/lib/claims";
+import claims from "@/components/sections/claims.module.css";
 
 export const metadata: Metadata = {
   title: "Programme terms",
@@ -11,6 +13,7 @@ const CLAUSES: { n: string; title: string; body: string[] }[] = [
     n: "01",
     title: "What this is",
     body: [
+      `This agreement is between you and ${BRAND.legalName}, a company incorporated in the Republic of South Africa, which we call “we” and “us” throughout.`,
       "You recommend REKRD to people you already know. They buy directly from shop.rekrd.io using your code. You earn a commission on what they spend. You never hold stock, never handle anyone's money, and never invoice a client.",
       "This is not employment, not a partnership, and not an agency. You are an independent person recommending a product, and you may stop at any time.",
     ],
@@ -48,11 +51,12 @@ const CLAUSES: { n: string; title: string; body: string[] }[] = [
     n: "05",
     title: "What you may and may not say",
     body: [
-      "REKRD is a foodstuff. It is not a medicine, it is not registered with SAHPRA, and it is not certified under Informed Sport or any comparable banned-substance programme. It makes no health claims, and neither may you — in a session, in a caption, in a story or in a private message.",
-      "The rule is one sentence: describe the sachet, never describe the outcome. You may state what is in it, how much of it, how to use it, what it costs, where it is made and that every batch is independently tested by MJ Labs. You may not state or imply what it does to a body.",
-      "You must disclose that you earn from the recommendation, in the caption and not buried in hashtags.",
+      "The rule is one sentence: say what is in the sachet, not what it does to a body. You may state what is in it, how much of it, how to use it, what it costs, where it is made and that every batch is independently lab tested. Almost everything true about REKRD falls on the safe side of that line.",
+      "REKRD is a foodstuff. It is not a medicine, it is not registered with SAHPRA, and it is not certified under Informed Sport or any comparable banned-substance programme. It makes no health claims, and neither may you. It is not a treatment for cramp, hangovers, migraines, illness or fatigue, and it is not a meal replacement or a pre-workout.",
+      "If a client is pregnant, breastfeeding, on chronic medication, managing blood pressure or a kidney condition, or competing under a code that requires certified supplements, your whole answer is to send them to their doctor, pharmacist or team doctor.",
+      "You must disclose that you earn from the recommendation, in the caption and not buried in hashtags. Do not send a claim in a private message that you would not put on a poster — a WhatsApp is not private for this purpose.",
       "Do not repeat a client's health testimonial. A testimonial you pass on is a claim you made.",
-      `If you are unsure whether a line is safe, ask ${BRAND.partnerEmail} before you post it.`,
+      `If you are unsure whether a line is safe, ask ${BRAND.partnerEmail} before you post it. Nobody has ever been told off for asking.`,
     ],
   },
   {
@@ -90,7 +94,7 @@ const CLAUSES: { n: string; title: string; body: string[] }[] = [
     n: "09",
     title: "The legal bit",
     body: [
-      "This agreement is governed by the laws of the Republic of South Africa.",
+      `This agreement is between you and ${BRAND.legalName}, and it is governed by the laws of the Republic of South Africa.`,
       "We will not be liable for indirect or consequential loss. Nothing here limits any right you have under the Consumer Protection Act.",
       "We may update these terms. Material changes will be emailed to you at least 30 days before they take effect.",
     ],
@@ -129,16 +133,40 @@ export default function TermsPage() {
                       {p}
                     </p>
                   ))}
+
+                  {/* The worked examples used to sit on the coaches page, where
+                      they read as a warning. They belong here. */}
+                  {c.n === "05" && (
+                    <details className="tuck">
+                      <summary>
+                        Worked examples — the ones that feel safe and aren&rsquo;t
+                      </summary>
+                      <div className="tuck-body">
+                        <div className={claims.grey} style={{ marginTop: 0 }}>
+                          {GREY_AREA.map((g) => (
+                            <div className={claims.greyRow} key={g.said}>
+                              <div className={claims.greySaid}>{g.said}</div>
+                              <div className={claims.greyWhy}>{g.why}</div>
+                              <div className={claims.greyInstead}>
+                                {g.instead}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </details>
+                  )}
                 </div>
               </div>
             ))}
           </div>
 
           <div className="banner">
-            <strong>Not legal advice, and not final.</strong> These terms are
-            drafted for review by a South African attorney before the programme
-            opens publicly. The company name, registration number, VAT number
-            and registered address still need to be filled in.
+            <strong>Questions about any of this?</strong> Email{" "}
+            <a href={`mailto:${BRAND.partnerEmail}`} style={{ color: "inherit" }}>
+              {BRAND.partnerEmail}
+            </a>{" "}
+            and a person will answer — before you sign up, not after.
           </div>
 
           <p style={{ marginTop: 26 }}>

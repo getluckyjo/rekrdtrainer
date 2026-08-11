@@ -1,39 +1,56 @@
 /**
- * The claims discipline. The section that keeps REKRD and the coach out of
- * trouble, and the only part of the training that gates the signup.
+ * What a coach can say. Framed as permission, because almost everything true
+ * about REKRD is safe to say and the page used to bury that under a list of
+ * prohibitions long enough to put people off applying.
  *
  * The whole rule in one sentence:
- *   Describe the sachet. Never describe the outcome.
+ *   Say what's in the sachet. Don't say what it does to a body.
+ *
+ * The worked examples that used to sit on the page (GREY_AREA) now live on the
+ * terms page — nothing was lost, it just stopped standing between a coach and
+ * the signup form.
  */
 
-export const CLAIMS_CHECK_VERSION = "2026-08-v1";
+/** Versions the acknowledgement wording on the apply form, not a quiz. */
+export const CLAIMS_CHECK_VERSION = "2026-08-v2";
 
 export const CLAIMS_LEDE =
-  "REKRD is a foodstuff, not a medicine. It isn't registered with SAHPRA and it makes no health claims — so neither can you, in a session, a caption or a WhatsApp. A health claim from you is a health claim from the brand, and it lands on both of us.";
+  "Here's the good news: almost everything true about REKRD is safe to say. It's a food, not a medicine, so you can name every ingredient, every quantity, the price, where it's made and who tests it. The one line you don't cross is describing what it does to a body. Say what's in the sachet — that's the whole rule.";
 
 export const SAY_THIS: string[] = [
   "“600mg of sodium per sachet.”",
+  "“500mg of L-glutamine in there too — most electrolyte sachets don't have any.”",
+  "“Zinc and vitamin C as well. 7mg of zinc, which is 64% of your daily NRV.”",
+  "“No fillers — that's why the sachet looks small.”",
   "“No added sugar, no caffeine, no artificial sweeteners.”",
-  "“Potassium, magnesium, coconut water powder, L-glutamine, vitamin C, zinc.”",
-  "“Made in South Africa, every batch independently tested by MJ Labs.”",
-  "“One sachet in 500ml of cold water, once a day.”",
+  "“Made in South Africa, every batch tested by an independent lab.”",
+  "“One sachet in 500ml of cold water, once a day. Big sweat day, have two.”",
   "“R600 a tube, so R20 a serve.”",
   "“I drink it every day.”",
-  "“If you're on medication or pregnant, show the label to your doctor.”",
 ];
 
+/**
+ * Three, not eight. These cover the real risk surface — a medicinal claim, a
+ * tested athlete taking a certification on trust, and an advertisement made out
+ * of someone's health story. The five we cut were all variations on the first.
+ */
 export const NEVER_SAY: string[] = [
-  "“It cures cramp.” / “It stops you cramping.”",
-  "“It prevents dehydration.” / “It'll stop heat stroke.”",
-  "“It boosts your immunity.” / “The zinc stops you getting sick.”",
-  "“You'll recover faster.”",
-  "“It's basically a drip in a sachet.” / “It fixes a hangover.”",
-  "“It's safe for drug testing.” / “It's Informed Sport approved.”",
-  "“SAHPRA approved.” / “Doctors recommend it.”",
-  "“It's fine for your blood pressure.” / “It'll help you lean out.”",
+  "Anything about what it does to a body — cures, prevents, boosts, speeds up, fixes.",
+  "“It's fine for drug testing” or “it's certified.” It isn't — independent batch testing is a different thing.",
+  "A client's health story, repeated. A testimonial you pass on is a claim you made.",
 ];
 
-/** The ones that feel safe and aren't. This is the useful part. */
+/** The one posting rule that stays on the page. The rest are in the terms. */
+export const POSTING_RULES: { title: string; body: string }[] = [
+  {
+    title: "Say it's your code",
+    body: "“I'm a REKRD coach — my code gets you 10% off.” In the caption, not buried in the hashtags. It's the rule, and it also just reads better.",
+  },
+];
+
+// ------------------------------------------------- worked examples (terms) --
+
+/** The ones that feel safe and aren't. Rendered on the terms page now. */
 export type GreyArea = { said: string; why: string; instead: string };
 
 export const GREY_AREA: GreyArea[] = [
@@ -50,94 +67,21 @@ export const GREY_AREA: GreyArea[] = [
   {
     said: "“It's clean”",
     why: "Fine as brand language, meaningless as a fact",
-    instead: "Follow it straight away with “no added sugar, no artificial sweeteners”",
+    instead: "Follow it straight away with “no added sugar, no artificial sweeteners, no fillers”",
   },
   {
     said: "“My client's cramping stopped once she started it”",
     why: "A testimonial you repeat is a claim you made",
-    instead: "Don't say it, don't post it, don't screenshot it",
+    instead: "Talk about your own routine instead — “I drink it every day”",
   },
   {
-    said: "“It's natural, it can't hurt you”",
-    why: "Never tell anyone something can't hurt them",
-    instead: "“It's a foodstuff — show the label to your doctor”",
+    said: "“The zinc will keep you from getting sick”",
+    why: "Naming the zinc is fine. Saying what it does is not",
+    instead: "“7mg of zinc, 64% of your daily NRV”",
   },
   {
     said: "A before/after photo next to a REKRD tube",
     why: "Implies a body-composition claim",
     instead: "Photo of the sachet on the bench. That's it.",
-  },
-];
-
-export const POSTING_RULES: { title: string; body: string }[] = [
-  {
-    title: "Disclose, every time",
-    body: "“I'm a REKRD coach — my code gets you 10% off.” In the caption, not buried in hashtags.",
-  },
-  {
-    title: "Never DM a claim you wouldn't put on a poster",
-    body: "A WhatsApp is not private for this purpose. Screenshots travel.",
-  },
-  {
-    title: "Don't buy stock and resell it",
-    body: "Clients buy direct. You never touch product and never touch anyone's money.",
-  },
-  {
-    title: "Don't bid on “REKRD” in Google or post your code on coupon sites",
-    body: "That's intercepting, not recommending — and the fastest way to lose your code.",
-  },
-];
-
-// ------------------------------------------------------------ claims check
-
-/**
- * Five cards, two taps each, ~25 seconds. Not a knowledge test — this is
- * consent with comprehension, and it produces the audit artefact
- * (claims_check_passed_at + version) if a complaint ever lands.
- *
- * It cannot be permanently failed. A wrong answer explains why and moves on.
- */
-export type ClaimsCard = {
-  id: string;
-  statement: string;
-  answer: "say" | "never";
-  explain: string;
-};
-
-export const CLAIMS_CARDS: ClaimsCard[] = [
-  {
-    id: "c1",
-    statement: "“REKRD helps prevent cramp.”",
-    answer: "never",
-    explain:
-      "Cramp is a medical outcome, and “helps prevent” is a claim about it. REKRD isn't licensed to make that claim, so neither are you. Name what's in the sachet and stop there.",
-  },
-  {
-    id: "c2",
-    statement: "“Each sachet has 600mg of sodium.”",
-    answer: "say",
-    explain:
-      "A quantity printed on the pack. Facts about what's in the sachet are always safe — it's what you say it does that isn't.",
-  },
-  {
-    id: "c3",
-    statement: "“The zinc and vitamin C boost your immune system.”",
-    answer: "never",
-    explain:
-      "The zinc and the vitamin C are both in the sachet, and you can absolutely say that. The moment you say what they do to a body, it stops being a food and becomes a medicine claim. Name the ingredient. Stop there.",
-  },
-  {
-    id: "c4",
-    statement: "“Every batch is independently tested by MJ Labs.”",
-    answer: "say",
-    explain:
-      "True, checkable, and one of the strongest things you can say. A certificate of analysis is available on request for any batch.",
-  },
-  {
-    id: "c5",
-    statement: "“It's Informed Sport certified, so it's fine for competition.”",
-    answer: "never",
-    explain:
-      "REKRD holds no banned-substance certification. Batch testing by MJ Labs is not the same thing. If a client competes under a code that requires certified supplements, send them to their team doctor.",
   },
 ];

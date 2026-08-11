@@ -24,11 +24,11 @@ export default function ShareActions({
   const openers = [
     {
       tab: "WhatsApp a client",
-      text: `Hey — I've started using REKRD, it's a South African electrolyte sachet you put in 500ml of water once a day. 600mg of sodium, no sugar, no caffeine. If you want to try it, my code ${code} gets you 10% off at shop.rekrd.io. There's a 5-sachet pack for R100 if you want to taste the flavours first.`,
+      text: `Hey — I've started using REKRD, it's a South African electrolyte sachet you put in 500ml of water once a day. 600mg of sodium, plus 500mg of L-glutamine, zinc and vitamin C. No sugar, no caffeine, no fillers. If you want to try it, my code ${code} gets you 10% off at shop.rekrd.io. There's a 5-sachet pack for R100 if you want to taste the flavours first.`,
     },
     {
       tab: "Story caption",
-      text: `One sachet, 500ml of cold water, once a day.\n600mg of sodium. No sugar, no caffeine.\nI'm a REKRD coach — code ${code} gets you 10% off.\n${vanity}`,
+      text: `One sachet, 500ml of cold water, once a day.\n600mg of sodium. 500mg of L-glutamine, zinc, vitamin C.\nNo sugar, no caffeine, no fillers.\nI'm a REKRD coach — code ${code} gets you 10% off.\n${vanity}`,
     },
     {
       tab: "End of a session",
