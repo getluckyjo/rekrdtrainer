@@ -347,9 +347,9 @@ export default function ApplyForm() {
           onChange={(e) => setAgreed(e.target.checked)}
         />
         <label htmlFor="agreed">
-          I understand REKRD is a food, not a medicine. I&rsquo;ll tell people{" "}
-          <a href="#say">what&rsquo;s in the sachet</a>, and I won&rsquo;t tell
-          them what it does to a body. I accept the{" "}
+          I&rsquo;ll say that I earn from my code when I recommend it, and
+          I&rsquo;ll send <a href="#say">medical and drug-testing questions</a>{" "}
+          to someone qualified. I accept the{" "}
           <a href="/coaches/terms">programme terms</a>.
         </label>
       </div>

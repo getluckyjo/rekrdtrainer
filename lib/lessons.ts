@@ -1,15 +1,13 @@
 /**
- * The training module. Four lessons, none longer than a minute.
+ * Product training. Six lessons, none longer than a minute.
+ *
+ * The emphasis is deliberate: this teaches the product, not a list of things a
+ * coach may not say. A coach who knows the formula, the flavours and the price
+ * answers a client's question without needing a rulebook.
  *
  * Written for a coach reading on a phone between clients, so every lesson
  * leads with the thing they'd actually say out loud. Deep-linkable
  * (#lesson-04) so a specific one can be sent to someone who asked.
- *
- * This used to be six lessons and its own numbered section. What's in it and
- * how it's tested are now told properly in the product section, so those two
- * lessons merged; the old lesson 05 ("what it is NOT — read this one twice")
- * is gone, and its one genuinely load-bearing line lives in a single callout
- * on the page and in the programme terms.
  */
 
 import type { IconName } from "@/components/Icon";
@@ -52,32 +50,78 @@ export const LESSONS: Lesson[] = [
     n: "02",
     title: "What's in it, and why it's built that way",
     icon: "drop",
-    seconds: 45,
+    seconds: 60,
     blocks: [
       {
         kind: "list",
         items: [
           "600mg sodium — the number you'll be asked about most",
           "500mg L-glutamine",
-          "7mg zinc (64% NRV) and 30mg vitamin C",
-          "Potassium and magnesium",
+          "150mg potassium, 100mg magnesium",
+          "30mg vitamin C, 7mg zinc, 7mg calcium",
           "Coconut water powder and Himalayan rock salt for trace minerals",
         ],
       },
       {
         kind: "p",
-        text: "No fillers, and nothing hidden behind a proprietary blend — the full list is printed on the tube, with the quantities. Made in South Africa and tested by an independent third-party lab, every batch, not a sample batch. A certificate of analysis is available on request.",
+        text: "The whole sachet is about 4.5g. No fillers, and nothing hidden behind a proprietary blend — the full list is printed on the pack, with the quantities. That is why the sachet looks small next to others on the shelf: you're paying for the actives, not for something to bulk it out.",
       },
       {
         kind: "callout",
-        label: "The one discipline",
-        text: "State the quantity. Don't state what it does to a body. Naming the zinc is fine; saying the zinc stops you getting sick is not.",
+        label: "Why 600mg and not 1000",
+        text: "600mg is a daily amount, not a race-day amount. It's built around one sachet a day, every day, whether they trained or not. Big sweat session? Two.",
       },
     ],
   },
   {
     id: "lesson-03",
     n: "03",
+    title: "The five flavours, and where to start someone",
+    icon: "flavours",
+    seconds: 40,
+    blocks: [
+      {
+        kind: "list",
+        items: [
+          "Sour Cherry Apple",
+          "Pineapple Berry — also carries vitamin B2",
+          "Orange Zest — also carries vitamin B2",
+          "Rooibos Peach Iced-Tea — plus 200mg rooibos extract",
+          "Salty Watermelon",
+        ],
+      },
+      {
+        kind: "callout",
+        label: "Start people on the R100 starter pack",
+        text: "Five sachets, one of each. Flavour is the number one reason a hydration product ends up half-used in a cupboard — let them find theirs before they buy thirty of the wrong one.",
+      },
+    ],
+  },
+  {
+    id: "lesson-04",
+    n: "04",
+    title: "When to reach for it",
+    icon: "clock",
+    seconds: 30,
+    blocks: [
+      {
+        kind: "p",
+        text: "One a day is the routine — training day or not. That's the whole point of the dose. On a brutal, soaking session, or a very hot day, a second sachet is fine.",
+      },
+      {
+        kind: "p",
+        text: "The pack itself lists hydration, sports recovery, endurance and anti-cramping. That's the brand's own language, printed on the tub, so you're on solid ground using it with a client.",
+      },
+      {
+        kind: "callout",
+        label: "The moments that actually convert",
+        text: "The end of a hot session, the week before a race, the first week of January, and travel. Ask once, then leave it.",
+      },
+    ],
+  },
+  {
+    id: "lesson-05",
+    n: "05",
     title: "The price, and the first ask",
     icon: "rand",
     seconds: 45,
@@ -88,14 +132,14 @@ export const LESSONS: Lesson[] = [
       },
       {
         kind: "callout",
-        label: "Start people on the R100 starter pack",
-        text: "Five sachets, all the flavours. Flavour is the number one reason a hydration product ends up half-used in a cupboard — let them find theirs before they buy thirty of the wrong one.",
+        label: "Don't pitch",
+        text: "Use it yourself in front of them. The sachet on the bench does more than a speech.",
       },
     ],
   },
   {
-    id: "lesson-04",
-    n: "04",
+    id: "lesson-06",
+    n: "06",
     title: "The questions you'll actually get",
     icon: "people",
     seconds: 60,
@@ -103,18 +147,18 @@ export const LESSONS: Lesson[] = [
       {
         kind: "list",
         items: [
-          "“Why is there so little powder in it?” — “No fillers. You're paying for the actives, not for something to bulk out the sachet.”",
-          "“Isn't 1000mg of sodium better?” — “Different job. 600mg is a daily amount — one a day, whether you trained or not. Brutal sweaty session, take two.”",
-          "“Is there sugar in it?” — “No added sugar, and no artificial sweeteners. The supplement facts are on the tube.”",
-          "“Can I have two?” — “One a day is the routine. On a very hot day or a big-sweat session, a second is fine.”",
-          "“Is it safe for me?” — “It's a food, not a medicine. If you're pregnant, on medication, or managing your sodium, show the label to your doctor.”",
+          "“Why is there so little powder in it?” — “No fillers. About 4.5g, and all of it is on the label.”",
+          "“Isn't 1000mg of sodium better?” — “Different job. 600mg is a daily amount. Brutal sweaty session, take two.”",
+          "“Is there sugar in it?” — “No added sugar, and no artificial sweeteners.”",
+          "“Can I have two?” — “One a day is the routine. Very hot day or a big-sweat session, a second is fine.”",
+          "“What's the L-glutamine for?” — “It's 500mg a sachet. Most electrolyte sachets don't have any.”",
           "“Where do I get it?” — “shop.rekrd.io. Use my code, you get 10% off.”",
         ],
       },
       {
         kind: "callout",
-        label: "And the way to recommend it",
-        text: "Don't pitch. Use it yourself in front of them — the sachet on the bench does more than a speech. Best moments: the end of a hot session, the week before a race, January. Ask once, then leave it.",
+        label: "If you don't know, say so",
+        text: "“I'll find out” is a perfectly good answer, and partners@rekrd.io will have it back to you the same day.",
       },
     ],
   },

@@ -32,25 +32,42 @@ export const PRODUCT = {
   testingScope: "Every batch, not a sample batch",
 } as const;
 
+/** Full names as printed on the sticks. The short forms were wrong. */
 export const FLAVOURS = [
-  { name: "Sour Cherry", token: "--fl-cherry" },
-  { name: "Pineapple", token: "--fl-pineapple" },
-  { name: "Orange", token: "--fl-orange" },
-  { name: "Peach", token: "--fl-rooibos" },
-  { name: "Watermelon", token: "--fl-watermelon" },
+  { name: "Sour Cherry Apple", token: "--fl-cherry" },
+  { name: "Pineapple Berry", token: "--fl-pineapple" },
+  { name: "Orange Zest", token: "--fl-orange" },
+  { name: "Rooibos Peach Iced-Tea", token: "--fl-rooibos" },
+  { name: "Salty Watermelon", token: "--fl-watermelon" },
 ] as const;
 
-/** Quantities are safe to state. What they do to a body is not. */
+/**
+ * Quantities are safe to state. What they do to a body is not.
+ *
+ * Every figure below is read off the printed per-serving panel. Note there is
+ * no NRV percentage anywhere on the pack — state the milligrams only.
+ */
 export const INGREDIENTS = [
   { name: "Sodium", detail: "600mg per sachet" },
-  { name: "Potassium", detail: null },
-  { name: "Magnesium", detail: null },
+  { name: "L-glutamine", detail: "500mg per sachet" },
+  { name: "Potassium", detail: "150mg per sachet" },
+  { name: "Magnesium", detail: "100mg per sachet" },
+  { name: "Vitamin C", detail: "30mg per sachet" },
+  { name: "Calcium", detail: "7mg per sachet" },
+  { name: "Zinc", detail: "7mg per sachet" },
   { name: "Coconut water powder", detail: null },
   { name: "Himalayan rock salt", detail: "for trace minerals" },
-  { name: "L-glutamine", detail: "500mg per sachet" },
-  { name: "Vitamin C", detail: "30mg per sachet" },
-  { name: "Zinc", detail: "7mg per sachet — 64% NRV" },
 ] as const;
+
+/**
+ * Net weight per sachet, off the printed sticks. This is the number that makes
+ * the "no fillers" story land — under five grams, and all of it on the label.
+ * Rooibos Peach carries 200mg of rooibos extract, hence the extra weight.
+ */
+export const SACHET_WEIGHT = {
+  range: "4.4g to 4.64g depending on flavour",
+  typical: "about 4.5g",
+} as const;
 
 export const FREE_FROM = [
   "No added sugar",
@@ -72,7 +89,7 @@ export const FREE_FROM = [
 export const FORMULA_NOTES: { title: string; body: string }[] = [
   {
     title: "The sachet looks small on purpose.",
-    body: "There is no filler in it. You are paying for the actives, not for something to bulk the sachet out.",
+    body: "About 4.5g of powder, and every gram of it is on the label. There is no filler in it — you are paying for the actives, not for something to bulk the sachet out.",
   },
   {
     title: "600mg of sodium is a daily number, not a race number.",
@@ -80,25 +97,9 @@ export const FORMULA_NOTES: { title: string; body: string }[] = [
   },
   {
     title: "It isn't only electrolytes.",
-    body: "500mg of L-glutamine, 7mg of zinc and 30mg of vitamin C sit in the same sachet alongside the salts. One sachet, one list, printed on the tube.",
+    body: "500mg of L-glutamine, 30mg of vitamin C, 7mg of zinc and 7mg of calcium sit in the same sachet alongside the sodium, potassium and magnesium. One sachet, one list, printed on the pack.",
   },
 ];
-
-/**
- * The regulatory footnote. This is a footnote, not a manifesto — it renders as
- * one small callout on the coaches page, and clause 05 of the programme terms
- * restates it at length in a legal register.
- *
- * It used to be a five-item `NOT_CLAIMS` list set as a full-width dark block
- * under the kicker "The part nobody else prints". That framing was doing more
- * to put coaches off applying than it was doing to protect anyone.
- */
-export const REGULATORY_NOTE = {
-  lead: "REKRD is a foodstuff, not a medicine. It isn't SAHPRA-registered and it isn't Informed Sport certified.",
-  deferral:
-    "If a client is pregnant, on medication or competing under a testing code, your whole answer is",
-  deferralEmphasis: "show the label to your doctor.",
-} as const;
 
 /** All prices in cents. Money lives in lib/calc.ts; this is display context. */
 export const PRICING = {
@@ -124,14 +125,12 @@ export const DELIVERY = {
 export const SPEC_ROWS: { label: string; value: string }[] = [
   { label: "What it is", value: "Electrolyte hydration system, single-serve sachet" },
   { label: "How to use it", value: "One sachet in 500ml of cold water, once a day" },
-  { label: "Sodium", value: "600mg per sachet" },
-  { label: "L-glutamine", value: "500mg per sachet" },
-  { label: "Zinc", value: "7mg per sachet — 64% NRV" },
-  { label: "Vitamin C", value: "30mg per sachet" },
-  { label: "Also in it", value: "Potassium, magnesium, coconut water powder, Himalayan rock salt" },
+  { label: "Per serving", value: "Sodium 600mg · L-glutamine 500mg · Potassium 150mg · Magnesium 100mg · Vitamin C 30mg · Calcium 7mg · Zinc 7mg" },
+  { label: "Also in it", value: "Coconut water powder, Himalayan rock salt and natural trace minerals" },
+  { label: "Sachet weight", value: "4.4g to 4.64g depending on flavour — no fillers, so it is all actives" },
   { label: "Not in it", value: "No added sugar, no caffeine, no artificial sweeteners, colours, flavours or fillers" },
   { label: "Not built to be", value: "A meal replacement or a pre-workout. There is no caffeine in it" },
-  { label: "Flavours", value: "Sour Cherry, Pineapple, Orange, Peach, Watermelon" },
+  { label: "Flavours", value: "Sour Cherry Apple, Pineapple Berry, Orange Zest, Rooibos Peach Iced-Tea, Salty Watermelon" },
   { label: "Tube", value: "30 sachets · R600 · R20 a serve" },
   { label: "Starter pack", value: "5 sachets · R100" },
   { label: "Subscription", value: "10% off at R540 a tube, every 2, 4, 6 or 8 weeks. Pause, skip or cancel any time, no fee" },
@@ -165,7 +164,7 @@ export const PROGRAMME = {
 export const KEY_FACTS: { icon: IconName; k: string; v: string }[] = [
   { icon: "drop", k: "Sodium", v: "600mg a sachet" },
   { icon: "sachet", k: "L-glutamine", v: "500mg a sachet" },
-  { icon: "flavours", k: "Zinc", v: "7mg — 64% NRV" },
+  { icon: "flavours", k: "Sachet", v: "4.5g, no fillers" },
   { icon: "no-sugar", k: "Sugar", v: "None added" },
   { icon: "rand", k: "Price", v: "R20 a serve" },
   { icon: "flask", k: "Tested", v: "Third-party lab" },

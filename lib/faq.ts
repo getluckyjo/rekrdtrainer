@@ -14,7 +14,7 @@ export type Faq = { q: string; a: string };
 export const PRODUCT_FAQS: Faq[] = [
   {
     q: "Why is there so little powder in the sachet?",
-    a: "Because there are no fillers in it. A lot of powder in a sachet isn't the same as a lot of active in a sachet — we only put in what's on the list, so the sachet is the size the actives make it. The full list is printed on the tube, with the quantities.",
+    a: "Because there are no fillers in it. The whole sachet is about 4.5g, and every gram of that is on the label — 600mg of sodium, 500mg of L-glutamine, 150mg of potassium, 100mg of magnesium, plus vitamin C, calcium and zinc. A lot of powder in a sachet isn't the same as a lot of active in a sachet. We only put in what's on the list, so the sachet is the size the actives make it.",
   },
   {
     q: "Another brand has 1000mg of sodium. Why is yours only 600mg?",

@@ -897,3 +897,67 @@ table.pl td:first-child {
   flex-shrink: 0;
   color: var(--ink);
 }
+
+/* ------------------------------------------------------------- FIGURES -- */
+
+/* Product photography. Same cream-panel framing as the hero shot so a packshot
+   on a white studio background never shows a seam against the page. */
+.shot {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--cream);
+  overflow: hidden;
+  position: relative;
+  margin-top: 22px;
+  /* Without a cap a portrait packshot renders full column width and becomes a
+     1300px monolith that swallows the section. */
+  max-width: 760px;
+}
+/* Portrait crops need a much tighter cap than landscape ones to occupy the
+   same amount of vertical space. */
+.shot.portrait {
+  max-width: 380px;
+}
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.shot figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: linear-gradient(to top, var(--cream) 55%, transparent);
+}
+
+/* Full-bleed campaign band. Breaks out of .wrap without a horizontal
+   scrollbar — 100vw would overflow by the scrollbar's width. */
+.band {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--ink);
+  aspect-ratio: 16 / 7;
+}
+.band img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+  display: block;
+}
+@media (max-width: 720px) {
+  .band {
+    aspect-ratio: 4 / 5;
+  }
+  .band img {
+    object-position: center 22%;
+  }
+}

@@ -1,27 +1,29 @@
 /**
- * What a coach can say. Framed as permission, because almost everything true
- * about REKRD is safe to say and the page used to bury that under a list of
- * prohibitions long enough to put people off applying.
+ * How a coach talks about REKRD.
  *
- * The whole rule in one sentence:
- *   Say what's in the sachet. Don't say what it does to a body.
+ * Deliberately light. The legal position taken on this programme is that the
+ * coaches site is not consumer-facing and that a coach may speak about the
+ * product in their own words, so this file is not a rulebook — the training in
+ * lib/lessons.ts is where the effort goes.
  *
- * The worked examples that used to sit on the page (GREY_AREA) now live on the
- * terms page — nothing was lost, it just stopped standing between a coach and
- * the signup form.
+ * The anchor is the pack: everything printed on it is the brand's own approved
+ * language, so a coach repeating it is on solid ground. What survives here is
+ * the short list of things that protect the coach rather than the brand —
+ * disclosing that they earn from it, and sending medical and competition
+ * questions to someone qualified to answer them.
  */
 
-/** Versions the acknowledgement wording on the apply form, not a quiz. */
-export const CLAIMS_CHECK_VERSION = "2026-08-v2";
+/** Versions the acknowledgement wording on the apply form. */
+export const CLAIMS_CHECK_VERSION = "2026-08-v3";
 
 export const CLAIMS_LEDE =
-  "Here's the good news: almost everything true about REKRD is safe to say. It's a food, not a medicine, so you can name every ingredient, every quantity, the price, where it's made and who tests it. The one line you don't cross is describing what it does to a body. Say what's in the sachet — that's the whole rule.";
+  "Talk about it the way you'd talk about anything else you rate. Everything printed on the pack is the brand's own language, so if it's on there, it's yours to use — and the numbers below are all checkable. You don't need a script.";
 
 export const SAY_THIS: string[] = [
   "“600mg of sodium per sachet.”",
   "“500mg of L-glutamine in there too — most electrolyte sachets don't have any.”",
-  "“Zinc and vitamin C as well. 7mg of zinc, which is 64% of your daily NRV.”",
-  "“No fillers — that's why the sachet looks small.”",
+  "“30mg of vitamin C, 7mg of zinc and 7mg of calcium in there as well.”",
+  "“It's about 4.5g of powder — no fillers, so the sachet looks small.”",
   "“No added sugar, no caffeine, no artificial sweeteners.”",
   "“Made in South Africa, every batch tested by an independent lab.”",
   "“One sachet in 500ml of cold water, once a day. Big sweat day, have two.”",
@@ -29,59 +31,33 @@ export const SAY_THIS: string[] = [
   "“I drink it every day.”",
 ];
 
+/** Printed on the tub. The brand's own words, so a coach can use them freely. */
+export const ON_PACK_CLAIMS = [
+  "Hydration",
+  "Sports recovery",
+  "Endurance",
+  "Anti-cramping",
+] as const;
+
 /**
- * Three, not eight. These cover the real risk surface — a medicinal claim, a
- * tested athlete taking a certification on trust, and an advertisement made out
- * of someone's health story. The five we cut were all variations on the first.
+ * Two, and both are about looking after the client rather than the brand.
+ * Framed as "send it on", not "never say".
  */
-export const NEVER_SAY: string[] = [
-  "Anything about what it does to a body — cures, prevents, boosts, speeds up, fixes.",
-  "“It's fine for drug testing” or “it's certified.” It isn't — independent batch testing is a different thing.",
-  "A client's health story, repeated. A testimonial you pass on is a claim you made.",
+export const LEAVE_TO_A_PRO: { title: string; body: string }[] = [
+  {
+    title: "Anything medical",
+    body: "Pregnant, breastfeeding, on chronic medication, managing blood pressure or a kidney condition — “show the label to your doctor” is the whole answer, and it's the right one.",
+  },
+  {
+    title: "Anyone who gets drug tested",
+    body: "Every batch is independently lab tested, but that isn't the same as a banned-substance certification like Informed Sport, which REKRD doesn't hold. If a client competes under a testing code, send them to their team doctor.",
+  },
 ];
 
-/** The one posting rule that stays on the page. The rest are in the terms. */
+/** The one rule that protects the coach, not the brand. */
 export const POSTING_RULES: { title: string; body: string }[] = [
   {
     title: "Say it's your code",
-    body: "“I'm a REKRD coach — my code gets you 10% off.” In the caption, not buried in the hashtags. It's the rule, and it also just reads better.",
-  },
-];
-
-// ------------------------------------------------- worked examples (terms) --
-
-/** The ones that feel safe and aren't. Rendered on the terms page now. */
-export type GreyArea = { said: string; why: string; instead: string };
-
-export const GREY_AREA: GreyArea[] = [
-  {
-    said: "“It helps with hydration”",
-    why: "“Helps with” is a function claim",
-    instead: "“It's an electrolyte sachet you put in your water”",
-  },
-  {
-    said: "“It replaces what you sweat out”",
-    why: "Implies a physiological effect",
-    instead: "“600mg of sodium a sachet”",
-  },
-  {
-    said: "“It's clean”",
-    why: "Fine as brand language, meaningless as a fact",
-    instead: "Follow it straight away with “no added sugar, no artificial sweeteners, no fillers”",
-  },
-  {
-    said: "“My client's cramping stopped once she started it”",
-    why: "A testimonial you repeat is a claim you made",
-    instead: "Talk about your own routine instead — “I drink it every day”",
-  },
-  {
-    said: "“The zinc will keep you from getting sick”",
-    why: "Naming the zinc is fine. Saying what it does is not",
-    instead: "“7mg of zinc, 64% of your daily NRV”",
-  },
-  {
-    said: "A before/after photo next to a REKRD tube",
-    why: "Implies a body-composition claim",
-    instead: "Photo of the sachet on the bench. That's it.",
+    body: "“I'm a REKRD coach — my code gets you 10% off.” In the caption, not buried in the hashtags. It keeps you right with the ad rules, and it also just reads better.",
   },
 ];

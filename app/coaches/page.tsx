@@ -7,15 +7,15 @@ import HeroTeaser from "@/components/calculator/HeroTeaser";
 import Calculator from "@/components/calculator/Calculator";
 import LessonAccordion from "@/components/sections/LessonAccordion";
 import ApplyForm from "@/components/form/ApplyForm";
-import { CLAIMS_LEDE, NEVER_SAY, POSTING_RULES, SAY_THIS } from "@/lib/claims";
-import { FAQS, PRODUCT_FAQS } from "@/lib/faq";
 import {
-  BRAND,
-  FORMULA_NOTES,
-  KEY_FACTS,
-  REGULATORY_NOTE,
-  SPEC_ROWS,
-} from "@/lib/productFacts";
+  CLAIMS_LEDE,
+  LEAVE_TO_A_PRO,
+  ON_PACK_CLAIMS,
+  POSTING_RULES,
+  SAY_THIS,
+} from "@/lib/claims";
+import { FAQS, PRODUCT_FAQS } from "@/lib/faq";
+import { BRAND, FORMULA_NOTES, KEY_FACTS, SPEC_ROWS } from "@/lib/productFacts";
 import claims from "@/components/sections/claims.module.css";
 
 export const metadata: Metadata = {
@@ -225,6 +225,21 @@ export default function CoachesPage() {
             to a tube. Made in South Africa, every batch third-party lab tested.
           </div>
 
+          {/* The line-up carries the per-serving panel on every stick, which is
+              the "nothing hidden" point made better than a sentence can. */}
+          <figure className="shot">
+            <Image
+              src="/flavours.webp"
+              alt="The five REKRD flavours — Salty Watermelon, Rooibos Peach Iced-Tea, Orange Zest, Pineapple Berry and Sour Cherry Apple — each stick printed with its per-serving amounts"
+              width={1400}
+              height={1008}
+              sizes="(max-width: 900px) 100vw, 900px"
+            />
+            <figcaption>
+              Five flavours · every amount printed on the stick
+            </figcaption>
+          </figure>
+
           <div className="manifesto" style={{ marginTop: 30 }}>
             <span className="m-kicker">Every day, every sport</span>
             <h2>Why it looks like this.</h2>
@@ -256,6 +271,19 @@ export default function CoachesPage() {
             </details>
           ))}
 
+          {/* Sits directly under "why is there so little powder" — it shows the
+              actual volume better than the answer describes it. */}
+          <figure className="shot portrait">
+            <Image
+              src="/sachet-pour.webp"
+              alt="A REKRD Salty Watermelon sachet being poured into a clear water bottle on a tennis court"
+              width={1100}
+              height={1467}
+              sizes="(max-width: 480px) 100vw, 380px"
+            />
+            <figcaption>One sachet · 500ml of water · about 4.5g of powder</figcaption>
+          </figure>
+
           <details className="tuck">
             <summary>All the numbers</summary>
             <div className="tuck-body table-scroll">
@@ -272,12 +300,20 @@ export default function CoachesPage() {
             </div>
           </details>
 
-          <div className="callout" style={{ marginTop: 22, maxWidth: 720 }}>
-            {REGULATORY_NOTE.lead} {REGULATORY_NOTE.deferral}{" "}
-            <strong>{REGULATORY_NOTE.deferralEmphasis}</strong>
-          </div>
         </div>
       </section>
+
+      {/* Campaign band. Carries "every day, every sport" better than the copy
+          does, and it sits on the seam between the product and the mechanics. */}
+      <div className="band">
+        <Image
+          src="/game-set-rekrd.webp"
+          alt="A tennis player mid-match in hard sunlight, sweat on her face, with the line Game. Set. REKRD."
+          width={1600}
+          height={2133}
+          sizes="100vw"
+        />
+      </div>
 
       {/* --------------------------------------------------- how it works -- */}
       <section className="section">
@@ -325,20 +361,20 @@ export default function CoachesPage() {
         </div>
       </section>
 
-      {/* ----------------------------------------------------------- say -- */}
+      {/* ------------------------------------------------------ training -- */}
       <section className="section alt" id="say">
         <div className="wrap">
           <h2>
-            <span className="num">04</span>Almost everything true{" "}
-            <span className="accent">is safe to say.</span>
+            <span className="num">04</span>Know it well enough{" "}
+            <span className="accent">to talk about it.</span>
           </h2>
           <p className="lede">{CLAIMS_LEDE}</p>
 
-          <div className="deal">
+          <div className="deal" style={{ marginBottom: 30 }}>
             <div className={`card ${claims.sayAccent} yes`}>
               <div className="ico-head">
                 <Icon name="check" size={18} />
-                <h3>Your lines</h3>
+                <h3>Lines that do the work</h3>
               </div>
               <ul>
                 {SAY_THIS.map((line) => (
@@ -349,24 +385,48 @@ export default function CoachesPage() {
                 ))}
               </ul>
             </div>
-            <div className={`card ${claims.neverAccent} no`}>
+            <div className="card">
               <div className="ico-head">
-                <Icon name="cross" size={18} />
-                <h3>The three to avoid</h3>
+                <Icon name="sachet" size={18} />
+                <h3>Straight off the pack</h3>
               </div>
+              <p style={{ marginBottom: 12 }}>
+                These four are printed on the tub. They&rsquo;re our own words,
+                so use them freely:
+              </p>
               <ul>
-                {NEVER_SAY.map((line) => (
-                  <li key={line}>
-                    <Icon name="cross" size={15} />
-                    <span>{line}</span>
+                {ON_PACK_CLAIMS.map((c) => (
+                  <li key={c}>
+                    <Icon name="check" size={15} />
+                    <span>{c}</span>
                   </li>
                 ))}
               </ul>
+              <p style={{ marginTop: 14 }}>
+                Past that, describe it however feels natural to you. There is no
+                script to learn.
+              </p>
             </div>
           </div>
 
-          <div className="steps" style={{ marginTop: 26 }}>
+          <h3 style={{ fontSize: 16, marginBottom: 6 }}>
+            Six lessons, about four minutes
+          </h3>
+          <p className="lede" style={{ marginBottom: 20 }}>
+            Read them once and you&rsquo;ll never be caught out on a gym floor.
+          </p>
+          <LessonAccordion />
+
+          <div className="steps" style={{ marginTop: 30 }}>
             {POSTING_RULES.map((r) => (
+              <div className="step" key={r.title}>
+                <div>
+                  <h3>{r.title}</h3>
+                  <p>{r.body}</p>
+                </div>
+              </div>
+            ))}
+            {LEAVE_TO_A_PRO.map((r) => (
               <div className="step" key={r.title}>
                 <div>
                   <h3>{r.title}</h3>
@@ -377,17 +437,10 @@ export default function CoachesPage() {
           </div>
 
           <div className="callout" style={{ marginTop: 22, maxWidth: 680 }}>
-            Unsure about a line? Send it to{" "}
+            Want a second opinion on something before you post it? Send it to{" "}
             <a href={`mailto:${BRAND.partnerEmail}`}>{BRAND.partnerEmail}</a>.
             Nobody has ever been told off for asking.
           </div>
-
-          <details className="tuck">
-            <summary>The whole brief — two minutes, if you want it</summary>
-            <div className="tuck-body">
-              <LessonAccordion />
-            </div>
-          </details>
         </div>
       </section>
 

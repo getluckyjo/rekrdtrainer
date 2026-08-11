@@ -33,25 +33,27 @@ REKRD is a foodstuff, not SAHPRA-registered, not Informed Sport certified, and
 the site must never state or imply what it does to a body. That applies to copy
 you write here as much as to the coaches the site is teaching.
 
-**Frame it as permission, not prohibition.** The page used to carry ~1,050 words
-on what a coach may not do against ~380 on why the product is good, and coaches
-were being put off applying. It was deliberately cut back. So:
+**Train on the product, not on prohibitions.** The legal position taken on this
+programme is that the coaches site is not consumer-facing and that a coach may
+describe the product in their own words. The page was rebalanced accordingly —
+six product lessons, and the restrictions cut to two referrals. So:
 
-- State quantities, never benefits. "500mg of L-glutamine per sachet" is the
-  selling line; "supports recovery" is a medicinal claim. Same for zinc and
-  immunity, which `NEVER_SAY` still forbids explicitly.
+- **The pack is the anchor.** `ON_PACK_CLAIMS` holds the four claims printed on
+  the tub (hydration, sports recovery, endurance, anti-cramping). Those are the
+  brand's own approved language and coaches are told to use them freely. If the
+  packaging changes, that constant changes with it.
+- State quantities off the printed per-serving panel. There is **no NRV
+  percentage anywhere on the pack** — give milligrams only.
 - **Never name a competitor.** Unnamed contrast is allowed, and only for a
   verifiable fact about the category — "most electrolyte sachets don't have any
-  L-glutamine" is checkable off the shelf. Never contrast on a health effect,
-  and never characterise what a competitor's product does. Where the positive
-  version carries the same weight, prefer it: `FORMULA_NOTES` says "there is no
-  filler in it", not "unlike the others".
-- The regulatory footnote (`REGULATORY_NOTE`) appears in **one** callout on the
-  coaches page, plus the footer and terms clause 05. It used to appear seven
-  times. Don't re-add it to lessons, spec rows or the welcome flow.
-- Worked examples of unsafe lines (`GREY_AREA`) live on the terms page, not
-  between a coach and the signup form.
-- There is **no claims quiz and no gate on the submit button.** The audit
-  artefact is the express acknowledgement checkbox in `ApplyForm`, versioned by
-  `CLAIMS_CHECK_VERSION`. If you change that checkbox's wording, bump the
+  L-glutamine" is checkable off the shelf. Prefer the positive version where it
+  carries the same weight: `FORMULA_NOTES` says "there is no filler in it".
+- Only two restrictions survive on the page, both in `LEAVE_TO_A_PRO`, and both
+  are about protecting the client rather than the brand: medical questions go to
+  a doctor, and drug-tested athletes go to their team doctor (every batch is lab
+  tested, but there is no Informed Sport certification). Plus one disclosure rule
+  in `POSTING_RULES`, which protects the coach under the ad rules.
+- Do not reintroduce a "never say" list, a claims quiz, or a gate on the submit
+  button. The audit artefact is the acknowledgement checkbox in `ApplyForm`,
+  versioned by `CLAIMS_CHECK_VERSION`. If you change its wording, bump the
   version.

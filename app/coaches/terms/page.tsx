@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Footer from "@/components/chrome/Footer";
 import { BRAND, PROGRAMME } from "@/lib/productFacts";
-import { GREY_AREA } from "@/lib/claims";
-import claims from "@/components/sections/claims.module.css";
 
 export const metadata: Metadata = {
   title: "Programme terms",
@@ -49,14 +47,13 @@ const CLAUSES: { n: string; title: string; body: string[] }[] = [
   },
   {
     n: "05",
-    title: "What you may and may not say",
+    title: "Talking about the product",
     body: [
-      "The rule is one sentence: say what is in the sachet, not what it does to a body. You may state what is in it, how much of it, how to use it, what it costs, where it is made and that every batch is independently lab tested. Almost everything true about REKRD falls on the safe side of that line.",
-      "REKRD is a foodstuff. It is not a medicine, it is not registered with SAHPRA, and it is not certified under Informed Sport or any comparable banned-substance programme. It makes no health claims, and neither may you. It is not a treatment for cramp, hangovers, migraines, illness or fatigue, and it is not a meal replacement or a pre-workout.",
-      "If a client is pregnant, breastfeeding, on chronic medication, managing blood pressure or a kidney condition, or competing under a code that requires certified supplements, your whole answer is to send them to their doctor, pharmacist or team doctor.",
-      "You must disclose that you earn from the recommendation, in the caption and not buried in hashtags. Do not send a claim in a private message that you would not put on a poster — a WhatsApp is not private for this purpose.",
-      "Do not repeat a client's health testimonial. A testimonial you pass on is a claim you made.",
-      `If you are unsure whether a line is safe, ask ${BRAND.partnerEmail} before you post it. Nobody has ever been told off for asking.`,
+      "Describe REKRD in your own words. Everything printed on the pack is our own approved language, so you are on solid ground repeating any of it, along with the ingredients, the quantities, how to use it, what it costs, where it is made and that every batch is independently lab tested.",
+      "Two things we ask you to pass on rather than answer yourself. If a client is pregnant, breastfeeding, on chronic medication or managing a condition, send them to their doctor or pharmacist. And if a client competes under a code that requires certified supplements, send them to their team doctor — every batch is independently lab tested, but REKRD holds no banned-substance certification such as Informed Sport.",
+      "REKRD is a foodstuff and it is not registered with SAHPRA as a medicine. Please do not present it as one, or present yourself as medically qualified in relation to it.",
+      "You must disclose that you earn from the recommendation, in the caption and not buried in hashtags. That is an advertising rule and it protects you.",
+      `If you would like a second opinion on anything you are about to post, ${BRAND.partnerEmail} will give you one. Nobody has ever been told off for asking.`,
     ],
   },
   {
@@ -134,28 +131,6 @@ export default function TermsPage() {
                     </p>
                   ))}
 
-                  {/* The worked examples used to sit on the coaches page, where
-                      they read as a warning. They belong here. */}
-                  {c.n === "05" && (
-                    <details className="tuck">
-                      <summary>
-                        Worked examples — the ones that feel safe and aren&rsquo;t
-                      </summary>
-                      <div className="tuck-body">
-                        <div className={claims.grey} style={{ marginTop: 0 }}>
-                          {GREY_AREA.map((g) => (
-                            <div className={claims.greyRow} key={g.said}>
-                              <div className={claims.greySaid}>{g.said}</div>
-                              <div className={claims.greyWhy}>{g.why}</div>
-                              <div className={claims.greyInstead}>
-                                {g.instead}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </details>
-                  )}
                 </div>
               </div>
             ))}
