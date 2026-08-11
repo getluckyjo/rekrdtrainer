@@ -22,12 +22,16 @@ const Payload = z.object({
   instagram: z.string().max(60).nullable().optional(),
   clientBand: z.string().max(20).nullable().optional(),
   marketingOptIn: z.boolean().default(false),
-  claimsCheckVersion: z.string().max(40),
+  /* Versions the acknowledgement the coach ticks on the form — "REKRD is a
+     food, not a medicine; I'll say what's in the sachet, not what it does."
+     That checkbox is required, so in practice this always arrives, but it stays
+     nullable: rows predating the acknowledgement have no version to record. */
+  claimsCheckVersion: z.string().max(40).nullable().optional(),
   trap: z.string().max(200).optional(),
   elapsedMs: z.number().int().nonnegative().optional(),
 });
 
-/** Nobody reads eight fields and picks a code in three seconds. */
+/** Nobody fills eight fields and picks a code in three seconds. */
 const MIN_FILL_MS = 3_000;
 
 export async function POST(req: NextRequest) {
@@ -105,8 +109,8 @@ export async function POST(req: NextRequest) {
         status: "provisioning",
         marketingOptIn: input.marketingOptIn,
         acceptedTermsAt: now,
-        claimsCheckPassedAt: now,
-        claimsCheckVersion: input.claimsCheckVersion,
+        claimsCheckPassedAt: input.claimsCheckVersion ? now : null,
+        claimsCheckVersion: input.claimsCheckVersion ?? null,
       })
       .returning({ id: trainers.id });
     trainerId = row.id;

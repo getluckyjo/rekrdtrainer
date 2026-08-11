@@ -11,6 +11,7 @@ const DISCIPLINES = [
   "Personal training",
   "Biokinetics",
   "Padel",
+  "Tennis",
   "Golf",
   "Running",
   "Cycling",
@@ -124,6 +125,7 @@ export default function ApplyForm() {
           instagram: instagram.trim().replace(/^@/, "") || null,
           clientBand: clientBand || null,
           marketingOptIn: marketing,
+          // The acknowledgement checkbox is required, so this always goes up.
           claimsCheckVersion: CLAIMS_CHECK_VERSION,
           // Bot signals: a filled honeypot, or a form completed impossibly fast.
           trap,
