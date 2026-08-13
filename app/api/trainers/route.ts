@@ -185,13 +185,24 @@ export async function POST(req: NextRequest) {
     .where(eq(trainers.id, trainerId));
 
   /* Best effort. A failed email must never cost the coach their code — they
-     already have it on the next screen. */
+     already have it on the next screen. Stamped on success so the resend
+     endpoint can tell who is still owed one. */
   try {
-    await sendWelcomeEmail({
+    const sent = await sendWelcomeEmail({
       to: email,
       fullName: input.fullName.trim(),
       code: finalCode,
     });
+    if (sent) {
+      await db()
+        .update(trainers)
+        .set({ flags: { welcomeEmailSentAt: now.toISOString() } })
+        .where(eq(trainers.id, trainerId));
+    } else {
+      console.warn(
+        "[trainers] welcome email skipped — RESEND_API_KEY is not set",
+      );
+    }
   } catch (err) {
     console.error("[trainers] welcome email failed", err);
   }

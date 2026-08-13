@@ -16,6 +16,15 @@ function client(): Resend | null {
 }
 
 /**
+ * Whether mail can actually go out. Worth checking explicitly before reporting
+ * success: RESEND_API_KEY went unset for the programme's first four signups
+ * and nothing complained, because sending is best-effort by design.
+ */
+export function isEmailConfigured(): boolean {
+  return Boolean(process.env.RESEND_API_KEY);
+}
+
+/**
  * The origin every coach-facing link is built from — the print card, the QR,
  * the welcome email and the dashboard. Set NEXT_PUBLIC_SITE_ORIGIN to the
  * branded domain; it is baked in at build time, so changing it needs a redeploy.
@@ -36,13 +45,19 @@ export function siteOrigin(): string {
   );
 }
 
+/**
+ * Returns true only when a message actually went to Resend. Callers that must
+ * not fail on a mail problem (the signup route) can ignore it; callers that
+ * report back to a human (the resend endpoint) must not claim success without
+ * it.
+ */
 export async function sendWelcomeEmail(opts: {
   to: string;
   fullName: string;
   code: string;
-}): Promise<void> {
+}): Promise<boolean> {
   const resend = client();
-  if (!resend) return;
+  if (!resend) return false;
 
   const { to, fullName, code } = opts;
   const firstName = fullName.split(/\s+/)[0];
@@ -83,4 +98,6 @@ export async function sendWelcomeEmail(opts: {
       `${BRAND.partnerEmail}`,
     ].join("\n"),
   });
+
+  return true;
 }
