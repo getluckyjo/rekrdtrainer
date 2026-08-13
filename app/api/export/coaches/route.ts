@@ -2,6 +2,8 @@ import { NextRequest } from "next/server";
 import { desc, eq, sql } from "drizzle-orm";
 import { db, isDbConfigured } from "@/lib/db";
 import { referredOrders, trainers } from "@/lib/db/schema";
+import { vanityLink } from "@/lib/codes";
+import { siteOrigin } from "@/lib/email";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -70,7 +72,11 @@ const HEADERS = [
   "Coaches",
   "Gym or club",
   "Instagram",
-  "Code",
+  "Discount code",
+  "Code active",
+  "Client discount",
+  "Share link",
+  "QR & print card",
   "Status",
   "Client band",
   "Orders",
@@ -108,6 +114,8 @@ export async function GET(req: NextRequest) {
       gym: trainers.gym,
       instagram: trainers.instagram,
       discountCode: trainers.discountCode,
+      shopifyDiscountGid: trainers.shopifyDiscountGid,
+      customerDiscountRate: trainers.customerDiscountRate,
       status: trainers.status,
       clientBand: trainers.clientBand,
       marketingOptIn: trainers.marketingOptIn,
@@ -121,6 +129,7 @@ export async function GET(req: NextRequest) {
     .orderBy(desc(trainers.createdAt));
 
   const rand = (c: number) => (Number(c) / 100).toFixed(2);
+  const origin = siteOrigin();
 
   const body = [
     csvRow(HEADERS),
@@ -135,6 +144,14 @@ export async function GET(req: NextRequest) {
         r.gym,
         r.instagram ? `@${r.instagram}` : "",
         r.discountCode,
+        /* A row only exists once Shopify has minted the discount — the signup
+           route deletes the coach again if minting fails, rather than leaving a
+           code behind with nothing behind it. So a GID plus an active status is
+           the same thing as a code a client can actually type at checkout. */
+        r.shopifyDiscountGid && r.status === "active" ? "yes" : "no",
+        `${Math.round(Number(r.customerDiscountRate) * 100)}%`,
+        vanityLink(r.discountCode, origin),
+        `${origin}/coaches/welcome/${r.discountCode}`,
         r.status,
         r.clientBand,
         Number(r.orderCount),
