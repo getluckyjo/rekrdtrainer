@@ -14,7 +14,8 @@
     "db:studio": "drizzle-kit studio",
     "shopify:check": "node --env-file=.env.local scripts/shopify-check.mjs",
     "db:check": "node --env-file=.env.local scripts/db-check.mjs",
-    "db:connect": "node --env-file=.env.local scripts/db-connect.mjs"
+    "db:connect": "node --env-file=.env.local scripts/db-connect.mjs",
+    "discounts:list": "npx tsx --env-file=.env.local scripts/list-discounts.mjs"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.2",
