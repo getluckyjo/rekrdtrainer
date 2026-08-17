@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="wrap">
         <div className="flavour-bar" style={{ marginBottom: 28 }} />
-        <Logo height={22} className="footer-logo" />
+        <Logo height={18} className="footer-logo" />
         <p className="mono" style={{ fontSize: 11 }}>
           Coach Programme · South Africa
         </p>

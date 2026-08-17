@@ -5,12 +5,19 @@
  * currentColor, which lets it sit on cream, on ink, or on a print card without
  * a second asset. The source file painted a flat #000d1b.
  *
+ * The viewBox is tightened to the ink. The supplied file declares
+ * `0 0 579.69 219.35`, but the mark only occupies 36% of that height — the
+ * rest is empty margin — so `height={17}` drew letters under 6px tall and read
+ * as a mistake. Cropping to the real bounds makes `height` mean the height of
+ * the letters, which is the only intuitive contract for a caller.
+ *
+ * True ratio is 4.98:1, not the 2.64:1 the padded box implied.
+ *
  * The clipPath in the original was a rect identical to the viewBox — a no-op —
  * so it is dropped along with the <defs> it needed.
- *
- * Sized by height. The mark is roughly 2.64:1, and width follows from the
- * viewBox, so callers only ever set one number.
  */
+const BOX = { x: 93.72, y: 67.44, w: 396.58, h: 79.68 };
+const RATIO = BOX.w / BOX.h;
 export default function Logo({
   height = 18,
   className,
@@ -23,9 +30,9 @@ export default function Logo({
 }) {
   return (
     <svg
-      viewBox="0 0 579.69 219.35"
+      viewBox={`${BOX.x} ${BOX.y} ${BOX.w} ${BOX.h}`}
       height={height}
-      width={height * (579.69 / 219.35)}
+      width={Math.round(height * RATIO)}
       className={className}
       fill="currentColor"
       role={title ? "img" : "presentation"}

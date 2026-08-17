@@ -39,7 +39,7 @@ export default function Nav() {
     <nav className="nav">
       <div className="wrap">
         <a className="nav-logo" href="#top" aria-label="REKRD — back to top">
-          <Logo height={17} title={null} />
+          <Logo height={22} title={null} />
         </a>
         <div className="nav-links">
           {LINKS.map((l) => (

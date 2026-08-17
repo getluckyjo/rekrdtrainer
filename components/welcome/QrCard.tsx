@@ -79,7 +79,7 @@ export default function QrCard({
       {/* A6, print stylesheet only. Goes on the gym noticeboard. */}
       <div className={s.printCard} aria-hidden="true">
         <div className={s.pcBrand}>
-          <Logo height={34} title={null} />
+          <Logo height={26} title={null} />
         </div>
         <div className={s.pcLead}>
           Clean hydration for the everyday athlete.
