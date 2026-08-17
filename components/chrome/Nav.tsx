@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Logo from "@/components/Logo";
 
 const LINKS = [
   { href: "#earnings", label: "Earn" },
@@ -37,8 +38,8 @@ export default function Nav() {
   return (
     <nav className="nav">
       <div className="wrap">
-        <a className="nav-logo" href="#top">
-          REKRD
+        <a className="nav-logo" href="#top" aria-label="REKRD — back to top">
+          <Logo height={17} title={null} />
         </a>
         <div className="nav-links">
           {LINKS.map((l) => (

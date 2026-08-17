@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import QRCode from "qrcode";
+import Logo from "@/components/Logo";
 import s from "./welcome.module.css";
 
 /**
@@ -77,7 +78,9 @@ export default function QrCard({
 
       {/* A6, print stylesheet only. Goes on the gym noticeboard. */}
       <div className={s.printCard} aria-hidden="true">
-        <div className={s.pcBrand}>REKRD</div>
+        <div className={s.pcBrand}>
+          <Logo height={34} title={null} />
+        </div>
         <div className={s.pcLead}>
           Clean hydration for the everyday athlete.
           <br />

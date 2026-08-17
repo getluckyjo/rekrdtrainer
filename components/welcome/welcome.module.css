@@ -198,13 +198,13 @@
     background: #fff;
     color: #0b1220;
   }
+  /* Now holds the inline wordmark rather than type. Flex removes the inline
+     descender gap, and the SVG picks up this colour via currentColor — print
+     stylesheets do not always inherit a fill the way screen ones do. */
   .printCard .pcBrand {
-    font-family: var(--font-display);
-    font-weight: 900;
-    font-style: italic;
-    text-transform: uppercase;
-    font-size: 16pt;
-    letter-spacing: 0.02em;
+    display: flex;
+    justify-content: center;
+    color: #0b1220;
   }
   .printCard .pcLead {
     font-size: 11pt;

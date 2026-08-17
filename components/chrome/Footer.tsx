@@ -1,3 +1,4 @@
+import Logo from "@/components/Logo";
 import { BRAND } from "@/lib/productFacts";
 
 export default function Footer() {
@@ -5,8 +6,9 @@ export default function Footer() {
     <footer className="footer">
       <div className="wrap">
         <div className="flavour-bar" style={{ marginBottom: 28 }} />
+        <Logo height={22} className="footer-logo" />
         <p className="mono" style={{ fontSize: 11 }}>
-          REKRD Coach Programme · South Africa
+          Coach Programme · South Africa
         </p>
         <p>
           Questions about the programme?{" "}
