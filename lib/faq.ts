@@ -48,7 +48,7 @@ export const FAQS: Faq[] = [
     a: "Yes, it's yours to declare. If you're VAT registered, tell us — commission is inclusive of VAT where it applies. We can't give you tax advice; your accountant can.",
   },
   {
-    q: "Can I recruit other coaches and earn off them?",
+    q: "Can I recruit other ambassadors and earn off them?",
     a: "No, and we won't build it. You earn on what your own clients buy. That's the whole model.",
   },
   {

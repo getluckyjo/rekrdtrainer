@@ -3,7 +3,6 @@ import Image from "next/image";
 import Nav from "@/components/chrome/Nav";
 import Footer from "@/components/chrome/Footer";
 import Icon from "@/components/Icon";
-import HeroTeaser from "@/components/calculator/HeroTeaser";
 import Calculator from "@/components/calculator/Calculator";
 import LessonAccordion from "@/components/sections/LessonAccordion";
 import ApplyForm from "@/components/form/ApplyForm";
@@ -15,18 +14,25 @@ import {
   SAY_THIS,
 } from "@/lib/claims";
 import { FAQS, PRODUCT_FAQS } from "@/lib/faq";
-import { BRAND, FORMULA_NOTES, KEY_FACTS, SPEC_ROWS } from "@/lib/productFacts";
+import {
+  AMBASSADOR_ASKS,
+  AMBASSADOR_GETS,
+  BRAND,
+  FORMULA_NOTES,
+  KEY_FACTS,
+  SPEC_ROWS,
+} from "@/lib/productFacts";
 import claims from "@/components/sections/claims.module.css";
 
 export const metadata: Metadata = {
-  title: "Earn 15% recommending REKRD",
-  alternates: { canonical: "/coaches" },
+  title: "Become a REKRD ambassador",
+  alternates: { canonical: "/ambassadors" },
 };
 
-export default function CoachesPage() {
+export default function AmbassadorsPage() {
   return (
     <>
-      <a className="skip-link" href="#earnings">
+      <a className="skip-link" href="#deal">
         Skip to content
       </a>
       <Nav />
@@ -36,7 +42,7 @@ export default function CoachesPage() {
         <div className="wrap hero-split">
           <div>
             <span className="kicker mono">
-              REKRD Coach Programme · Applications open
+              REKRD Ambassador Programme · Applications open
             </span>
             <h1>
               You already tell them
@@ -44,24 +50,24 @@ export default function CoachesPage() {
               <span className="accent">to drink more water.</span>
             </h1>
             <p className="sub">
-              One sachet in 500ml of water, once a day. 600mg of sodium, 500mg
-              of L-glutamine, zinc and vitamin C. No sugar, no caffeine, no
-              fillers. Your clients get 10% off with your code — you earn 15% of
-              everything they spend, every order, not just the first.
+              Post about REKRD once or twice a week and we&rsquo;ll send you a
+              tub every month, free. Thirty sachets, delivered. Want to earn as
+              well? Your code gets people 10% off and pays you 15% of everything
+              they spend — every order, for a year.
             </p>
 
             <div className="hero-meta">
               <div>
-                <div className="k mono">Your cut</div>
+                <div className="k mono">Every month</div>
+                <div className="v">A free tub</div>
+              </div>
+              <div>
+                <div className="k mono">We ask</div>
+                <div className="v">1–2 posts a week</div>
+              </div>
+              <div>
+                <div className="k mono">If you sell</div>
                 <div className="v">15%</div>
-              </div>
-              <div>
-                <div className="k mono">They save</div>
-                <div className="v">10%</div>
-              </div>
-              <div>
-                <div className="k mono">Setup</div>
-                <div className="v">90 seconds</div>
               </div>
               <div>
                 <div className="k mono">Cost to you</div>
@@ -69,7 +75,11 @@ export default function CoachesPage() {
               </div>
             </div>
 
-            <HeroTeaser />
+            <p className="sub" style={{ marginTop: 22 }}>
+              <a className="btn" href="#apply">
+                Become an ambassador
+              </a>
+            </p>
           </div>
 
           <div className="hero-shot">
@@ -87,15 +97,70 @@ export default function CoachesPage() {
         </div>
       </header>
 
-      {/* ------------------------------------------------------ earnings -- */}
-      <section className="section" id="earnings">
+      {/* ------------------------------------------------------- the deal -- */}
+      <section className="section" id="deal">
         <div className="wrap">
           <h2>
-            <span className="num">01</span>15% of everything,{" "}
-            <span className="accent">for as long as they keep buying.</span>
+            <span className="num">01</span>What we ask,{" "}
+            <span className="accent">and what you get.</span>
           </h2>
           <p className="lede">
-            A tube is thirty sachets — about a month. So a client who sticks
+            Two things from you. Four back. No targets, no minimum, and nothing
+            to buy — ever.
+          </p>
+
+          <div className="deal">
+            <div className="card">
+              <div className="ico-head">
+                <Icon name="people" size={18} />
+                <h3>What we ask</h3>
+              </div>
+              <ul>
+                {AMBASSADOR_ASKS.map((a) => (
+                  <li key={a.title}>
+                    <Icon name={a.icon} size={15} />
+                    <span>
+                      <strong>{a.title}.</strong> {a.body}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="card yes">
+              <div className="ico-head">
+                <Icon name="check" size={18} />
+                <h3>What you get</h3>
+              </div>
+              <ul>
+                {AMBASSADOR_GETS.map((g) => (
+                  <li key={g.title}>
+                    <Icon name={g.icon} size={15} />
+                    <span>
+                      <strong>{g.title}.</strong> {g.body}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="callout" style={{ marginTop: 22, maxWidth: 720 }}>
+            <strong>The tub is the deal.</strong> Keep posting and it keeps
+            coming. The commission is yours if you want it, but nobody is going
+            to chase you about sales — that part is entirely up to you.
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------ earnings -- */}
+      <section className="section alt" id="earnings">
+        <div className="wrap">
+          <h2>
+            <span className="num">02</span>Want to earn as well?{" "}
+            <span className="accent">15% of everything.</span>
+          </h2>
+          <p className="lede">
+            A tube is thirty sachets — about a month. So someone who sticks
             with it re-orders every month, and you earn on every one of those
             orders, not just their first.
           </p>
@@ -105,7 +170,7 @@ export default function CoachesPage() {
               <thead>
                 <tr>
                   <th>Order</th>
-                  <th>Your client pays</th>
+                  <th>They pay</th>
                   <th>You earn</th>
                 </tr>
               </thead>
@@ -143,7 +208,7 @@ export default function CoachesPage() {
               <ul>
                 <li>
                   <Icon name="check" size={15} />
-                  <span>15% of the order before your client&rsquo;s 10% comes off</span>
+                  <span>15% of the order before their 10% comes off</span>
                 </li>
                 <li>
                   <Icon name="repeat" size={15} />
@@ -175,7 +240,7 @@ export default function CoachesPage() {
                 </li>
                 <li>
                   <Icon name="check" size={15} />
-                  <span>No admin — your clients buy direct, you never invoice</span>
+                  <span>No admin — they buy direct, you never invoice</span>
                 </li>
                 <li>
                   <Icon name="check" size={15} />
@@ -197,14 +262,14 @@ export default function CoachesPage() {
       </section>
 
       {/* ------------------------------------------------------- product -- */}
-      <section className="section alt" id="product">
+      <section className="section" id="product">
         <div className="wrap">
           <h2>
-            <span className="num">02</span>The product,{" "}
+            <span className="num">03</span>The product,{" "}
             <span className="accent">in sixty seconds.</span>
           </h2>
           <p className="lede">
-            These six answer almost everything a client will ask you.
+            These six answer almost everything anyone will ask you.
           </p>
 
           <div className="fact-grid">
@@ -319,7 +384,7 @@ export default function CoachesPage() {
       <section className="section">
         <div className="wrap">
           <h2>
-            <span className="num">03</span>How it works.
+            <span className="num">04</span>How it works.
           </h2>
           <div className="cards c4" style={{ marginTop: 26 }}>
             <div className="card">
@@ -365,7 +430,7 @@ export default function CoachesPage() {
       <section className="section alt" id="say">
         <div className="wrap">
           <h2>
-            <span className="num">04</span>Know it well enough{" "}
+            <span className="num">05</span>Know it well enough{" "}
             <span className="accent">to talk about it.</span>
           </h2>
           <p className="lede">{CLAIMS_LEDE}</p>
@@ -413,7 +478,7 @@ export default function CoachesPage() {
             Six lessons, about four minutes
           </h3>
           <p className="lede" style={{ marginBottom: 20 }}>
-            Read them once and you&rsquo;ll never be caught out on a gym floor.
+            Read them once and you&rsquo;ll never be caught out.
           </p>
           <LessonAccordion />
 
@@ -448,7 +513,7 @@ export default function CoachesPage() {
       <section className="section" id="apply">
         <div className="wrap">
           <h2>
-            <span className="num">05</span>Get your code.
+            <span className="num">06</span>Become an ambassador.
           </h2>
           <p className="lede">
             Ninety seconds, and it&rsquo;s live before you close the tab.
@@ -461,7 +526,7 @@ export default function CoachesPage() {
       <section className="section alt" id="faq">
         <div className="wrap">
           <h2>
-            <span className="num">06</span>Questions coaches ask.
+            <span className="num">07</span>Questions people ask.
           </h2>
           <div style={{ marginTop: 24 }}>
             {FAQS.map((f, i) => (

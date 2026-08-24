@@ -247,7 +247,7 @@ if (WRITE_TEST) {
             productDiscounts: false,
             shippingDiscounts: true,
           },
-          tags: ["coach-affiliate", "self-test"],
+          tags: ["ambassador-affiliate", "self-test"],
         },
       },
     );

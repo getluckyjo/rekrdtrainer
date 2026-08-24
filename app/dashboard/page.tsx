@@ -111,7 +111,7 @@ export default async function DashboardPage(
 
       <header className="header">
         <div className="wrap">
-          <span className="kicker mono">Coach dashboard</span>
+          <span className="kicker mono">Ambassador dashboard</span>
           <h1>
             {firstName}&rsquo;s <span className="accent">earnings.</span>
           </h1>
@@ -147,7 +147,7 @@ export default async function DashboardPage(
               <CopyButton value={vanity} label="Copy link" />
               <a
                 className="btn small ghost"
-                href={`/coaches/welcome/${coach.code}`}
+                href={`/ambassadors/welcome/${coach.code}`}
               >
                 QR &amp; assets
               </a>
@@ -257,7 +257,7 @@ function SignIn({ sent, expired }: { sent: boolean; expired: boolean }) {
       <div className="flavour-bar" />
       <header className="header">
         <div className="wrap">
-          <span className="kicker mono">Coach dashboard</span>
+          <span className="kicker mono">Ambassador dashboard</span>
           <h1>
             Sign <span className="accent">in.</span>
           </h1>
@@ -299,7 +299,7 @@ function SignIn({ sent, expired }: { sent: boolean; expired: boolean }) {
           )}
 
           <p style={{ marginTop: 26, fontSize: 14, color: "var(--ink-soft)" }}>
-            Not a coach yet? <a href="/coaches">Get your code</a> — it takes
+            Not an ambassador yet? <a href="/ambassadors">Get your code</a> — it takes
             about ninety seconds.
           </p>
         </div>

@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { shopifyDiscountLink, vanityLink } from "./codes";
+import { AGREEMENT_COMMITMENTS, AGREEMENT_VERSION } from "./claims";
 import { BRAND } from "./productFacts";
 
 /**
@@ -8,7 +9,7 @@ import { BRAND } from "./productFacts";
  * them the signup.
  */
 
-const FROM = "REKRD Coaches <partners@rekrd.io>";
+const FROM = "REKRD Ambassadors <partners@rekrd.io>";
 
 function client(): Resend | null {
   const key = process.env.RESEND_API_KEY;
@@ -62,7 +63,7 @@ export async function sendWelcomeEmail(opts: {
   const { to, fullName, code } = opts;
   const firstName = fullName.split(/\s+/)[0];
   const origin = siteOrigin();
-  const welcome = `${origin}/coaches/welcome/${code}`;
+  const welcome = `${origin}/ambassadors/welcome/${code}`;
 
   await resend.emails.send({
     from: FROM,
@@ -86,6 +87,13 @@ export async function sendWelcomeEmail(opts: {
       `And this is where you check what you've earned. Enter this same email`,
       `address and we'll send you a link in — no password to remember:`,
       `${origin}/dashboard`,
+      ``,
+      `What you agreed to when you signed up:`,
+      ...AGREEMENT_COMMITMENTS.map((c) => `  · ${c.label}`),
+      ``,
+      `Keep those up and a tub comes to you every month, free. That's the deal,`,
+      `and it's recorded against your name as ${AGREEMENT_VERSION} on the date`,
+      `above. Keep this email — it's your copy.`,
       ``,
       `Two things worth remembering:`,
       `1. Give people the code, not just the link. A typed code works from any`,

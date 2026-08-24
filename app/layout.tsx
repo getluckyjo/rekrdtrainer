@@ -30,13 +30,13 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://coach.rekrd.io"),
   title: {
-    default: "REKRD Coach Programme — earn 15% on clean hydration",
-    template: "%s · REKRD Coach Programme",
+    default: "REKRD Ambassador Programme — get sponsored, and earn",
+    template: "%s · REKRD Ambassador Programme",
   },
   description:
     "Recommend REKRD with your own code. Your clients get 10% off, you earn 15% of everything they spend — including every subscription renewal. Free to join, no stock, no minimum.",
   openGraph: {
-    title: "REKRD Coach Programme",
+    title: "REKRD Ambassador Programme",
     description:
       "Your clients get 10% off. You earn 15% of everything they spend. Free to join, nothing to buy.",
     type: "website",

@@ -2,12 +2,16 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { CLAIMS_CHECK_VERSION } from "@/lib/claims";
+import { AGREEMENT_COMMITMENTS, AGREEMENT_VERSION } from "@/lib/claims";
 import { validateCode } from "@/lib/codes";
 import CodeField, { type CodeState } from "./CodeField";
 import s from "./form.module.css";
 
+/* Widened past coaching: the programme now recruits creators, clubs and
+   retailers, and this field is required — a list of ten sports would have
+   turned an influencer away at the last step. */
 const DISCIPLINES = [
+  "Creator / influencer",
   "Personal training",
   "Biokinetics",
   "Padel",
@@ -18,6 +22,9 @@ const DISCIPLINES = [
   "CrossFit",
   "Pilates / Yoga",
   "Team sport",
+  "Club or gym",
+  "Retailer",
+  "Athlete",
   "Other",
 ];
 
@@ -66,10 +73,17 @@ export default function ApplyForm() {
   const [disciplines, setDisciplines] = useState<string[]>([]);
   const [code, setCode] = useState("");
   const [codeState, setCodeState] = useState<CodeState>("idle");
+  const [addressLine1, setAddressLine1] = useState("");
+  const [addressLine2, setAddressLine2] = useState("");
+  const [suburb, setSuburb] = useState("");
+  const [postalCode, setPostalCode] = useState("");
   const [gym, setGym] = useState("");
   const [instagram, setInstagram] = useState("");
   const [clientBand, setClientBand] = useState("");
-  const [agreed, setAgreed] = useState(false);
+  /* One tick per commitment rather than a single blanket "I agree" — these are
+     obligations an ambassador is signing up to, not boilerplate. */
+  const [commitments, setCommitments] = useState<Record<string, boolean>>({});
+  const allAgreed = AGREEMENT_COMMITMENTS.every((c) => commitments[c.id]);
   const [marketing, setMarketing] = useState(false);
   const [trap, setTrap] = useState("");
 
@@ -85,7 +99,9 @@ export default function ApplyForm() {
 
   const canSubmit = !submitting;
 
-  const submitLabel = submitting ? "Creating your code…" : "Get my code";
+  const submitLabel = submitting
+    ? "Setting you up…"
+    : "Become an ambassador";
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -101,7 +117,12 @@ export default function ApplyForm() {
     if (disciplines.length === 0) errors.disciplines = "Pick at least one";
     if (validateCode(code)) errors.code = "Pick a valid code";
     if (codeState === "taken") errors.code = "That code is taken";
-    if (!agreed) errors.agreed = "We need this one";
+    if (!addressLine1.trim()) errors.addressLine1 = "We need somewhere to send it";
+    if (!postalCode.trim()) errors.postalCode = "And a postal code";
+    /* Required now: the bio-link commitment can't be checked against a profile
+       we never captured. */
+    if (!instagram.trim()) errors.instagram = "We need one profile";
+    if (!allAgreed) errors.agreed = "Tick all three to continue";
 
     setFieldErrors(errors);
     if (Object.keys(errors).length > 0) {
@@ -119,14 +140,18 @@ export default function ApplyForm() {
           email: email.trim().toLowerCase(),
           phone: phone.trim(),
           city: city.trim(),
+          addressLine1: addressLine1.trim(),
+          addressLine2: addressLine2.trim() || null,
+          suburb: suburb.trim() || null,
+          postalCode: postalCode.trim(),
           disciplines,
           code,
           gym: gym.trim() || null,
-          instagram: instagram.trim().replace(/^@/, "") || null,
+          instagram: instagram.trim().replace(/^@/, ""),
           clientBand: clientBand || null,
           marketingOptIn: marketing,
-          // The acknowledgement checkbox is required, so this always goes up.
-          claimsCheckVersion: CLAIMS_CHECK_VERSION,
+          // Every commitment is required, so this always goes up.
+          claimsCheckVersion: AGREEMENT_VERSION,
           // Bot signals: a filled honeypot, or a form completed impossibly fast.
           trap,
           elapsedMs: Date.now() - startedAt,
@@ -159,7 +184,7 @@ export default function ApplyForm() {
         return;
       }
 
-      router.push(`/coaches/welcome/${data.code}`);
+      router.push(`/ambassadors/welcome/${data.code}`);
     } catch {
       setFormError(
         "Couldn't reach us — check your connection and try again.",
@@ -250,9 +275,77 @@ export default function ApplyForm() {
         </div>
       </div>
 
+      {/* Framed as the benefit it is, not as data collection — this exists
+          because we post them a tub every month. */}
+      <div className={s.row}>
+        <span className={s.label}>Where do we send your tub?</span>
+        <div className={`${s.row} ${s.two}`} style={{ marginTop: 8 }}>
+          <div>
+            <label className={s.label} htmlFor="addressLine1">
+              Street address
+            </label>
+            <input
+              id="addressLine1"
+              className={`${s.input} ${fieldErrors.addressLine1 ? s.inputError : ""}`}
+              value={addressLine1}
+              onChange={(e) => setAddressLine1(e.target.value)}
+              autoComplete="address-line1"
+              required
+            />
+            {fieldErrors.addressLine1 && (
+              <p className={s.error}>{fieldErrors.addressLine1}</p>
+            )}
+          </div>
+          <div>
+            <label className={s.label} htmlFor="addressLine2">
+              Complex or unit
+              <span className={s.optional}>Optional</span>
+            </label>
+            <input
+              id="addressLine2"
+              className={s.input}
+              value={addressLine2}
+              onChange={(e) => setAddressLine2(e.target.value)}
+              autoComplete="address-line2"
+            />
+          </div>
+        </div>
+        <div className={`${s.row} ${s.two}`}>
+          <div>
+            <label className={s.label} htmlFor="suburb">
+              Suburb
+              <span className={s.optional}>Optional</span>
+            </label>
+            <input
+              id="suburb"
+              className={s.input}
+              value={suburb}
+              onChange={(e) => setSuburb(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className={s.label} htmlFor="postalCode">
+              Postal code
+            </label>
+            <input
+              id="postalCode"
+              className={`${s.input} ${fieldErrors.postalCode ? s.inputError : ""}`}
+              value={postalCode}
+              onChange={(e) => setPostalCode(e.target.value)}
+              inputMode="numeric"
+              autoComplete="postal-code"
+              required
+            />
+            {fieldErrors.postalCode && (
+              <p className={s.error}>{fieldErrors.postalCode}</p>
+            )}
+          </div>
+        </div>
+      </div>
+
       <div className={s.row}>
         <span className={s.label} id="disciplines-label">
-          What do you coach?
+          What's your world?
         </span>
         <div
           className={s.chips}
@@ -289,7 +382,7 @@ export default function ApplyForm() {
       <div className={`${s.row} ${s.two}`}>
         <div>
           <label className={s.label} htmlFor="gym">
-            Gym, studio or club
+            Gym, club or business
             <span className={s.optional}>Optional</span>
           </label>
           <input
@@ -301,27 +394,30 @@ export default function ApplyForm() {
         </div>
         <div>
           <label className={s.label} htmlFor="instagram">
-            Instagram
-            <span className={s.optional}>Optional</span>
+            Instagram or TikTok
           </label>
           <input
             id="instagram"
-            className={s.input}
+            className={`${s.input} ${fieldErrors.instagram ? s.inputError : ""}`}
             value={instagram}
             onChange={(e) => setInstagram(e.target.value)}
             placeholder="@yourhandle"
             autoCapitalize="none"
             spellCheck={false}
+            required
           />
           <p className={s.hint}>
-            So we can find you, repost you, and send assets that suit your feed.
+            So we can find you, repost you, and see the link in your bio.
           </p>
+          {fieldErrors.instagram && (
+            <p className={s.error}>{fieldErrors.instagram}</p>
+          )}
         </div>
       </div>
 
       <div className={s.row}>
         <span className={s.label} id="band-label">
-          Roughly how many clients?
+          Roughly how many people?
           <span className={s.optional}>Optional</span>
         </span>
         <div className={s.chips} role="group" aria-labelledby="band-label">
@@ -339,21 +435,43 @@ export default function ApplyForm() {
         </div>
       </div>
 
-      <div className={s.consent}>
-        <input
-          id="agreed"
-          type="checkbox"
-          checked={agreed}
-          onChange={(e) => setAgreed(e.target.checked)}
-        />
-        <label htmlFor="agreed">
-          I&rsquo;ll say that I earn from my code when I recommend it, and
-          I&rsquo;ll send <a href="#say">medical and drug-testing questions</a>{" "}
-          to someone qualified. I accept the{" "}
-          <a href="/coaches/terms">programme terms</a>.
-        </label>
+      {/* One tick per commitment. These are obligations, and a single box
+          swallowing all three would make the record much weaker — a copy of
+          exactly this list goes out in the welcome email. */}
+      <div className={s.row}>
+        <span className={s.label} id="agreement-label">
+          What you&rsquo;re agreeing to
+        </span>
+        <div role="group" aria-labelledby="agreement-label">
+          {AGREEMENT_COMMITMENTS.map((c) => (
+            <div className={s.consent} key={c.id}>
+              <input
+                id={`commit-${c.id}`}
+                type="checkbox"
+                checked={Boolean(commitments[c.id])}
+                onChange={(e) =>
+                  setCommitments((prev) => ({
+                    ...prev,
+                    [c.id]: e.target.checked,
+                  }))
+                }
+              />
+              <label htmlFor={`commit-${c.id}`}>
+                {c.id === "terms" ? (
+                  <>
+                    I&rsquo;ll say I earn from my code when I recommend it, and
+                    I accept the{" "}
+                    <a href="/ambassadors/terms">programme terms</a>.
+                  </>
+                ) : (
+                  c.label
+                )}
+              </label>
+            </div>
+          ))}
+        </div>
+        {fieldErrors.agreed && <p className={s.error}>{fieldErrors.agreed}</p>}
       </div>
-      {fieldErrors.agreed && <p className={s.error}>{fieldErrors.agreed}</p>}
 
       <div className={`${s.consent} ${s.consentOptional}`}>
         <input
@@ -363,7 +481,7 @@ export default function ApplyForm() {
           onChange={(e) => setMarketing(e.target.checked)}
         />
         <label htmlFor="marketing">
-          Send me the coach monthly — new flavours, campaign assets, what&rsquo;s
+          Send me the ambassador monthly — new flavours, campaign assets, what&rsquo;s
           actually selling. Optional, and you can stop it any time.
         </label>
       </div>

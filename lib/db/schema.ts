@@ -36,6 +36,15 @@ export const trainers = pgTable(
     email: text("email").notNull(),
     phone: text("phone"),
     city: text("city"),
+
+    /* Ambassadors are sent a free tub every month, so the programme needs a
+       postable address. Nullable: the six who signed up before the sponsorship
+       tier existed have none, and are being asked separately. */
+    addressLine1: text("address_line1"),
+    addressLine2: text("address_line2"),
+    suburb: text("suburb"),
+    postalCode: text("postal_code"),
+
     gym: text("gym"),
     instagram: text("instagram"),
     disciplines: jsonb("disciplines").$type<string[]>().default([]).notNull(),

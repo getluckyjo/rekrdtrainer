@@ -15,6 +15,13 @@
       "when": 1785738351760,
       "tag": "0001_client_discount_10",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1787572294538,
+      "tag": "0002_heavy_falcon",
+      "breakpoints": true
     }
   ]
 }

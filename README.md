@@ -1,37 +1,37 @@
-# REKRD Coach Programme
+# REKRD Ambassador Programme
 
-The coach-facing side of REKRD's referral channel: a training site, an earnings
-calculator, and the plumbing that mints a coach's Shopify discount code and
+The ambassador-facing side of REKRD's referral channel: a training site, an earnings
+calculator, and the plumbing that mints an ambassador's Shopify discount code and
 tracks what they're owed.
 
-**Live:** `coach.rekrd.io` · **Store:** `shop.rekrd.io` (Shopify)
+**Live:** `ambassador.rekrd.io` · **Store:** `shop.rekrd.io` (Shopify)
 
 ## The deal
 
 | | |
 |---|---|
-| Coach earns | **15%** of the order value *before* the client's discount |
-| Client saves | **10%** with the coach's code |
+| Ambassador earns | **15%** of the order value *before* the client's discount |
+| Client saves | **10%** with the ambassador's code |
 | Carry-over | **12 months** from a client's first coded order |
 | Payment | Statement on the 1st, EFT on the 7th, R200 minimum, 30-day hold |
 
 Per order: **R90** on a one-off tube (client pays R540), **R81** on a
 subscription order (client pays R486 first, then R540), **R15** on a starter
-pack. A coach is never penalised for the discount they give.
+pack. An ambassador is never penalised for the discount they give.
 
 ## How attribution works
 
 **The discount code *is* the attribution token.** No cookies, no pixel, no
-theme edits. The primary use case is a coach saying "use my code" on a gym
+theme edits. The primary use case is an ambassador saying "use my code" on a gym
 floor, where nobody clicks anything.
 
-1. Coach signs up → `discountCodeBasicCreate` mints a 10% code in Shopify.
+1. Ambassador signs up → `discountCodeBasicCreate` mints a 10% code in Shopify.
 2. Client checks out with the code → it's recorded permanently on the order.
 3. Nightly cron reads orders updated in the last 3 days and rebuilds the ledger.
-4. First coded order links that Shopify customer to the coach for 12 months, so
+4. First coded order links that Shopify customer to the ambassador for 12 months, so
    subscription renewals and forgotten-the-code repeat orders still pay out.
 
-`coach.rekrd.io/t/CODE` is a vanity redirect to Shopify's own
+`ambassador.rekrd.io/t/CODE` is a vanity redirect to Shopify's own
 `/discount/CODE` share link. It logs clicks for the dashboard and is **never**
 the attribution source of truth.
 
@@ -74,9 +74,9 @@ signups, mark payouts paid. There is deliberately no admin UI to maintain.
 ## Layout
 
 ```
-app/coaches/                 the page: training, claims, calculator, signup
-app/coaches/welcome/[code]/  code + QR + print card + share assets
-app/coaches/terms/           programme terms
+app/ambassadors/                 the page: training, claims, calculator, signup
+app/ambassadors/welcome/[code]/  code + QR + print card + share assets
+app/ambassadors/terms/           programme terms
 app/dashboard/               magic-link earnings dashboard
 app/api/trainers/            signup (reserve code -> mint -> activate)
 app/api/cron/                nightly + weekly order sync
@@ -93,7 +93,7 @@ lib/commission/sync.ts       the ledger reconciler
 
 `lib/calc.ts` is the file that can't be wrong. Change it and the tests fail
 loudly, which is the point — those figures are the contract between the
-programme terms, the page copy and what a coach actually gets paid.
+programme terms, the page copy and what an ambassador actually gets paid.
 
 ## Things to know before you touch it
 
@@ -109,16 +109,16 @@ programme terms, the page copy and what a coach actually gets paid.
 - **Codes stack with the subscription price** (a selling-plan price, not a
   discount, so `combinesWith` doesn't govern it). `recurringCycleLimit: 1`
   keeps the 5% to the first subscription order only.
-- **Never expose customer identity to a coach.** `referred_orders` stores the
+- **Never expose customer identity to an ambassador.** `referred_orders` stores the
   order *name* and nothing else about the buyer. That's a POPIA line, not a
   style preference.
 - **Banking details are not stored.** Collected at first payout, kept in Xero.
 
 ## Still open
 
-- Coach T&Cs and the coach-specific POPIA notice need attorney review; company
+- Ambassador T&Cs and the ambassador-specific POPIA notice need attorney review; company
   name, CIPC number, VAT number and registered address are still placeholders.
 - Confirm which subscription app runs Subscribe & Save — it decides whether a
-  code can be pulled from live contracts when a coach leaves.
+  code can be pulled from live contracts when an ambassador leaves.
 - "Sales by discount" reporting isn't on the Shopify Basic plan. This ledger
   *is* the reporting.

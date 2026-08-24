@@ -28,7 +28,7 @@ export default function ShareActions({
     },
     {
       tab: "Story caption",
-      text: `One sachet, 500ml of cold water, once a day.\n600mg of sodium. 500mg of L-glutamine, zinc, vitamin C.\nNo sugar, no caffeine, no fillers.\nI'm a REKRD coach — code ${code} gets you 10% off.\n${vanity}`,
+      text: `One sachet, 500ml of cold water, once a day.\n600mg of sodium. 500mg of L-glutamine, zinc, vitamin C.\nNo sugar, no caffeine, no fillers.\nI'm a REKRD ambassador — code ${code} gets you 10% off.\n${vanity}`,
     },
     {
       tab: "End of a session",
@@ -37,7 +37,7 @@ export default function ShareActions({
   ];
 
   const whatsappHref = `https://wa.me/?text=${encodeURIComponent(
-    `My REKRD coach link: ${vanity} — code ${code} for 10% off.`,
+    `My REKRD ambassador link: ${vanity} — code ${code} for 10% off.`,
   )}`;
 
   return (

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 export default async function WelcomePage(
-  props: PageProps<"/coaches/welcome/[code]">,
+  props: PageProps<"/ambassadors/welcome/[code]">,
 ) {
   const { code: raw } = await props.params;
   const code = normaliseCode(raw);
@@ -55,7 +55,7 @@ export default async function WelcomePage(
 
       <header className={s.hero}>
         <div className="wrap">
-          <span className="kicker mono">REKRD Coach Programme</span>
+          <span className="kicker mono">REKRD Ambassador Programme</span>
           <h1>
             You&rsquo;re in{firstName ? `, ${firstName}` : ""}.
           </h1>

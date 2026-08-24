@@ -4,7 +4,7 @@ import { z } from "zod";
 import { db, isDbConfigured } from "@/lib/db";
 import { trainers } from "@/lib/db/schema";
 import { nextCandidates, normaliseCode, validateCode } from "@/lib/codes";
-import { mintCoachDiscount } from "@/lib/shopify/discounts";
+import { mintAmbassadorDiscount } from "@/lib/shopify/discounts";
 import { isShopifyConfigured } from "@/lib/shopify/client";
 import { sendWelcomeEmail } from "@/lib/email";
 
@@ -16,10 +16,16 @@ const Payload = z.object({
   email: z.string().email().max(200),
   phone: z.string().min(9).max(30),
   city: z.string().min(2).max(120),
+  /* Nullable in the schema for the six who joined before the sponsorship tier,
+     but required here — nobody new should get in without a postable address. */
+  addressLine1: z.string().min(3).max(200),
+  addressLine2: z.string().max(200).nullable().optional(),
+  suburb: z.string().max(120).nullable().optional(),
+  postalCode: z.string().min(3).max(10),
   disciplines: z.array(z.string().max(60)).min(1).max(12),
   code: z.string().min(3).max(12),
   gym: z.string().max(160).nullable().optional(),
-  instagram: z.string().max(60).nullable().optional(),
+  instagram: z.string().min(1).max(60),
   clientBand: z.string().max(20).nullable().optional(),
   marketingOptIn: z.boolean().default(false),
   /* Versions the acknowledgement the coach ticks on the form — "REKRD is a
@@ -101,8 +107,12 @@ export async function POST(req: NextRequest) {
         email,
         phone: input.phone.trim(),
         city: input.city.trim(),
+        addressLine1: input.addressLine1.trim(),
+        addressLine2: input.addressLine2?.trim() || null,
+        suburb: input.suburb?.trim() || null,
+        postalCode: input.postalCode.trim(),
         gym: input.gym?.trim() || null,
-        instagram: input.instagram?.replace(/^@/, "").trim() || null,
+        instagram: input.instagram.replace(/^@/, "").trim(),
         disciplines: input.disciplines,
         clientBand: input.clientBand || null,
         discountCode: code,
@@ -138,9 +148,9 @@ export async function POST(req: NextRequest) {
 
   for (let attempt = 0; attempt < 5 && !gid; attempt++) {
     try {
-      const result = await mintCoachDiscount({
+      const result = await mintAmbassadorDiscount({
         code: finalCode,
-        coachName: input.fullName.trim(),
+        ambassadorName: input.fullName.trim(),
       });
 
       if (result.ok) {

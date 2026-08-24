@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Logo from "@/components/Logo";
 
 const LINKS = [
+  { href: "#deal", label: "The deal" },
   { href: "#earnings", label: "Earn" },
   { href: "#product", label: "Product" },
-  { href: "#say", label: "What to say" },
 ];
 
 export default function Nav() {
@@ -53,7 +53,7 @@ export default function Nav() {
           ))}
         </div>
         <a className="btn ghost small nav-cta" href="#apply">
-          Get my code
+          Become an ambassador
         </a>
       </div>
       <div className="flavour-bar" />

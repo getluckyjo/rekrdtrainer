@@ -141,6 +141,53 @@ export const SPEC_ROWS: { label: string; value: string }[] = [
   { label: "Regulatory", value: "A foodstuff. Not a medicine, not SAHPRA-registered, not Informed Sport certified" },
 ];
 
+/**
+ * The two sides of the ambassador deal.
+ *
+ * ASKS are the commitments each ambassador ticks on the apply form and is sent
+ * a copy of — see AGREEMENT_COMMITMENTS in lib/claims.ts, which must stay in
+ * step with these. GETS is what they receive for it.
+ *
+ * The monthly tub is the lead offer. Commission is real but optional, and
+ * deliberately second: an influencer with no sales history does not believe a
+ * commission number, and does believe free product.
+ */
+export const AMBASSADOR_ASKS: { icon: IconName; title: string; body: string }[] = [
+  {
+    icon: "repeat",
+    title: "Post once or twice a week",
+    body: "A story or a post, tagging @rekrd.io. Your words, not ours — you know your people better than we do.",
+  },
+  {
+    icon: "tag",
+    title: "Put us in your bio",
+    body: "That you're a REKRD ambassador, with your link. It's where people actually go looking.",
+  },
+];
+
+export const AMBASSADOR_GETS: { icon: IconName; title: string; body: string }[] = [
+  {
+    icon: "sachet",
+    title: "A tub every month, free",
+    body: "Thirty sachets, delivered to your door. Yours for as long as you're posting.",
+  },
+  {
+    icon: "qr",
+    title: "Your own code",
+    body: "10% off for anyone who uses it, plus a QR code and a printable card.",
+  },
+  {
+    icon: "rand",
+    title: "15% of what they spend",
+    body: "On every order for 12 months, not just the first. Optional — there's no target and no pressure.",
+  },
+  {
+    icon: "people",
+    title: "Everything you need to say it",
+    body: "Captions written for you, the numbers that matter, and a person on the other end of an email.",
+  },
+];
+
 /** Programme terms, in one place, so page copy and emails can't drift. */
 export const PROGRAMME = {
   commissionRateLabel: "15%",

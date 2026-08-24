@@ -2,7 +2,7 @@ import { CLIENT_DISCOUNT } from "@/lib/calc";
 import { ShopifyError, respectThrottle, shopifyGraphQL } from "./client";
 
 /**
- * Mints a coach's 5%-off code in Shopify.
+ * Mints an ambassador's 5%-off code in Shopify.
  *
  * Verified against DiscountCodeBasicInput on API 2026-07:
  *   - `context: { all: ALL }` — `customerSelection` is deprecated
@@ -12,7 +12,7 @@ import { ShopifyError, respectThrottle, shopifyGraphQL } from "./client";
  */
 
 const DISCOUNT_CODE_BASIC_CREATE = /* GraphQL */ `
-  mutation CreateCoachDiscount($input: DiscountCodeBasicInput!) {
+  mutation CreateAmbassadorDiscount($input: DiscountCodeBasicInput!) {
     discountCodeBasicCreate(basicCodeDiscount: $input) {
       codeDiscountNode {
         id
@@ -49,16 +49,16 @@ export type MintResult =
   | { ok: false; reason: "taken" }
   | { ok: false; reason: "rejected"; message: string };
 
-export async function mintCoachDiscount(opts: {
+export async function mintAmbassadorDiscount(opts: {
   code: string;
-  coachName: string;
+  ambassadorName: string;
   /** Fraction. Defaults to the programme's 5%. */
   percentage?: number;
 }): Promise<MintResult> {
-  const { code, coachName, percentage = CLIENT_DISCOUNT } = opts;
+  const { code, ambassadorName, percentage = CLIENT_DISCOUNT } = opts;
 
   const input = {
-    title: `Coach · ${coachName} · ${code}`,
+    title: `Ambassador · ${ambassadorName} · ${code}`,
     code,
     startsAt: new Date().toISOString(),
     // No endsAt. A code that silently dies breaks every printed QR card.
@@ -83,7 +83,7 @@ export async function mintCoachDiscount(opts: {
       // Harmless, and lets a coach code coexist with a free-shipping promo.
       shippingDiscounts: true,
     },
-    tags: ["coach-affiliate"],
+    tags: ["ambassador-affiliate"],
   };
 
   const { data } = await shopifyGraphQL<CreateResponse>(
@@ -114,7 +114,7 @@ export async function mintCoachDiscount(opts: {
 export async function deleteDiscount(gid: string): Promise<void> {
   await shopifyGraphQL(
     /* GraphQL */ `
-      mutation DeleteCoachDiscount($id: ID!) {
+      mutation DeleteAmbassadorDiscount($id: ID!) {
         discountCodeDelete(id: $id) {
           deletedCodeDiscountId
           userErrors {

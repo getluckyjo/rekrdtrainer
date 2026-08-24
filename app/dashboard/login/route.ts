@@ -40,9 +40,9 @@ export async function POST(req: NextRequest) {
       const key = process.env.RESEND_API_KEY;
       if (key) {
         await new Resend(key).emails.send({
-          from: "REKRD Coaches <partners@rekrd.io>",
+          from: "REKRD Ambassadors <partners@rekrd.io>",
           to: email,
-          subject: "Your REKRD coach dashboard link",
+          subject: "Your REKRD ambassador dashboard link",
           text: [
             `Hi ${trainer.fullName.split(/\s+/)[0]},`,
             ``,

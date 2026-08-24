@@ -22,7 +22,7 @@ Three rules that matter more than style:
    update the terms, the page copy and the plan, not the fixture.
 2. **`SHOPIFY_API_VERSION` is pinned on purpose.** Bumping it means
    re-verifying `DiscountCodeBasicInput` against shopify.dev first.
-3. **Never expose a customer's identity to a coach.** `referred_orders` holds
+3. **Never expose a customer's identity to an ambassador.** `referred_orders` holds
    the order name and nothing else about the buyer. That is a POPIA boundary.
 
 ## Product facts
@@ -31,16 +31,16 @@ Every product claim lives in `lib/productFacts.ts`, `lib/lessons.ts` and
 `lib/claims.ts`. Don't inline a fact in a component — and don't invent one.
 REKRD is a foodstuff, not SAHPRA-registered, not Informed Sport certified, and
 the site must never state or imply what it does to a body. That applies to copy
-you write here as much as to the coaches the site is teaching.
+you write here as much as to the ambassadors the site is teaching.
 
 **Train on the product, not on prohibitions.** The legal position taken on this
-programme is that the coaches site is not consumer-facing and that a coach may
+programme is that the ambassador site is not consumer-facing and that an ambassador may
 describe the product in their own words. The page was rebalanced accordingly —
 six product lessons, and the restrictions cut to two referrals. So:
 
 - **The pack is the anchor.** `ON_PACK_CLAIMS` holds the four claims printed on
   the tub (hydration, sports recovery, endurance, anti-cramping). Those are the
-  brand's own approved language and coaches are told to use them freely. If the
+  brand's own approved language and ambassadors are told to use them freely. If the
   packaging changes, that constant changes with it.
 - State quantities off the printed per-serving panel. There is **no NRV
   percentage anywhere on the pack** — give milligrams only.
@@ -52,8 +52,8 @@ six product lessons, and the restrictions cut to two referrals. So:
   are about protecting the client rather than the brand: medical questions go to
   a doctor, and drug-tested athletes go to their team doctor (every batch is lab
   tested, but there is no Informed Sport certification). Plus one disclosure rule
-  in `POSTING_RULES`, which protects the coach under the ad rules.
+  in `POSTING_RULES`, which protects the ambassador under the ad rules.
 - Do not reintroduce a "never say" list, a claims quiz, or a gate on the submit
-  button. The audit artefact is the acknowledgement checkbox in `ApplyForm`,
-  versioned by `CLAIMS_CHECK_VERSION`. If you change its wording, bump the
+  button. The audit artefact is the three commitment checkboxes in `ApplyForm`,
+  versioned by `AGREEMENT_VERSION`. If you change its wording, bump the
   version.

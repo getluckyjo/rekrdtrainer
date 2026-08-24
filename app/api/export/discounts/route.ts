@@ -31,7 +31,7 @@ function csvCell(value: unknown): string {
 const HEADERS = [
   "Code",
   "Belongs to",
-  "Coach name",
+  "Ambassador name",
   "Discount",
   "Type",
   "Status",
@@ -92,7 +92,7 @@ export async function GET(req: NextRequest) {
       const coach = coachByCode.get(d.code.toUpperCase());
       return [
         d.code,
-        coach ? "Coach" : "Other",
+        coach ? "Ambassador" : "Other",
         coach ?? "",
         d.value,
         d.kind,

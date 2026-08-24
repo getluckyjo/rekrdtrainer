@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="flavour-bar" style={{ marginBottom: 28 }} />
         <Logo height={18} className="footer-logo" />
         <p className="mono" style={{ fontSize: 11 }}>
-          Coach Programme · South Africa
+          Ambassador Programme · South Africa
         </p>
         <p>
           Questions about the programme?{" "}
@@ -16,7 +16,7 @@ export default function Footer() {
           person answers, usually within a business day.
         </p>
         <p>
-          <a href="/coaches/terms">Programme terms</a> ·{" "}
+          <a href="/ambassadors/terms">Programme terms</a> ·{" "}
           <a href="https://shop.rekrd.io/policies/privacy-policy">
             Privacy policy
           </a>{" "}

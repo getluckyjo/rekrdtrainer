@@ -106,17 +106,17 @@ export type Preset = {
 export const PRESETS: Preset[] = [
   {
     id: "small",
-    label: "Small book · 20",
+    label: "Small circle · 20",
     inputs: { clients: 20, conversion: 0.3, tubesPerMonth: 1, subShare: 0.4 },
   },
   {
     id: "full",
-    label: "Full book · 40",
+    label: "Regulars · 40",
     inputs: { clients: 40, conversion: 0.3, tubesPerMonth: 1, subShare: 0.4 },
   },
   {
     id: "studio",
-    label: "Studio or team · 100",
+    label: "Club or studio · 100",
     inputs: { clients: 100, conversion: 0.3, tubesPerMonth: 1, subShare: 0.4 },
   },
   {

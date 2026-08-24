@@ -20,6 +20,7 @@ const RESERVED = new Set([
   "CHECKOUT",
   "CLEAN",
   "COACH",
+  "AMBASSADOR",
   "DEAL",
   "DISCOUNT",
   "FREE",

@@ -22,7 +22,7 @@ export default function HeroTeaser() {
     <div className={s.teaser}>
       <div className={s.teaserTop}>
         <label className={s.teaserLabel} htmlFor="teaser-clients">
-          How many clients do you train?
+          How many people would take your word for it?
         </label>
         <span className={s.teaserCount} aria-hidden="true">
           {clients}

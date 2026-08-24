@@ -21,7 +21,6 @@ import Slider from "./Slider";
 import { useTweenedNumber } from "./useTweenedNumber";
 import s from "./calculator.module.css";
 
-const SESSION_RATE_C = 45_000; // R450 — a mid-market PT session in SA
 
 export default function Calculator() {
   const [inputs, setInputs] = useState<CalcInputs>(DEFAULT_INPUTS);
@@ -52,7 +51,6 @@ export default function Calculator() {
      number did a coach have on screen just before they signed up. */
   useUrlSync(inputs, setInputs);
 
-  const sessions = result.monthlyC / SESSION_RATE_C;
 
   return (
     <>
@@ -74,11 +72,11 @@ export default function Calculator() {
 
           <Slider
             id="calc-clients"
-            label="Clients you train regularly"
-            hint="People who'd actually take a recommendation from you."
+            label="People who'd take your word for it"
+            hint="Clients, members, followers — whoever actually listens to you."
             value={inputs.clients}
             displayValue={String(inputs.clients)}
-            valueText={`${inputs.clients} clients`}
+            valueText={`${inputs.clients} people`}
             {...INPUT_BOUNDS.clients}
             onChange={(n) => set("clients", n)}
           />
@@ -124,14 +122,17 @@ export default function Calculator() {
             {formatZar(Math.round(annual))} a year
           </div>
           <p className={s.disclaimer}>
-            Annual is monthly × 12, assuming your book holds. It won&rsquo;t be
+            Annual is monthly × 12, assuming your numbers hold. It won&rsquo;t be
             a straight line. Treat it as a run rate, not a promise.
           </p>
+          {/* This used to read "N sessions you didn't have to coach for" — the
+              best line on the page, and useless to an ambassador who coaches
+              nobody. The neutral version anchors on the same thing: money that
+              arrives without you doing the work twice. */}
           {result.monthlyC > 0 && (
             <p className={s.translate}>
-              At R450 a session, that&rsquo;s{" "}
-              <strong>{sessions.toFixed(1)} sessions</strong>{" "}
-              you didn&rsquo;t have to coach for.
+              That&rsquo;s <strong>{formatZar(result.annualC)}</strong> a year,
+              without holding a single tube.
             </p>
           )}
 
@@ -139,11 +140,11 @@ export default function Calculator() {
 
           <div className={s.stats}>
             <div className={s.stat}>
-              <span className={s.statK}>Per client on your books</span>
+              <span className={s.statK}>Per person you'd tell</span>
               <span className={s.statV}>{formatZar(result.perClientC)}</span>
             </div>
             <div className={s.stat}>
-              <span className={s.statK}>Per client who buys</span>
+              <span className={s.statK}>Per person who buys</span>
               <span className={s.statV}>{formatZar(result.perBuyerC)}</span>
             </div>
           </div>
@@ -152,7 +153,7 @@ export default function Calculator() {
 
       <div className={s.compare}>
         <h3 style={{ fontSize: "clamp(20px,2.6vw,26px)", fontWeight: 900 }}>
-          The same client, <span className="accent">two ways.</span>
+          The same person, <span className="accent">two ways.</span>
         </h3>
 
         <div className={s.compareGrid}>
@@ -305,7 +306,7 @@ function Ledger({
       </div>
       <div className={s.ledgerRule} />
       <div className={`${s.ledgerRow} ${s.ledgerSaved}`}>
-        <span className={s.ledgerLabel}>Your clients spend</span>
+        <span className={s.ledgerLabel}>They spend</span>
         <span className={s.ledgerAmount}>{formatZar(result.clientSpendC)}</span>
       </div>
       <div className={`${s.ledgerRow} ${s.ledgerTotal}`}>

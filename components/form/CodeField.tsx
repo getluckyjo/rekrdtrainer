@@ -9,7 +9,12 @@ import {
   suggestFromName,
   validateCode,
 } from "@/lib/codes";
+import { siteOrigin } from "@/lib/email";
 import s from "./form.module.css";
+
+/* Derived, not hardcoded: this string was "coach.rekrd.io" in the markup and
+   would have silently gone stale the moment the domain moved. */
+const linkHost = siteOrigin().replace(/^https?:\/\//, "");
 
 export type CodeState = "idle" | "checking" | "free" | "taken" | "invalid";
 
@@ -117,7 +122,7 @@ export default function CodeField({
           Code: <b>{value || "—"}</b>
         </span>
         <span>
-          Link: <b>coach.rekrd.io/t/{value || "—"}</b>
+          Link: <b>{linkHost}/t/{value || "—"}</b>
         </span>
       </div>
 
@@ -167,7 +172,7 @@ export default function CodeField({
       )}
 
       <p className={s.hint}>
-        This is what a client types at checkout, so keep it short and say it
+        This is what someone types at checkout, so keep it short and say it
         out loud once before you commit. It never expires.
       </p>
     </div>
