@@ -81,12 +81,15 @@ app/dashboard/               magic-link earnings dashboard
 app/api/trainers/            signup (reserve code -> mint -> activate)
 app/api/cron/                nightly + weekly order sync
 app/t/[code]/                vanity redirect
+app/unlock/                  the site password prompt
+proxy.ts                     sends anyone without the password to /unlock
 
 lib/calc.ts                  ALL money maths. Pure, integer cents, tested
 lib/productFacts.ts          single source of truth for every product fact
 lib/lessons.ts               the 8 training lessons
 lib/claims.ts                say / never say / grey area + the claims check
 lib/codes.ts                 code generation, blocklist, collision handling
+lib/siteGate.ts              the site password, and the paths that skip it
 lib/shopify/                 version-pinned Admin API client
 lib/commission/sync.ts       the ledger reconciler
 ```
@@ -97,6 +100,12 @@ programme terms, the page copy and what an ambassador actually gets paid.
 
 ## Things to know before you touch it
 
+- **The whole site is behind one shared password, `SITE_PASSWORD`.** It backs
+  up the position that this site isn't consumer-facing. It lives only in the
+  environment, never in code, because this repo is public. Unset means
+  locked, not open. A few paths skip it on purpose (`OPEN_PATHS` in
+  `lib/siteGate.ts`); the one that matters most is `/t/CODE`, because clients
+  scan it off printed cards and never get the password.
 - **Money is integer cents everywhere.** Never a float.
 - **`SHOPIFY_API_VERSION` is pinned.** Before bumping, re-verify
   `DiscountCodeBasicInput` — `customerSelection` is already deprecated in favour
