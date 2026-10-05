@@ -95,8 +95,12 @@ and Preview), using `.env.example` as the checklist:
 SHOPIFY_STORE_DOMAIN     SHOPIFY_CLIENT_ID        SHOPIFY_CLIENT_SECRET
 SHOPIFY_API_VERSION      SHOPIFY_PRODUCT_HANDLE   DATABASE_URL
 RESEND_API_KEY           DASHBOARD_JWT_SECRET     CRON_SECRET
-NEXT_PUBLIC_SITE_ORIGIN
+NEXT_PUBLIC_SITE_ORIGIN  SITE_PASSWORD
 ```
+
+`SITE_PASSWORD` is the shared password every visitor types at `/unlock`. If it
+is missing the whole site stays locked, apart from `/t/CODE` links and the
+cron and export endpoints. Changing it signs everyone out.
 
 Generate the two secrets:
 
